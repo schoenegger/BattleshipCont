@@ -8,7 +8,7 @@ import GameUtilities.Field.Field;
 /**
  * @author Team Schoenegger / Purkart / Koch
  *
- *Hello Didi
+ *
  *         Handler for the commands between the component
  */
 
