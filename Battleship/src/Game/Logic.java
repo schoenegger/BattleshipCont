@@ -1,11 +1,12 @@
 package Game;
 
+import gameSounds.GameSoundPlayer;
+
 import java.awt.Point;
 
-import javax.naming.InitialContext;
-
+import view.StartView;
+import view.settings.StartViewSettingData;
 import GameConnections.ConnectionCommandHandler;
-import GameConnections.TestEnemy;
 import GameUtilities.Command;
 import GameUtilities.AttackPosition.AttackPosition;
 import GameUtilities.Field.Field;
@@ -19,7 +20,11 @@ import GameUtilities.Field.Field;
 public class Logic
 {
 	private Frontend referenceFrontend;
+	private StartView startView;
 	private CommandHandler commandHandler;
+	private StartViewSettingData startSettData;
+
+	private GameSoundPlayer gameSoundPlayer;
 	private Command currAttacCommand = null;
 	private Field ownField;
 	private Field enemyField;
@@ -27,10 +32,10 @@ public class Logic
 	private boolean isHost;
 
 	// ********only for tests---------------------
-//	private TestEnemy testEnemy = new TestEnemy();
+	// private TestEnemy testEnemy = new TestEnemy();
 
 	// *****************************************
-	
+
 	/**
 	 * Logic
 	 * 
@@ -38,20 +43,31 @@ public class Logic
 	 */
 	public Logic(boolean isFirstPlayer)
 	{
+		startSettData = new StartViewSettingData();
+		startView = new StartView(this, startSettData);
+		gameSoundPlayer = new GameSoundPlayer();
+
 		this.isMyTurn = isFirstPlayer;
 	}
 
 	/********************** FUNCTION FOR FRONTEND ********************************/
-	
+
+	public void openStartViewSettings()
+	{
+		startView.openStartViewSettings();
+	}
+
 	/**
 	 * Set The Reference for the Logic
+	 * 
 	 * @param refFrontend
 	 */
-	public void setFrontendReference(Frontend refFrontend)	//----->>>REF FRONTEND 
+	public void setFrontendReference(Frontend refFrontend) // ----->>>REF
+															// FRONTEND
 	{
 		this.referenceFrontend = refFrontend;
 	}
-	
+
 	/**
 	 * set the initial field
 	 * 
@@ -62,17 +78,17 @@ public class Logic
 		this.ownField = ownInitField;
 		sendFieldToOtherPlayer();
 	}
-	
+
 	public boolean isAttacMoveValid(String nextMove)
 	{
 		System.out.println(nextMove);
 		int[] attacCoordinates = buildCoordinatesByString(nextMove);
 
-		return enemyField.IsValidAttacPosition(attacCoordinates[0], attacCoordinates[1]);
+		return enemyField.IsValidAttacPosition(attacCoordinates[0],
+				attacCoordinates[1]);
 	}
 
 	/********************** FUNCTION FOR LOGIC ***********************************/
-	
 
 	private void startNextMove()
 	{
@@ -82,7 +98,7 @@ public class Logic
 		System.out.println("\nEnemy Field:");
 		enemyField.displayIncognito();
 		System.out.println("*****************************************");
-		
+
 		if (isMyTurn)
 		{
 			fireToFieldPosition(referenceFrontend.getNextCommand());
@@ -93,7 +109,7 @@ public class Logic
 		{
 			// wait for enemy move
 			System.out.println("Wait for enemy move");
-			//waitForEnemyMove();
+			// waitForEnemyMove();
 			setIsMyTurn(true);
 		}
 		commandHandler.receiveCommandFromDataBox();
@@ -112,7 +128,7 @@ public class Logic
 
 		enemyField.fireToPosition(attacCoordinates[0], attacCoordinates[1]);
 		commandHandler.sendAttacCommand(attacCommand);
-		if (enemyField.checkIfAllShipsAreCountersunk()) 
+		if (enemyField.checkIfAllShipsAreCountersunk())
 		{
 			referenceFrontend.displayWin();
 			wait(10000);
@@ -124,14 +140,13 @@ public class Logic
 	private Command buildAttacCommand(String fireMove)
 	{
 		String segments[] = fireMove.split(",");
-		Point point = new Point(Integer.parseInt(segments[0]), Integer.parseInt(segments[1]));
+		Point point = new Point(Integer.parseInt(segments[0]),
+				Integer.parseInt(segments[1]));
 		AttackPosition attackPos = new AttackPosition(point);
 
 		Command command = new Command(1, attackPos, "ATTAC_COMMAND");
 		return command;
 	}
-
-	
 
 	private int[] buildCoordinatesByString(String nextMove)
 	{
@@ -151,7 +166,7 @@ public class Logic
 	{
 		this.enemyField = enemyField;
 	}
-	
+
 	private void wait(int ms)
 	{
 		try
@@ -166,24 +181,28 @@ public class Logic
 
 	/********************** FUNCTION FOR COMMAND HANDLER *************************/
 
-	public void setEnemyAttacCommand(AttackPosition attacPosition)// called from Command Handler
+	public void setEnemyAttacCommand(AttackPosition attacPosition)// called from
+																	// Command
+																	// Handler
 	{
 		currAttacCommand = new Command(1, attacPosition, "ATTAC_COMMAND");
-		ownField.fireToPosition(attacPosition.getXyPosition().x, attacPosition.getXyPosition().y);
-		
-		if (ownField.checkIfAllShipsAreCountersunk()) 
+		ownField.fireToPosition(attacPosition.getXyPosition().x,
+				attacPosition.getXyPosition().y);
+
+		if (ownField.checkIfAllShipsAreCountersunk())
 		{
 			referenceFrontend.displayGameOver();
 			wait(10000);
 			ConnectionCommandHandler.abortConnection();
 		}
-		
+
 		startNextMove();
 	}
 
 	private void sendFieldToOtherPlayer()
 	{
-		commandHandler = new CommandHandler(this); // Create commandHandler and send reference
+		commandHandler = new CommandHandler(this); // Create commandHandler and
+													// send reference
 
 		commandHandler.sendInitField(buildInitCommand(this.ownField));
 
@@ -200,7 +219,7 @@ public class Logic
 
 		startNextMove();
 	}
-	
+
 	private Command buildInitCommand(Field field)
 	{
 		Command initCommand = new Command(1, field, "INIT_FIELD");
