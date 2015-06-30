@@ -67,7 +67,7 @@ public class StartSettingsWindow extends JDialog
 		spinnerPort.setModel(new SpinnerNumberModel(8000, 8000, 8500, 1));
 		spinnerPort.setBounds(149, 49, 63, 28);
 		frmSettings.getContentPane().add(spinnerPort);
-		spinnerPort.setValue(2);
+		spinnerPort.setValue(Integer.parseInt(startViewSettingsData.getPort()));
 
 		lblIpAddress = new JLabel("IP Address");
 		lblIpAddress.setBounds(27, 4, 73, 35);
@@ -127,6 +127,7 @@ public class StartSettingsWindow extends JDialog
 							.toString());
 					startViewSettingsData.setMode(getHostState());
 					startViewSettingsData.writeSettingsToFile();
+
 				}
 				else
 				{

@@ -81,30 +81,30 @@ public class StartView extends JDialog
 				SystemColor.activeCaption);
 		frmBattleshipCommander.setResizable(false);
 		frmBattleshipCommander.setTitle("BATTLESHIP COMMANDER");
-		frmBattleshipCommander.setBounds(100, 100, 288, 286);
+		frmBattleshipCommander.setBounds(100, 100, 339, 286);
 		frmBattleshipCommander.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBattleshipCommander.getContentPane().setLayout(null);
 
 		this.btnPlayerCom = new JButton("PLAYER vs COM");
-		btnPlayerCom.setBounds(61, 102, 162, 42);
+		btnPlayerCom.setBounds(171, 0, 162, 42);
 		btnPlayerCom.setActionCommand(ViewStringDefinitions.PLAYER_VS_COM);
 		frmBattleshipCommander.getContentPane().add(btnPlayerCom);
 
 		this.btn2Player = new JButton("PLAYER vs PLAYER");
-		btn2Player.setBounds(61, 48, 162, 42);
+		btn2Player.setBounds(0, 0, 162, 42);
 		btn2Player.setActionCommand(ViewStringDefinitions.PLAYER_VS_PLAYER);
 		frmBattleshipCommander.getContentPane().add(btn2Player);
 
 		this.btnSettings = new JButton("SETTINGS");
 		btnSettings.addActionListener(this.viewButtListener);
-		btnSettings.setBounds(61, 156, 162, 42);
+		btnSettings.setBounds(83, 210, 162, 42);
 		btnSettings.setActionCommand(ViewStringDefinitions.SETTING_START_VIEW);
 		frmBattleshipCommander.getContentPane().add(btnSettings);
 
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(StartView.class
 				.getResource("/img/shipBackground.jpg")));
-		label.setBounds(6, 6, 270, 246);
+		label.setBounds(23, 28, 310, 203);
 		frmBattleshipCommander.getContentPane().add(label);
 
 		frmBattleshipCommander.setVisible(true);
