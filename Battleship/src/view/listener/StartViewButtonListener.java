@@ -24,7 +24,7 @@ public class StartViewButtonListener implements ActionListener
 		switch (command)
 		{
 		case ViewStringDefinitions.PLAYER_VS_COM :
-			;
+			refGameLogic.openViewGameField();
 			break;
 		case ViewStringDefinitions.PLAYER_VS_PLAYER :
 			;

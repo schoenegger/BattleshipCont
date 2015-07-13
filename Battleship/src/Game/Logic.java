@@ -26,8 +26,8 @@ public class Logic
 
 	private GameSoundPlayer gameSoundPlayer;
 	private Command currAttacCommand = null;
-	private Field ownField;
-	private Field enemyField;
+	private Field ownField = new Field();
+	private Field enemyField = new Field();
 	private boolean isMyTurn;
 	private boolean isHost;
 
@@ -55,6 +55,11 @@ public class Logic
 	public void openStartViewSettings()
 	{
 		startView.openStartViewSettings();
+	}
+
+	public void openViewGameField()
+	{
+		startView.openViewGameFields(ownField, enemyField);
 	}
 
 	/**

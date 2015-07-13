@@ -10,10 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import view.GlobalStrings.ViewStringDefinitions;
+import view.game.GameWindow;
 import view.listener.StartViewButtonListener;
 import view.settings.StartSettingsWindow;
 import view.settings.StartViewSettingData;
 import Game.Logic;
+import GameUtilities.Field.Field;
 
 public class StartView extends JDialog
 {
@@ -25,6 +27,7 @@ public class StartView extends JDialog
 
 	private Logic refGameLogic;
 	private StartViewButtonListener viewButtListener;
+	private GameWindow gameWindow;
 	private StartSettingsWindow startSettWindow;
 	private StartViewSettingData startSettData;
 
@@ -86,6 +89,7 @@ public class StartView extends JDialog
 		frmBattleshipCommander.getContentPane().setLayout(null);
 
 		this.btnPlayerCom = new JButton("PLAYER vs COM");
+		btnPlayerCom.addActionListener(viewButtListener);
 		btnPlayerCom.setBounds(171, 0, 162, 42);
 		btnPlayerCom.setActionCommand(ViewStringDefinitions.PLAYER_VS_COM);
 		frmBattleshipCommander.getContentPane().add(btnPlayerCom);
@@ -118,4 +122,8 @@ public class StartView extends JDialog
 		this.startSettWindow = new StartSettingsWindow(startSettData);
 	}
 
+	public void openViewGameFields(Field ownField, Field enemyField)
+	{
+		this.gameWindow = new GameWindow(ownField, enemyField);
+	}
 }

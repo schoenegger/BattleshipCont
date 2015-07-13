@@ -15,6 +15,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import logging.Logging;
 import view.listener.StartViewSettingsListener;
 import GameUtilities.GlobalValues;
 
@@ -116,8 +117,6 @@ public class StartSettingsWindow extends JDialog
 		btnSave.setBounds(27, 241, 90, 28);
 		btnSave.addActionListener(new ActionListener()
 		{
-
-			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				if (checkIfSettingAreValid())
@@ -127,7 +126,7 @@ public class StartSettingsWindow extends JDialog
 							.toString());
 					startViewSettingsData.setMode(getHostState());
 					startViewSettingsData.writeSettingsToFile();
-
+					Logging.writeInfoMessage("changed Start View Settings");
 				}
 				else
 				{
