@@ -65,7 +65,7 @@ public class GameWindow extends JDialog
 						"[600.00:600.00,grow][21.00,baseline]"));
 
 		drawPanel = new DrawingPanelGameFields(ownField, enemyField);
-		drawPanel.setBackground(SystemColor.activeCaption);
+		drawPanel.setBackground(SystemColor.info);
 		drawPanel.revalidate();
 		drawPanel.repaint();
 

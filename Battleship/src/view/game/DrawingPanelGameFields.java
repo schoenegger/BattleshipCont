@@ -40,21 +40,29 @@ public class DrawingPanelGameFields extends JPanel
 		// System.out.println("Fuck you 'Image");
 		// e.printStackTrace();
 		// }
-
 		graphic = (Graphics2D) graph.create();
 
-		createFieldView(ownField);
-		createFieldView(enemyField);
+		createFieldView(ownField, (1.0 / 12.0), (1.0 / 6.0), (1.0 / 30.0));
+		createFieldView(enemyField, (7.0 / 12.0), (1.0 / 6.0), (1.0 / 30.0));
 		// super.revalidate();
 		// super.repaint();
 	}
 
-	private void createFieldView(Field gameField)
+	private void createFieldView(Field gameField, double factorStartX,
+			double factorStartY, double factorRect)
 	{
-		double width = 60;
-		double height = 60;
-		double x = 30;
-		double y = 30;
+		// double width = 60;
+		// double height = 60;
+		// double x = 30;
+		// double y = 30;
+
+		double widthReck = this.getWidth() * factorRect;
+		double heightReck = widthReck;
+		double startX = this.getWidth() * factorStartX;
+		double startY = this.getHeight() * factorStartY;
+
+		graphic.drawString("PanelWidht" + this.getWidth(), (int) startX,
+				(int) startY - 20);
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -63,17 +71,19 @@ public class DrawingPanelGameFields extends JPanel
 			{
 
 				// draw line
-				graphic.drawString("PanelWidht" + this.getWidth(), 15, 15);
+				// graphic.drawString("PanelWidht" + this.getWidth(), 20,
+				// 20);
 
-				graphic.draw(new Rectangle2D.Double(x, y, width, height));
+				graphic.draw(new Rectangle2D.Double(startX, startY, widthReck,
+						heightReck));
 
 				// graphic.drawImage(image, (int) (x + (width / 2 - 25)),
 				// (int) (y + (height / 2 - 25)), this);
 
-				x += width;
+				startX += widthReck;
 			}
-			x = 30;
-			y += height;
+			startX = this.getWidth() * factorStartX;
+			startY += heightReck;
 		}
 	}
 }
