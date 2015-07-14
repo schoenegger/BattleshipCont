@@ -1,5 +1,6 @@
 package GameUtilities;
 
+
 /**
  * Ship
  * 
@@ -32,15 +33,15 @@ public class Ship
 
 		switch (this.shipType)
 		{
-			case AIRCARRIER:
-				countSector = 5;
-				break;
-			case DESTROYER:
-				countSector = 4;
-				break;
-			default:
-				countSector = 3;
-				break;
+		case AIRCARRIER :
+			countSector = 5;
+			break;
+		case DESTROYER :
+			countSector = 4;
+			break;
+		default :
+			countSector = 3;
+			break;
 		}
 
 	}
@@ -55,20 +56,21 @@ public class Ship
 		String type = "";
 		switch (this.shipType)
 		{
-			case AIRCARRIER:
-				type = "AIRCARRIER";
-				break;
-			case DESTROYER:
-				type = "DESTROYER";
-				break;
-			case YELLOW_SUBMARINE:
-				type = "YELLOW_SUBMARINE";
-				break;
-			default:
-				break;
+		case AIRCARRIER :
+			type = "AIRCARRIER";
+			break;
+		case DESTROYER :
+			type = "DESTROYER";
+			break;
+		case YELLOW_SUBMARINE :
+			type = "YELLOW_SUBMARINE";
+			break;
+		default :
+			break;
 		}
 
-		return "-" + Integer.toString(number) + "," + type + "," + shipPosition.toString();
+		return "-" + Integer.toString(number) + "," + type + ","
+				+ shipPosition.toString();
 	}
 
 	/**
