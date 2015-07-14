@@ -3,7 +3,7 @@ package view.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import view.GlobalStrings.ViewStringDefinitions;
+import view.GlobalStrings.Definitions;
 import Game.Logic;
 
 public class StartViewButtonListener implements ActionListener
@@ -23,13 +23,13 @@ public class StartViewButtonListener implements ActionListener
 
 		switch (command)
 		{
-		case ViewStringDefinitions.PLAYER_VS_COM :
+		case Definitions.PLAYER_VS_COM :
 			refGameLogic.openViewGameField();
 			break;
-		case ViewStringDefinitions.PLAYER_VS_PLAYER :
+		case Definitions.PLAYER_VS_PLAYER :
 			;
 			break;
-		case ViewStringDefinitions.SETTING_START_VIEW :
+		case Definitions.SETTING_START_VIEW :
 			refGameLogic.openStartViewSettings();
 			break;
 		default :

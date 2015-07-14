@@ -3,7 +3,7 @@ package view.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import view.GlobalStrings.ViewStringDefinitions;
+import view.GlobalStrings.Definitions;
 
 public class StartViewSettingsListener implements ActionListener
 {
@@ -15,7 +15,7 @@ public class StartViewSettingsListener implements ActionListener
 
 		switch (command)
 		{
-		case ViewStringDefinitions.SAVE_BUTTON_START_SETTINGS_VIEW :
+		case Definitions.SAVE_BUTTON_START_SETTINGS_VIEW :
 
 			break;
 

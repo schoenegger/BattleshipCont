@@ -9,7 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import view.GlobalStrings.ViewStringDefinitions;
+import view.GlobalStrings.Definitions;
 import view.game.GameWindow;
 import view.listener.StartViewButtonListener;
 import view.settings.StartSettingsWindow;
@@ -91,18 +91,18 @@ public class StartView extends JDialog
 		this.btnPlayerCom = new JButton("PLAYER vs COM");
 		btnPlayerCom.addActionListener(viewButtListener);
 		btnPlayerCom.setBounds(171, 0, 162, 42);
-		btnPlayerCom.setActionCommand(ViewStringDefinitions.PLAYER_VS_COM);
+		btnPlayerCom.setActionCommand(Definitions.PLAYER_VS_COM);
 		frmBattleshipCommander.getContentPane().add(btnPlayerCom);
 
 		this.btn2Player = new JButton("PLAYER vs PLAYER");
 		btn2Player.setBounds(0, 0, 162, 42);
-		btn2Player.setActionCommand(ViewStringDefinitions.PLAYER_VS_PLAYER);
+		btn2Player.setActionCommand(Definitions.PLAYER_VS_PLAYER);
 		frmBattleshipCommander.getContentPane().add(btn2Player);
 
 		this.btnSettings = new JButton("SETTINGS");
 		btnSettings.addActionListener(this.viewButtListener);
 		btnSettings.setBounds(83, 210, 162, 42);
-		btnSettings.setActionCommand(ViewStringDefinitions.SETTING_START_VIEW);
+		btnSettings.setActionCommand(Definitions.SETTING_START_VIEW);
 		frmBattleshipCommander.getContentPane().add(btnSettings);
 
 		label = new JLabel("");
