@@ -5,8 +5,6 @@ import gameSounds.GameSoundPlayer;
 import java.awt.Point;
 
 import view.StartView;
-import view.GlobalStrings.LanguageView;
-import view.settings.StartViewSettingData;
 import GameConnections.ConnectionCommandHandler;
 import GameUtilities.Command;
 import GameUtilities.AttackPosition.AttackPosition;
@@ -23,8 +21,8 @@ public class Logic
 	private Frontend referenceFrontend;
 	private StartView startView;
 	private CommandHandler commandHandler;
-	private StartViewSettingData startSettData;
-	private LanguageView languageView;
+	// private StartViewSettingData startSettData;
+	// private LanguageView languageView;
 
 	private GameSoundPlayer gameSoundPlayer;
 	private Command currAttacCommand = null;
@@ -45,11 +43,11 @@ public class Logic
 	 */
 	public Logic(boolean isFirstPlayer)
 	{
-		startSettData = new StartViewSettingData();
+		// startSettData = new StartViewSettingData();
 
-		languageView = new LanguageView(startSettData.getLanguage());
+		// languageView = new LanguageView(startSettData.getLanguage());
 
-		startView = new StartView(this, startSettData, this.languageView);
+		startView = new StartView(this); // , startSettData
 		gameSoundPlayer = new GameSoundPlayer();
 
 		this.isMyTurn = isFirstPlayer;

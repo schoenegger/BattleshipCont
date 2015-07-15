@@ -42,13 +42,15 @@ public class StartSettingsWindow extends JDialog
 	/**
 	 * Create the application.
 	 */
-	public StartSettingsWindow(StartViewSettingData startSettData)
+	public StartSettingsWindow(StartViewSettingData startSettData,
+			LanguageView languageView)
 	{
+		this.languageView = languageView;
 		this.viewSettListener = new StartViewSettingsListener();
 		startViewSettingsData = startSettData;
 
-		this.languageView = new LanguageView(
-				startViewSettingsData.getLanguage());
+		// this.languageView = new LanguageView(
+		// startViewSettingsData.getLanguage());
 
 		initialize();
 	}
@@ -118,8 +120,13 @@ public class StartSettingsWindow extends JDialog
 		comboBox.addItem("ENGLISH");
 		comboBox.addItem("DEUTSCH");
 		comboBox.setBounds(149, 192, 133, 26);
+
+		if (this.startViewSettingsData.getLanguage().equals(
+				LanguageView.ENGLISH))
+			comboBox.setSelectedIndex(0);
+		else
+			comboBox.setSelectedIndex(1);
 		frmSettings.getContentPane().add(comboBox);
-		comboBox.setSelectedIndex(languageView.getLanguageIndex());
 
 		btnSave = new JButton("SAVE");
 		btnSave.setBounds(27, 241, 90, 28);

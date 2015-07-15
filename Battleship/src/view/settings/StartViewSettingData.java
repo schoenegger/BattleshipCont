@@ -9,7 +9,8 @@ import logging.Logging;
 
 public class StartViewSettingData
 {
-
+	// private LanguageView languageView;
+	// private StartViewSettingData startSettData;
 	private String configFilePath = "cnf/configGame.txt";
 	private String ipAddress;
 	private String port;
@@ -19,9 +20,11 @@ public class StartViewSettingData
 
 	// private String
 
-	public StartViewSettingData()
+	public StartViewSettingData()// LanguageView languageView
 	{
+
 		loadSettingsFromFile();
+		// languageView = new LanguageView(startSettData.getLanguage());
 	}
 
 	public void loadSettingsFromFile()

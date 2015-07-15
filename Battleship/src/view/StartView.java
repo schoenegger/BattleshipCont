@@ -65,13 +65,12 @@ public class StartView extends JDialog
 	/**
 	 * Create the application.
 	 */
-	public StartView(Logic refGameLogic, StartViewSettingData startSettData,
-			LanguageView languageView)
+	public StartView(Logic refGameLogic)// , StartViewSettingData startSettData
 	{
-		this.startSettData = startSettData;
+		this.startSettData = new StartViewSettingData();
 		this.refGameLogic = refGameLogic;
 
-		this.languageView = languageView;
+		this.languageView = new LanguageView(startSettData.getLanguage());
 
 		initializeListeners();
 		initializeComponets();
@@ -97,8 +96,11 @@ public class StartView extends JDialog
 
 		// this.btnPlayerCom = new JButton("PLAYER vs COM");
 
+		// this.btnPlayerCom = new JButton(
+		// languageView.getResourceString("Player_vs._CPU_Button"));
+
 		this.btnPlayerCom = new JButton(
-				languageView.getResourceString("Player_vs._CPU_Button"));
+				languageView.getResourceString(languageView.PLAYER_VS_CPU));
 
 		btnPlayerCom.addActionListener(viewButtListener);
 		btnPlayerCom.setBounds(171, 0, 162, 42);
@@ -132,7 +134,8 @@ public class StartView extends JDialog
 
 	public void openStartViewSettings()
 	{
-		this.startSettWindow = new StartSettingsWindow(startSettData);
+		this.startSettWindow = new StartSettingsWindow(startSettData,
+				this.languageView);
 	}
 
 	public void openViewGameFields(Field ownField, Field enemyField)
