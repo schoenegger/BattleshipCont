@@ -88,8 +88,8 @@ public class StartViewSettingData
 
 			out.write("ipAddress" + ";" + this.getIpAddress() + "\n" + "port"
 					+ ";" + this.getPort() + "\n" + "mode" + ";"
-					+ this.getMode() + "\n" + "level;1" + "\n" + "language;en"
-					+ "\n");
+					+ this.getMode() + "\n" + "level;1" + "\n" + "language"
+					+ ";" + this.getLanguage() + "\n");
 
 			out.close();
 		}

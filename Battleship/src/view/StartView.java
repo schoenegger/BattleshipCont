@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import view.GlobalStrings.Definitions;
+import view.GlobalStrings.LanguageView;
 import view.game.GameWindow;
 import view.listener.StartViewButtonListener;
 import view.settings.StartSettingsWindow;
@@ -30,6 +31,8 @@ public class StartView extends JDialog
 	private GameWindow gameWindow;
 	private StartSettingsWindow startSettWindow;
 	private StartViewSettingData startSettData;
+
+	private LanguageView languageView;
 
 	private JFrame frmBattleshipCommander;
 
@@ -62,10 +65,14 @@ public class StartView extends JDialog
 	/**
 	 * Create the application.
 	 */
-	public StartView(Logic refGameLogic, StartViewSettingData startSettData)
+	public StartView(Logic refGameLogic, StartViewSettingData startSettData,
+			LanguageView languageView)
 	{
 		this.startSettData = startSettData;
 		this.refGameLogic = refGameLogic;
+
+		this.languageView = languageView;
+
 		initializeListeners();
 		initializeComponets();
 	}
@@ -88,13 +95,19 @@ public class StartView extends JDialog
 		frmBattleshipCommander.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBattleshipCommander.getContentPane().setLayout(null);
 
-		this.btnPlayerCom = new JButton("PLAYER vs COM");
+		// this.btnPlayerCom = new JButton("PLAYER vs COM");
+
+		this.btnPlayerCom = new JButton(
+				languageView.getResourceString("Player_vs._CPU_Button"));
+
 		btnPlayerCom.addActionListener(viewButtListener);
 		btnPlayerCom.setBounds(171, 0, 162, 42);
 		btnPlayerCom.setActionCommand(Definitions.PLAYER_VS_COM);
 		frmBattleshipCommander.getContentPane().add(btnPlayerCom);
 
-		this.btn2Player = new JButton("PLAYER vs PLAYER");
+		// this.btn2Player = new JButton("PLAYER vs PLAYER");
+		this.btn2Player = new JButton(
+				languageView.getResourceString("Player_vs._Player_Button"));
 		btn2Player.setBounds(0, 0, 162, 42);
 		btn2Player.setActionCommand(Definitions.PLAYER_VS_PLAYER);
 		frmBattleshipCommander.getContentPane().add(btn2Player);

@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import logging.Logging;
+import view.GlobalStrings.LanguageView;
 import view.listener.StartViewSettingsListener;
 import GameUtilities.GlobalValues;
 
@@ -23,6 +24,7 @@ public class StartSettingsWindow extends JDialog
 {
 
 	private StartViewSettingData startViewSettingsData;
+	private LanguageView languageView;
 	private JFrame frmSettings;
 	private JTextField txtIPAddress;
 	private JLabel lblPort;
@@ -32,6 +34,7 @@ public class StartSettingsWindow extends JDialog
 	private JSpinner spinnerPort;
 	private JLabel lblIpAddress;
 	private JCheckBox chckbxNewCheckBox;
+	private JComboBox<String> comboBox;
 	private JLabel lblLanguage;
 	private JButton btnSave;
 	private StartViewSettingsListener viewSettListener;
@@ -43,6 +46,10 @@ public class StartSettingsWindow extends JDialog
 	{
 		this.viewSettListener = new StartViewSettingsListener();
 		startViewSettingsData = startSettData;
+
+		this.languageView = new LanguageView(
+				startViewSettingsData.getLanguage());
+
 		initialize();
 	}
 
@@ -107,11 +114,12 @@ public class StartSettingsWindow extends JDialog
 		lblLanguage.setBounds(27, 188, 73, 35);
 		frmSettings.getContentPane().add(lblLanguage);
 
-		JComboBox<String> comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		comboBox.addItem("ENGLISH");
-		comboBox.addItem("GERMAN");
+		comboBox.addItem("DEUTSCH");
 		comboBox.setBounds(149, 192, 133, 26);
 		frmSettings.getContentPane().add(comboBox);
+		comboBox.setSelectedIndex(languageView.getLanguageIndex());
 
 		btnSave = new JButton("SAVE");
 		btnSave.setBounds(27, 241, 90, 28);
@@ -125,6 +133,8 @@ public class StartSettingsWindow extends JDialog
 					startViewSettingsData.setPort(spinnerPort.getValue()
 							.toString());
 					startViewSettingsData.setMode(getHostState());
+					startViewSettingsData.setLanguage(comboBox
+							.getSelectedItem().toString());
 					startViewSettingsData.writeSettingsToFile();
 					Logging.writeInfoMessage("changed Start View Settings");
 				}

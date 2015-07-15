@@ -9,8 +9,15 @@ import logging.Logging;
 public class LanguageView
 {
 	private ResourceBundle bundle;
+	private String actualLanguageToken;
+	private int languageIndex;
 	public static final String EN = "en";
 	public static final String GER = "de";
+
+	public static final String VIEW_STRING_EN = "ENGLISH";
+	public static final String VIEW_STRING_DE = "DEUTSCH";
+
+	public static final String DEFAULT_STRING_NOT_EXIST = "empty placeholder";
 
 	public static final String LECTURE_PLAN = "LecturePlan";
 	public static final String CALENDAR_WEEK = "CalendarWeek";
@@ -30,18 +37,44 @@ public class LanguageView
 
 	public LanguageView()
 	{
-		setLanguage(EN); // default language
-							// is English
+		actualLanguageToken = EN; // default language
+		languageIndex = 0;
+		// is English
+	}
+
+	public LanguageView(String language)
+	{
+		actualLanguageToken = convertToLanguageTokenAndSetLanguageIndex(language);
+		setLanguage(actualLanguageToken);
+	}
+
+	// The languageIndex shows the correct used Language in the view (combobox)
+	// The
+	private String convertToLanguageTokenAndSetLanguageIndex(String language)
+	{
+		switch (language)
+		{
+		case VIEW_STRING_EN :
+			languageIndex = 0;
+			return (EN);
+
+		case VIEW_STRING_DE :
+			languageIndex = 1;
+			return (GER);
+
+		default :
+			Logging.writeInfoMessage("Can't find selected language \""
+					+ language + "\"! Using default language English!");
+			return (EN);
+		}
 	}
 
 	public void setLanguage(String languageDictionary)
 	{
-		String langDicString = EN;
-
 		try
 		{
 			this.bundle = ResourceBundle.getBundle("LanguageViewStrings",
-					new Locale(langDicString));
+					new Locale(languageDictionary));
 		}
 		catch (MissingResourceException e)
 		{
@@ -51,10 +84,27 @@ public class LanguageView
 
 	public String getResourceString(String languageDictionary)
 	{
-
+		String returnstring;
 		// TODO DIDI -- create Error Handling for Function
-		return this.bundle.getString(languageDictionary);
 
+		// returnstring = this.bundle.getString(languageDictionary);
+		try
+		{
+			returnstring = this.bundle.getString(languageDictionary);
+		}
+		catch (MissingResourceException mre)
+		{
+			returnstring = DEFAULT_STRING_NOT_EXIST;
+			Logging.writeInfoMessage("translation string \""
+					+ languageDictionary
+					+ "\" wasn't found in File! Using default string");
+		}
+		return returnstring;
+	}
+
+	public int getLanguageIndex()
+	{
+		return languageIndex;
 	}
 
 }
