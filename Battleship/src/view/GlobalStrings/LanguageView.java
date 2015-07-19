@@ -88,6 +88,7 @@ public class LanguageView
 	public String getResourceString(String languageDictionary)
 	{
 		String resourceString;
+		// TODO DIDI -- create Error Handling for Function
 
 		// returnstring = this.bundle.getString(languageDictionary);
 		try
@@ -97,7 +98,7 @@ public class LanguageView
 		catch (MissingResourceException mre)
 		{
 			resourceString = DEFAULT_STRING_NOT_EXIST;
-			Logging.writeErrorMessage("translation string \""
+			Logging.writeInfoMessage("translation string \""
 					+ languageDictionary
 					+ "\" wasn't found in File! Using default string");
 		}
