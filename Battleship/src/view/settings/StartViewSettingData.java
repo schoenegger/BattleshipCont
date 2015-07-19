@@ -18,7 +18,65 @@ public class StartViewSettingData
 	private String level;
 	private String language;
 
-	// private String
+	public String getConfigFilePath()
+	{
+		return configFilePath;
+	}
+
+	public void setConfigFilePath(String configFilePath)
+	{
+		this.configFilePath = configFilePath;
+	}
+
+	public String getIpAddress()
+	{
+		return ipAddress;
+	}
+
+	public void setIpAddress(String ipAddress)
+	{
+		this.ipAddress = ipAddress;
+	}
+
+	public String getPort()
+	{
+		return port;
+	}
+
+	public void setPort(String port)
+	{
+		this.port = port;
+	}
+
+	public String getMode()
+	{
+		return mode;
+	}
+
+	public void setMode(String mode)
+	{
+		this.mode = mode;
+	}
+
+	public String getLevel()
+	{
+		return level;
+	}
+
+	public void setLevel(String level)
+	{
+		this.level = level;
+	}
+
+	public String getLanguage()
+	{
+		return language;
+	}
+
+	public void setLanguage(String language)
+	{
+		this.language = language;
+	}
 
 	public StartViewSettingData()// LanguageView languageView
 	{
@@ -102,65 +160,4 @@ public class StartViewSettingData
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
-
-	public String getConfigFilePath()
-	{
-		return configFilePath;
-	}
-
-	public void setConfigFilePath(String configFilePath)
-	{
-		this.configFilePath = configFilePath;
-	}
-
-	public String getIpAddress()
-	{
-		return ipAddress;
-	}
-
-	public void setIpAddress(String ipAddress)
-	{
-		this.ipAddress = ipAddress;
-	}
-
-	public String getPort()
-	{
-		return port;
-	}
-
-	public void setPort(String port)
-	{
-		this.port = port;
-	}
-
-	public String getMode()
-	{
-		return mode;
-	}
-
-	public void setMode(String mode)
-	{
-		this.mode = mode;
-	}
-
-	public String getLevel()
-	{
-		return level;
-	}
-
-	public void setLevel(String level)
-	{
-		this.level = level;
-	}
-
-	public String getLanguage()
-	{
-		return language;
-	}
-
-	public void setLanguage(String language)
-	{
-		this.language = language;
-	}
-
 }

@@ -3,6 +3,8 @@ package view.settings;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -48,10 +50,6 @@ public class StartSettingsWindow extends JDialog
 		this.languageView = languageView;
 		this.viewSettListener = new StartViewSettingsListener();
 		startViewSettingsData = startSettData;
-
-		// this.languageView = new LanguageView(
-		// startViewSettingsData.getLanguage());
-
 		initialize();
 	}
 
@@ -63,7 +61,8 @@ public class StartSettingsWindow extends JDialog
 		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		frmSettings = new JFrame();
 		frmSettings.setResizable(false);
-		frmSettings.setTitle("SETTINGS");
+		frmSettings.setTitle(languageView
+				.getResourceString(LanguageView.SETTINGS));
 		frmSettings.getContentPane().setBackground(SystemColor.activeCaption);
 		frmSettings.getContentPane().setLayout(null);
 
@@ -79,11 +78,12 @@ public class StartSettingsWindow extends JDialog
 		frmSettings.getContentPane().add(spinnerPort);
 		spinnerPort.setValue(Integer.parseInt(startViewSettingsData.getPort()));
 
-		lblIpAddress = new JLabel("IP Address");
+		lblIpAddress = new JLabel(
+				languageView.getResourceString(LanguageView.IP_ADDRESS));
 		lblIpAddress.setBounds(27, 4, 73, 35);
 		frmSettings.getContentPane().add(lblIpAddress);
 
-		lblPort = new JLabel("Port");
+		lblPort = new JLabel(languageView.getResourceString(LanguageView.PORT));
 		lblPort.setBounds(27, 42, 73, 35);
 		frmSettings.getContentPane().add(lblPort);
 
@@ -103,16 +103,18 @@ public class StartSettingsWindow extends JDialog
 		chckbxNewCheckBox.setBounds(149, 95, 21, 23);
 		frmSettings.getContentPane().add(chckbxNewCheckBox);
 
-		lblLevel = new JLabel("LEVEL");
+		lblLevel = new JLabel(
+				languageView.getResourceString(LanguageView.LEVEL));
 		lblLevel.setBounds(27, 132, 73, 35);
 		frmSettings.getContentPane().add(lblLevel);
 
 		spinnerLevel = new JSpinner();
-		spinnerLevel.setModel(new SpinnerNumberModel(1, 1, 5, 1));
+		spinnerLevel.setModel(new SpinnerNumberModel(1, 1, 3, 1));
 		spinnerLevel.setBounds(149, 139, 63, 28);
 		frmSettings.getContentPane().add(spinnerLevel);
 
-		lblLanguage = new JLabel("Language");
+		lblLanguage = new JLabel(
+				languageView.getResourceString(LanguageView.LANGUAGE));
 		lblLanguage.setBounds(27, 188, 73, 35);
 		frmSettings.getContentPane().add(lblLanguage);
 
@@ -128,52 +130,81 @@ public class StartSettingsWindow extends JDialog
 			comboBox.setSelectedIndex(1);
 		frmSettings.getContentPane().add(comboBox);
 
-		btnSave = new JButton("SAVE");
-		btnSave.setBounds(27, 241, 90, 28);
+		btnSave = new JButton(languageView.getResourceString(LanguageView.SAVE));
+		btnSave.setBounds(27, 241, 100, 28);
+
+		// add didi
+		btnSave.setMnemonic(KeyEvent.VK_S);
+		btnSave.addKeyListener(new KeyListener()
+		{
+			public void keyPressed(KeyEvent e)
+			{
+				if (e.getKeyCode() == KeyEvent.VK_ENTER
+						&& btnSave.isFocusOwner() == true)
+				{
+					saveSettingsIfValideAndWriteToFile();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0)
+			{
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0)
+			{
+
+			}
+
+		});
 		btnSave.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				if (checkIfSettingAreValid())
-				{
-					startViewSettingsData.setIpAddress(txtIPAddress.getText());
-					startViewSettingsData.setPort(spinnerPort.getValue()
-							.toString());
-					startViewSettingsData.setMode(getHostState());
-					startViewSettingsData.setLanguage(comboBox
-							.getSelectedItem().toString());
-					startViewSettingsData.writeSettingsToFile();
-					Logging.writeInfoMessage("changed Start View Settings");
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Invalid Values",
-							"Settings Values are not valid",
-							JOptionPane.PLAIN_MESSAGE);
-				}
-			}
-
-			private boolean checkIfSettingAreValid()
-			{
-
-				if (!(txtIPAddress.getText().equals("localhost") || txtIPAddress
-						.getText().trim().length() == GlobalValues.IP_ADDRESS_LENGHT))
-				{
-					return false;
-				}
-				if (!((int) spinnerPort.getValue() >= 8000 && (int) spinnerPort
-						.getValue() <= 8500))
-				{
-					return false;
-				}
-
-				return true;
+				saveSettingsIfValideAndWriteToFile();
 			}
 		});
 		frmSettings.getContentPane().add(btnSave);
 		frmSettings.setBounds(100, 100, 354, 303);
 
 		frmSettings.setVisible(true);
+	}
+
+	private void saveSettingsIfValideAndWriteToFile()
+	{
+		if (checkIfSettingAreValid())
+		{
+			startViewSettingsData.setIpAddress(txtIPAddress.getText());
+			startViewSettingsData.setPort(spinnerPort.getValue().toString());
+			startViewSettingsData.setMode(getHostState());
+			startViewSettingsData.setLanguage(comboBox.getSelectedItem()
+					.toString());
+			startViewSettingsData.writeSettingsToFile();
+			Logging.writeInfoMessage("changed Start View Settings");
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Invalid Values",
+					"Settings Values are not valid", JOptionPane.PLAIN_MESSAGE);
+		}
+	}
+
+	protected boolean checkIfSettingAreValid()
+	{
+		if (!(txtIPAddress.getText().equals("localhost") || txtIPAddress
+				.getText().trim().length() == GlobalValues.IP_ADDRESS_LENGHT))
+		{
+			return false;
+		}
+		if (!((int) spinnerPort.getValue() >= 8000 && (int) spinnerPort
+				.getValue() <= 8500))
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	private String getHostState()
@@ -187,5 +218,4 @@ public class StartSettingsWindow extends JDialog
 			return "client";
 		}
 	}
-
 }

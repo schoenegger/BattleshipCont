@@ -234,4 +234,22 @@ public class Logic
 
 		return initCommand;
 	}
+
+	// Add Didi Function for listener Keyevent
+	/**
+	 * 
+	 * @return the actual focus in the startview
+	 */
+	public String checkFocusInStartView()
+	{
+		return startView.checkFocusButton();
+	}
+
+	public void quitGame()
+	{
+		startView.setVisible(false);
+		startView.dispose();
+		System.exit(0);
+		// startView.closeWindow();
+	}
 }

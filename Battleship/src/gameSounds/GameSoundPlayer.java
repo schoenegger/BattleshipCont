@@ -25,7 +25,7 @@ public class GameSoundPlayer
 		{
 			this.soundClip = AudioSystem.getClip();
 			this.soundClip.open(AudioSystem.getAudioInputStream(new File(
-					"sound\\Ring05.wav")));
+					"sound\\sound_menue.wav")));
 		}
 		catch (Exception e)
 		{
