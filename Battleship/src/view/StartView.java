@@ -94,11 +94,6 @@ public class StartView extends JDialog
 		frmBattleshipCommander.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBattleshipCommander.getContentPane().setLayout(null);
 
-		// this.btnPlayerCom = new JButton("PLAYER vs COM");
-
-		// this.btnPlayerCom = new JButton(
-		// languageView.getResourceString("Player_vs._CPU_Button"));
-
 		this.btnPlayerCom = new JButton(
 				languageView.getResourceString(languageView.PLAYER_VS_CPU));
 
@@ -107,7 +102,6 @@ public class StartView extends JDialog
 		btnPlayerCom.setActionCommand(Definitions.PLAYER_VS_COM);
 		frmBattleshipCommander.getContentPane().add(btnPlayerCom);
 
-		// this.btn2Player = new JButton("PLAYER vs PLAYER");
 		this.btn2Player = new JButton(
 				languageView.getResourceString("Player_vs._Player_Button"));
 		btn2Player.setBounds(0, 0, 162, 42);
@@ -129,8 +123,7 @@ public class StartView extends JDialog
 		frmBattleshipCommander.setVisible(true);
 	}
 
-	// *************************************Called from
-	// Logic****************************
+	// ****************Called from Logic**********************
 
 	public void openStartViewSettings()
 	{
@@ -142,4 +135,5 @@ public class StartView extends JDialog
 	{
 		this.gameWindow = new GameWindow(ownField, enemyField);
 	}
+
 }

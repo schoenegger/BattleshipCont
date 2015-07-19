@@ -109,6 +109,7 @@ public class Logic
 
 		if (isMyTurn)
 		{
+			// startView.getNextCommandFromGameField()
 			fireToFieldPosition(referenceFrontend.getNextCommand());
 			setIsMyTurn(false);
 			wait(100);
