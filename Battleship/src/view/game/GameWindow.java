@@ -6,14 +6,19 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.SystemColor;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
+import view.StartView;
 import GameUtilities.Field.Field;
 
 public class GameWindow extends JDialog
@@ -24,6 +29,7 @@ public class GameWindow extends JDialog
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private StartView refStartView;
 	private JPanel panel_1;
 	private JFrame frmSettings;
 	private JPanel drawPanel;
@@ -32,6 +38,11 @@ public class GameWindow extends JDialog
 	private Field refEnemyField;
 	private volatile String nextMove = null;
 	private String currFieldText = "";
+	private JRadioButton rdbtnVertical;
+	private JRadioButton rdbtnHorizontal;
+	private JButton btnSetShip;
+	private JComboBox comboBox;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	// private DrawingPanelGameFields drawingPanelGameField;
 
@@ -42,10 +53,11 @@ public class GameWindow extends JDialog
 	/**
 	 * Create the frame.
 	 */
-	public GameWindow()
+	public GameWindow(StartView refStartView)
 	{
 		// this.ownField = ownField;
 		// this.enemyField = enemyField;
+		this.refStartView = refStartView;
 		initializeComponents();
 		initGameField();
 	}
@@ -85,7 +97,7 @@ public class GameWindow extends JDialog
 		frmSettings.getContentPane().add(panel_1, "cell 0 1,grow");
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]
-		{ 57, 90, 97, 127, 496, 86, 0 };
+		{ 57, 90, 97, 176, 496, 86, 0 };
 		gbl_panel_1.rowHeights = new int[]
 		{ 16, 0, 23, 0 };
 		gbl_panel_1.columnWeights = new double[]
@@ -99,27 +111,48 @@ public class GameWindow extends JDialog
 		gbc_btnExit.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnExit.insets = new Insets(0, 0, 5, 5);
 		gbc_btnExit.gridx = 1;
-		gbc_btnExit.gridy = 1;
+		gbc_btnExit.gridy = 0;
 		panel_1.add(btnExit, gbc_btnExit);
+
+		rdbtnVertical = new JRadioButton("Vertical");
+		rdbtnVertical.setSelected(true);
+		buttonGroup.add(rdbtnVertical);
+		GridBagConstraints gbc_rdbtnVertical = new GridBagConstraints();
+		gbc_rdbtnVertical.insets = new Insets(0, 0, 5, 5);
+		gbc_rdbtnVertical.gridx = 2;
+		gbc_rdbtnVertical.gridy = 0;
+		panel_1.add(rdbtnVertical, gbc_rdbtnVertical);
+
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[]
+		{ "Destroyer", "Air Carrier", "Yellow Submarine" }));
+		comboBox.setToolTipText("ShipType");
+		comboBox.setEditable(true);
+		comboBox.setMinimumSize(new Dimension(20, 20));
+		comboBox.setPreferredSize(new Dimension(20, 20));
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox.gridx = 3;
+		gbc_comboBox.gridy = 0;
+		panel_1.add(comboBox, gbc_comboBox);
 
 		JButton btnAttack = new JButton("Attack");
 		btnAttack.setMaximumSize(new Dimension(100, 30));
 		GridBagConstraints gbc_btnAttack = new GridBagConstraints();
 		gbc_btnAttack.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnAttack.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAttack.gridx = 2;
+		gbc_btnAttack.gridx = 1;
 		gbc_btnAttack.gridy = 1;
 		panel_1.add(btnAttack, gbc_btnAttack);
 
-		textField = new JTextField();
-		textField.setText("0;1");
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.anchor = GridBagConstraints.WEST;
-		gbc_textField.gridx = 3;
-		gbc_textField.gridy = 1;
-		panel_1.add(textField, gbc_textField);
-		textField.setColumns(10);
+		rdbtnHorizontal = new JRadioButton("horizontal");
+		buttonGroup.add(rdbtnHorizontal);
+		GridBagConstraints gbc_rdbtnHorizontal = new GridBagConstraints();
+		gbc_rdbtnHorizontal.insets = new Insets(0, 0, 5, 5);
+		gbc_rdbtnHorizontal.gridx = 2;
+		gbc_rdbtnHorizontal.gridy = 1;
+		panel_1.add(rdbtnHorizontal, gbc_rdbtnHorizontal);
 
 		JLabel lblMessages = new JLabel("Messages");
 		GridBagConstraints gbc_lblMessages = new GridBagConstraints();
@@ -127,6 +160,23 @@ public class GameWindow extends JDialog
 		gbc_lblMessages.gridx = 4;
 		gbc_lblMessages.gridy = 1;
 		panel_1.add(lblMessages, gbc_lblMessages);
+
+		textField = new JTextField();
+		textField.setText("0;1");
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 0, 5);
+		gbc_textField.anchor = GridBagConstraints.WEST;
+		gbc_textField.gridx = 1;
+		gbc_textField.gridy = 2;
+		panel_1.add(textField, gbc_textField);
+		textField.setColumns(10);
+
+		btnSetShip = new JButton("Set Ship");
+		GridBagConstraints gbc_btnSetShip = new GridBagConstraints();
+		gbc_btnSetShip.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSetShip.gridx = 2;
+		gbc_btnSetShip.gridy = 2;
+		panel_1.add(btnSetShip, gbc_btnSetShip);
 
 		frmSettings.revalidate();
 		frmSettings.repaint();
@@ -147,6 +197,7 @@ public class GameWindow extends JDialog
 		while (this.nextMove == null)
 		{
 			wait(500);
+			sendMessge("Make your next Move");
 		}
 		if (this.nextMove != null)
 		{
@@ -159,7 +210,8 @@ public class GameWindow extends JDialog
 
 	public void refreshAttacTextField(String attacFieldText)
 	{
-		textField.setText(attacFieldText);
+		textField.getText();
+		this.textField.setText(attacFieldText);
 	}
 
 	/************** default help functions ************/
@@ -175,5 +227,11 @@ public class GameWindow extends JDialog
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void sendMessge(String message)
+	{
+		textField.setText(message);
+		textField.revalidate();
 	}
 }

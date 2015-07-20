@@ -62,7 +62,7 @@ public class Logic
 
 	public void openViewGameField()
 	{
-		startView.openViewGameFields(ownField, enemyField);
+		startView.openViewGameFields();
 	}
 
 	/**
@@ -115,9 +115,8 @@ public class Logic
 		}
 		else
 		{
-			// wait for enemy move
 			System.out.println("Wait for enemy move");
-			// waitForEnemyMove();
+
 			setIsMyTurn(true);
 		}
 		commandHandler.receiveCommandFromDataBox();
@@ -222,7 +221,8 @@ public class Logic
 		while (enemyField == null)
 		{
 			wait(300);
-			System.out.println("wait for settings other player");
+			this.startView
+					.sendGameWindowMessage("Wait for settings other Player");
 		}
 
 		startNextMove();
@@ -258,4 +258,11 @@ public class Logic
 	{
 		return gameSoundPlayer;
 	}
+
+	// ************* Commands To Logic*************
+	public String getNextMoveFromStartView()
+	{
+		return this.startView.getNextCommandFromGameWindow();
+	}
+
 }

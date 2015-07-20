@@ -43,27 +43,6 @@ public class StartView extends JDialog
 	private JLabel label;
 
 	/**
-	 * Launch the application.
-	 */
-	// public static void main(String[] args) {
-	// try {
-	// UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-	// } catch (Throwable e) {
-	// e.printStackTrace();
-	// }
-	// EventQueue.invokeLater(new Runnable() {
-	// public void run() {
-	// try {
-	// StartView window = new StartView();
-	// window.frmBattleshipCommander.setVisible(true);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// });
-	// }
-
-	/**
 	 * Create the application.
 	 */
 	public StartView(Logic refGameLogic)// , StartViewSettingData startSettData
@@ -96,6 +75,7 @@ public class StartView extends JDialog
 		frmBattleshipCommander.getContentPane().setLayout(null);
 		this.btnPlayerCom = new JButton(
 				languageView.getResourceString(LanguageView.PLAYER_VS_CPU));
+		btnPlayerCom.setToolTipText("Alt+C");
 
 		btnPlayerCom.addActionListener(this.viewButtListener);
 		btnPlayerCom.addKeyListener(this.viewButtListener);
@@ -105,6 +85,7 @@ public class StartView extends JDialog
 		frmBattleshipCommander.getContentPane().add(this.btnPlayerCom);
 		this.btn2Player = new JButton(
 				languageView.getResourceString(LanguageView.PLAYER_VS_PLAYER));
+		btn2Player.setToolTipText("Alt+P");
 		btn2Player.setBounds(0, 0, 162, 42);
 		btn2Player.setActionCommand(Definitions.PLAYER_VS_PLAYER);
 
@@ -116,6 +97,7 @@ public class StartView extends JDialog
 		frmBattleshipCommander.getContentPane().add(btn2Player);
 		this.btnSettings = new JButton(
 				languageView.getResourceString(LanguageView.SETTINGS));
+		btnSettings.setToolTipText("Alt+S");
 		btnSettings.addActionListener(this.viewButtListener);
 
 		btnSettings.addKeyListener(this.viewButtListener);
@@ -146,12 +128,25 @@ public class StartView extends JDialog
 		// this.languageView);
 	}
 
-	public void openViewGameFields(Field ownField, Field enemyField)
+	public void openViewGameFields()
 	{
-		this.gameWindow = new GameWindow();
+		this.gameWindow = new GameWindow(this);
 	}
 
-	// add Didi called from listener
+	public String getNextCommandFromGameWindow()
+	{
+		return this.gameWindow.getNextMove();
+	}
+
+	/******************* Called from Game View *************/
+
+	public void setInitFieldInLogic(Field ownInitField)
+	{
+		this.refGameLogic.setInitField(ownInitField);
+	}
+
+	/***************************** Listener *************/
+
 	/**
 	 * check which button have currently the focus for keylistener
 	 * 
@@ -173,4 +168,11 @@ public class StartView extends JDialog
 		}
 		return "";
 	}
+
+	public void sendGameWindowMessage(String message)
+	{
+		this.gameWindow.sendMessge(message);
+
+	}
+
 }

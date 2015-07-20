@@ -44,9 +44,31 @@ public class Field
 		return activeShipsInField;
 	}
 
-	public void setShipOnField(Ship ship)
+	/**
+	 * Sets a ship on the Field max 2AirCarrier, 2YellowSubmarines, 2Destroyer
+	 * returnValue initValues valid = true, Invalid = false
+	 * 
+	 * @param ship
+	 * @return
+	 */
+	public boolean setShipsOnField(Vector<Ship> ships)
 	{
-		shipsOnField.addElement(ship);
+
+		shipsOnField = new Vector<Ship>();
+
+		if (checkIfShipsListIsValid())
+		{
+			shipsOnField = ships;
+			return true;
+		}
+
+		return false;
+	}
+
+	private boolean checkIfShipsListIsValid()
+	{
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	public boolean checkIfAllShipsAreCountersunk()
@@ -55,7 +77,9 @@ public class Field
 		{
 			for (int j = 0; j <= 9; j++)
 			{
-				if (fieldElemtens[i][j].isTaken() && !fieldElemtens[i][j].getFieldState().equals(FieldState.STRIKE_SHIP))
+				if (fieldElemtens[i][j].isTaken()
+						&& !fieldElemtens[i][j].getFieldState().equals(
+								FieldState.STRIKE_SHIP))
 				{
 					return false;
 				}
@@ -73,11 +97,13 @@ public class Field
 		{
 			for (int j = 0; j <= 9; j++)
 			{
-				if (fieldElemtens[i][j].getFieldState().equals(FieldState.STRIKE_SHIP))
+				if (fieldElemtens[i][j].getFieldState().equals(
+						FieldState.STRIKE_SHIP))
 				{
 					// TODO maybe something more intelligent^^
 				}
-				if (fieldElemtens[i][j].getFieldState().equals(FieldState.UNKNOWN))
+				if (fieldElemtens[i][j].getFieldState().equals(
+						FieldState.UNKNOWN))
 				{
 					freePosition = new Point(i, j);
 					return freePosition;
@@ -90,7 +116,8 @@ public class Field
 	public boolean IsValidAttacPosition(int posX, int posY)
 	{
 
-		if (this.fieldElemtens[posX][posY].getFieldState().equals(FieldState.UNKNOWN))
+		if (this.fieldElemtens[posX][posY].getFieldState().equals(
+				FieldState.UNKNOWN))
 		{
 			return true;
 		}
@@ -142,7 +169,8 @@ public class Field
 			{
 				for (int i = 0; i < countSector; i++)
 				{
-					fieldElemtens[currShipPoint.x + i][currShipPoint.y].setTaken();
+					fieldElemtens[currShipPoint.x + i][currShipPoint.y]
+							.setTaken();
 				}
 			}
 			else
@@ -150,7 +178,8 @@ public class Field
 			{
 				for (int i = 0; i < countSector; i++)
 				{
-					fieldElemtens[currShipPoint.x][currShipPoint.y + i].setTaken();
+					fieldElemtens[currShipPoint.x][currShipPoint.y + i]
+							.setTaken();
 				}
 			}
 		}
@@ -165,15 +194,19 @@ public class Field
 
 			for (int j = 0; j <= 9; j++)
 			{
-				if (fieldElemtens[i][j].isTaken() && !fieldElemtens[i][j].getFieldState().equals(FieldState.STRIKE_SHIP))
+				if (fieldElemtens[i][j].isTaken()
+						&& !fieldElemtens[i][j].getFieldState().equals(
+								FieldState.STRIKE_SHIP))
 				{
 					printField += "|S";
 				}
-				else if (fieldElemtens[i][j].getFieldState().equals(FieldState.STRIKE_SHIP))
+				else if (fieldElemtens[i][j].getFieldState().equals(
+						FieldState.STRIKE_SHIP))
 				{
 					printField += "|X";
 				}
-				else if (fieldElemtens[i][j].getFieldState().equals(FieldState.STRIKE_WATER))
+				else if (fieldElemtens[i][j].getFieldState().equals(
+						FieldState.STRIKE_WATER))
 				{
 					printField += "|~";
 				}
@@ -185,11 +218,11 @@ public class Field
 			printField += "|";
 			printField += Integer.toString(i);
 		}
-		
+
 		System.out.println(printField);
 		System.out.println(" 0 1 2 3 4 5 6 7 8 9");
 	}
-	
+
 	public void displayIncognito()
 	{
 		String printField = "_____________________";
@@ -199,12 +232,14 @@ public class Field
 
 			for (int j = 0; j <= 9; j++)
 			{
-				
-			    if (fieldElemtens[i][j].getFieldState().equals(FieldState.STRIKE_SHIP))
+
+				if (fieldElemtens[i][j].getFieldState().equals(
+						FieldState.STRIKE_SHIP))
 				{
 					printField += "|X";
 				}
-				else if (fieldElemtens[i][j].getFieldState().equals(FieldState.STRIKE_WATER))
+				else if (fieldElemtens[i][j].getFieldState().equals(
+						FieldState.STRIKE_WATER))
 				{
 					printField += "|~";
 				}
@@ -216,8 +251,13 @@ public class Field
 			printField += "|";
 			printField += Integer.toString(i);
 		}
-		
+
 		System.out.println(printField);
 		System.out.println(" 0 1 2 3 4 5 6 7 8 9");
+	}
+
+	public void setShipOnField(Ship ship)
+	{
+		this.shipsOnField.addElement(ship);
 	}
 }

@@ -1,6 +1,5 @@
 package GameUtilities;
 
-
 /**
  * Ship
  * 
@@ -96,5 +95,10 @@ public class Ship
 	public ShipPosition getShipPosition()
 	{
 		return this.shipPosition;
+	}
+
+	public ShipType getType()
+	{
+		return this.shipType;
 	}
 }
