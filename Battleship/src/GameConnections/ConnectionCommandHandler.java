@@ -2,6 +2,7 @@ package GameConnections;
 
 import Game.GlobalGameData;
 import GameUtilities.Command;
+import UnitTests.MockObjects.MockConnection;
 
 /**
  * Handler for the connection commands
@@ -15,7 +16,8 @@ public class ConnectionCommandHandler implements Runnable
 	private Command commandReceive;
 	private Connection connection = null;
 
-	private static boolean abortConnection = false; // static.. you can call it from everywhere
+	private static boolean abortConnection = false; // static.. you can call it
+													// from everywhere
 
 	/**
 	 * Constructor
@@ -23,6 +25,15 @@ public class ConnectionCommandHandler implements Runnable
 	public ConnectionCommandHandler()
 	{
 		this.connection = new LocalConnection();
+		this.connectionLogic = new ConnectionLogic(connection);
+	}
+
+	/**
+	 * Constructor
+	 */
+	public ConnectionCommandHandler(MockConnection refMockConnection)
+	{
+		this.connection = refMockConnection;
 		this.connectionLogic = new ConnectionLogic(connection);
 	}
 
@@ -41,8 +52,9 @@ public class ConnectionCommandHandler implements Runnable
 		}
 		catch (Exception exception)
 		{
-			System.out.println("Can not create connection. Please restart the Game !!!\n Exception:"
-					+ exception.toString());
+			System.out
+					.println("Can not create connection. Please restart the Game !!!\n Exception:"
+							+ exception.toString());
 		}
 	}
 
@@ -63,8 +75,9 @@ public class ConnectionCommandHandler implements Runnable
 		}
 		catch (Exception exception)
 		{
-			System.out.println("Can not create connection. Please restart the Game !!!\n Exception:"
-					+ exception.toString());
+			System.out
+					.println("Can not create connection. Please restart the Game !!!\n Exception:"
+							+ exception.toString());
 		}
 	}
 
@@ -73,7 +86,7 @@ public class ConnectionCommandHandler implements Runnable
 	 */
 	public static void abortConnection()
 	{
-		self: abortConnection = true;
+		abortConnection = true;
 	}
 
 	/**
@@ -100,8 +113,7 @@ public class ConnectionCommandHandler implements Runnable
 			}
 
 			wait(300);
-		}
-		while (!abortConnection);
+		} while (!abortConnection);
 
 		connectionLogic.closeConnection();
 	}

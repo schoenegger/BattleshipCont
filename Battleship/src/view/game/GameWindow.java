@@ -28,8 +28,10 @@ public class GameWindow extends JDialog
 	private JFrame frmSettings;
 	private JPanel drawPanel;
 	private JTextField textField;
-	private Field ownField;
-	private Field enemyField;
+	private Field refOwnField;
+	private Field refEnemyField;
+	private volatile String nextMove = null;
+	private String currFieldText = "";
 
 	// private DrawingPanelGameFields drawingPanelGameField;
 
@@ -40,11 +42,18 @@ public class GameWindow extends JDialog
 	/**
 	 * Create the frame.
 	 */
-	public GameWindow(Field ownField, Field enemyField)
+	public GameWindow()
 	{
-		this.ownField = ownField;
-		this.enemyField = enemyField;
+		// this.ownField = ownField;
+		// this.enemyField = enemyField;
 		initializeComponents();
+		initGameField();
+	}
+
+	private void initGameField()
+	{
+		// TODO Auto-generated method stub
+
 	}
 
 	private void initializeComponents()
@@ -64,7 +73,7 @@ public class GameWindow extends JDialog
 				new MigLayout("", "[grow]",
 						"[600.00:600.00,grow][21.00,baseline]"));
 
-		drawPanel = new DrawingPanelGameFields(ownField, enemyField);
+		drawPanel = new DrawingPanelGameFields(refOwnField, refEnemyField);
 		drawPanel.setBackground(SystemColor.info);
 		drawPanel.revalidate();
 		drawPanel.repaint();
@@ -131,5 +140,40 @@ public class GameWindow extends JDialog
 	{
 		drawPanel.revalidate();
 		drawPanel.repaint();
+	}
+
+	public String getNextMove()
+	{
+		while (this.nextMove == null)
+		{
+			wait(500);
+		}
+		if (this.nextMove != null)
+		{
+			String currNextMove = this.nextMove;
+			nextMove = null;
+			return currNextMove;
+		}
+		return null;
+	}
+
+	public void refreshAttacTextField(String attacFieldText)
+	{
+		textField.setText(attacFieldText);
+	}
+
+	/************** default help functions ************/
+
+	private void wait(int ms)
+	{
+		try
+		{
+			Thread.sleep(ms);
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

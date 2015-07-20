@@ -1,9 +1,9 @@
 package UnitTests.GameConnection;
 
-import org.junit.Test;
-import org.junit.Assert;
-
 import java.awt.Point;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import GameConnections.Connection;
 import GameConnections.TCPConnectionClient;
@@ -16,54 +16,55 @@ import GameUtilities.Field.Field;
 public class JClient
 {
 
-    @Test
-    public void connectionClient()
-    {
-
-	Point point = new Point(1, 1);
-	Field field = new Field();
-	ShipPosition shipPosition = new ShipPosition(point, "vertical");
-	Ship ship = new Ship(shipPosition, ShipType.AIRCARRIER, 1);
-	field.setShipOnField(ship);
-	Command command = new Command(1, field, "INIT_FIELD");
-
-	// Connection connectionServer = null;
-	Connection connectionClient = null;
-
-	try
+	@Test
+	public void connectionClient()
 	{
-	    // connectionServer = new TCPConnectionServer(8020);
-	    connectionClient = new TCPConnectionClient(8020, "localhost");
-	}
-	catch (Exception exception)
-	{
-	    System.out.println("Can not create connection!");
+
+		Point point = new Point(1, 1);
+		Field field = new Field();
+		ShipPosition shipPosition = new ShipPosition(point, "vertical");
+		Ship ship = new Ship(shipPosition, ShipType.AIRCARRIER, 1);
+		field.setShipOnField(ship);
+		Command command = new Command(1, field, "INIT_FIELD");
+
+		// Connection connectionServer = null;
+		Connection connectionClient = null;
+
+		try
+		{
+			// connectionServer = new TCPConnectionServer(8020);
+			connectionClient = new TCPConnectionClient(8020, "localhost");
+		}
+		catch (Exception exception)
+		{
+			System.out.println("Can not create connection!");
+		}
+
+		for (int i = 0; i < 10; i++)
+		{
+			// connectionServer.sendCommand(command);
+			// this.wait(50);
+			command = connectionClient.receiveCommand();
+			connectionClient.sendCommand(command);
+			this.wait(50);
+			// command = connectionServer.receiveCommand();
+			System.out.println("CLIENT ----------------------");
+		}
+
+		Assert.assertEquals("1;INIT_FIELD;-1,AIRCARRIER,1,1,vertical",
+				command.toString());
+
 	}
 
-	for (int i = 0; i < 10; i++)
+	private void wait(int ms)
 	{
-	    // connectionServer.sendCommand(command);
-	    // this.wait(50);
-	    command = connectionClient.receiveCommand();
-	    connectionClient.sendCommand(command);
-	    this.wait(50);
-	    // command = connectionServer.receiveCommand();
-	    System.out.println("CLIENT ----------------------");
+		try
+		{
+			Thread.sleep(ms);
+		}
+		catch (Exception exception)
+		{
+		}
 	}
-
-	Assert.assertEquals("1;INIT_FIELD;-1,AIRCARRIER,1,1,vertical", command.toString());
-
-    }
-
-    private void wait(int ms)
-    {
-	try
-	{
-	    Thread.sleep(ms);
-	}
-	catch (Exception exception)
-	{
-	}
-    }
 
 }
