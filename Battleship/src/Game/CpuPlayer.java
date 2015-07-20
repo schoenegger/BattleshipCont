@@ -17,6 +17,7 @@ public class CpuPlayer
 
 	}
 
+	// -----------
 	/**
 	 * Receive the next command
 	 * 
