@@ -252,4 +252,10 @@ public class Logic
 		System.exit(0);
 		// startView.closeWindow();
 	}
+
+	// Add Didi
+	public GameSoundPlayer getgameSoundPlayer()
+	{
+		return gameSoundPlayer;
+	}
 }
