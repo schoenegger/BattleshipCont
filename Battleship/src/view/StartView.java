@@ -148,7 +148,7 @@ public class StartView extends JDialog
 
 	public void openViewGameFields(Field ownField, Field enemyField)
 	{
-		this.gameWindow = new GameWindow(ownField, enemyField);
+		this.gameWindow = new GameWindow();
 	}
 
 	// add Didi called from listener
