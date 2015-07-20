@@ -175,4 +175,10 @@ public class StartView extends JDialog
 
 	}
 
+	public void buildConnection()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
 }

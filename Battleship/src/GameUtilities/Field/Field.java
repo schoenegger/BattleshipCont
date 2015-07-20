@@ -9,6 +9,7 @@ public class Field
 {
 	private Vector<Ship> shipsOnField = new Vector<Ship>();
 	private FieldElement[][] fieldElemtens;
+	private boolean isFieldInit = false;
 
 	// Array of FieldElements 10x10--??
 
@@ -16,6 +17,11 @@ public class Field
 	{
 		fieldElemtens = new FieldElement[10][10];
 		initNewField();
+	}
+
+	public boolean isFieldInit()
+	{
+		return isFieldInit;
 	}
 
 	private void initNewField()
@@ -59,6 +65,7 @@ public class Field
 		if (checkIfShipsListIsValid())
 		{
 			shipsOnField = ships;
+			this.isFieldInit = true;
 			return true;
 		}
 
@@ -258,6 +265,9 @@ public class Field
 
 	public void setShipOnField(Ship ship)
 	{
+		if (shipsOnField.size() > 6)
+			return;
+
 		this.shipsOnField.addElement(ship);
 	}
 }

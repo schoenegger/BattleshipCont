@@ -64,7 +64,7 @@ public class GameWindow extends JDialog
 
 	private void initGameField()
 	{
-		// TODO Auto-generated method stub
+		Field refOwnField = new Field();
 
 	}
 
@@ -114,7 +114,7 @@ public class GameWindow extends JDialog
 		gbc_btnExit.gridy = 0;
 		panel_1.add(btnExit, gbc_btnExit);
 
-		rdbtnVertical = new JRadioButton("Vertical");
+		rdbtnVertical = new JRadioButton("vertical");
 		rdbtnVertical.setSelected(true);
 		buttonGroup.add(rdbtnVertical);
 		GridBagConstraints gbc_rdbtnVertical = new GridBagConstraints();
@@ -208,6 +208,51 @@ public class GameWindow extends JDialog
 		return null;
 	}
 
+	public void setShipButtonPressed()
+	{
+		if (checkIfPositionTextIsValid(textField.getText()))
+		{
+			if (checkIfPositionIsAvailable())
+			{
+				String[] points = textField.getText().split(",");
+				int x = Integer.parseInt(points[0]);
+				int y = Integer.parseInt(points[1]);
+
+				setShipToField(this.comboBox.getSelectedItem().toString(), x, y);
+			}
+		}
+
+		if (refOwnField.isFieldInit())
+		{
+			startGame();
+		}
+	}
+
+	private void startGame()
+	{
+		refStartView.buildConnection();
+		refStartView.setInitFieldInLogic(this.refOwnField);
+		this.disableInitButtons();
+	}
+
+	private void disableInitButtons()
+	{
+		comboBox.setVisible(false);
+		rdbtnHorizontal.setVisible(false);
+		rdbtnVertical.setVisible(false);
+	}
+
+	private void setShipToField(String type, int x, int y)
+	{
+
+	}
+
+	private boolean checkIfPositionIsAvailable()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public void refreshAttacTextField(String attacFieldText)
 	{
 		textField.getText();
@@ -215,6 +260,11 @@ public class GameWindow extends JDialog
 	}
 
 	/************** default help functions ************/
+
+	private boolean checkIfPositionTextIsValid(String positionText)
+	{
+		return true;
+	}
 
 	private void wait(int ms)
 	{
