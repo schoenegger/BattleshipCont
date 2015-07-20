@@ -7,6 +7,12 @@ import javax.sound.sampled.Clip;
 
 public class GameSoundPlayer
 {
+	// Didi ADD
+	public final static String SOUND_MENUE_WAV = "sound_menue.wav";
+	public final static String SOUND_SETTING_WAV = "sound_settings.wav";
+
+	// public final static String SOUND_GAME_WAV = "";
+
 	private enum SoundTypes
 	{
 		BOMB, BACKGROUND, WATERSHOOT;
@@ -16,16 +22,16 @@ public class GameSoundPlayer
 
 	public GameSoundPlayer()
 	{
-		startBackgroundSound();
+		startBackgroundSound(GameSoundPlayer.SOUND_MENUE_WAV);
 	}
 
-	public void startBackgroundSound()
+	public void startBackgroundSound(String wavFilename)
 	{
 		try
 		{
 			this.soundClip = AudioSystem.getClip();
 			this.soundClip.open(AudioSystem.getAudioInputStream(new File(
-					"sound\\sound_menue.wav")));
+					"sound\\" + wavFilename)));
 		}
 		catch (Exception e)
 		{
@@ -42,6 +48,10 @@ public class GameSoundPlayer
 
 	}
 
+	public void stopBackGroundSounds()
+	{
+		soundClip.stop();
+	}
 	// Clip clip = AudioSystem.getClip();
 	// clip.open(AudioSystem.getAudioInputStream(soundFileName));
 

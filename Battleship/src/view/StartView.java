@@ -102,7 +102,6 @@ public class StartView extends JDialog
 		btnPlayerCom.setMnemonic(KeyEvent.VK_C);
 		btnPlayerCom.setBounds(171, 0, 162, 42);
 		btnPlayerCom.setActionCommand(Definitions.PLAYER_VS_COM);
-
 		frmBattleshipCommander.getContentPane().add(this.btnPlayerCom);
 		this.btn2Player = new JButton(
 				languageView.getResourceString(LanguageView.PLAYER_VS_PLAYER));
@@ -132,16 +131,19 @@ public class StartView extends JDialog
 				.getResource("/img/shipBackground.jpg")));
 		label.setBounds(23, 28, 310, 203);
 		frmBattleshipCommander.getContentPane().add(label);
-
 		frmBattleshipCommander.setVisible(true);
+		btnPlayerCom.requestFocus();
 	}
 
 	// *****************Called from Logic****************************
 
 	public void openStartViewSettings()
 	{
+		// add didi
 		this.startSettWindow = new StartSettingsWindow(startSettData,
-				this.languageView);
+				this.languageView, refGameLogic.getgameSoundPlayer());
+		// old this.startSettWindow = new StartSettingsWindow(startSettData,
+		// this.languageView);
 	}
 
 	public void openViewGameFields(Field ownField, Field enemyField)

@@ -1,10 +1,14 @@
 package view.settings;
 
+import gameSounds.GameSoundPlayer;
+
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -27,6 +31,8 @@ public class StartSettingsWindow extends JDialog
 
 	private StartViewSettingData startViewSettingsData;
 	private LanguageView languageView;
+	GameSoundPlayer gameSoundPlayer;
+
 	private JFrame frmSettings;
 	private JTextField txtIPAddress;
 	private JLabel lblPort;
@@ -44,6 +50,17 @@ public class StartSettingsWindow extends JDialog
 	/**
 	 * Create the application.
 	 */
+	// Add Didi
+	public StartSettingsWindow(StartViewSettingData startSettData,
+			LanguageView languageView, GameSoundPlayer gameSoundPlayer)
+	{
+		this.languageView = languageView;
+		this.viewSettListener = new StartViewSettingsListener();
+		startViewSettingsData = startSettData;
+		this.gameSoundPlayer = gameSoundPlayer;
+		initialize();
+	}
+
 	public StartSettingsWindow(StartViewSettingData startSettData,
 			LanguageView languageView)
 	{
@@ -134,6 +151,55 @@ public class StartSettingsWindow extends JDialog
 		btnSave.setBounds(27, 241, 100, 28);
 
 		// add didi
+		frmSettings.addWindowListener(new WindowListener()
+		{
+
+			@Override
+			public void windowOpened(WindowEvent e)
+			{
+				gameSoundPlayer.stopBackGroundSounds();
+				gameSoundPlayer
+						.startBackgroundSound(GameSoundPlayer.SOUND_SETTING_WAV);
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e)
+			{
+
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e)
+			{
+
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e)
+			{
+
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				gameSoundPlayer.stopBackGroundSounds();
+				gameSoundPlayer
+						.startBackgroundSound(GameSoundPlayer.SOUND_MENUE_WAV);
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e)
+			{
+
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e)
+			{
+
+			}
+		});
 		btnSave.setMnemonic(KeyEvent.VK_S);
 		btnSave.addKeyListener(new KeyListener()
 		{
@@ -143,6 +209,17 @@ public class StartSettingsWindow extends JDialog
 						&& btnSave.isFocusOwner() == true)
 				{
 					saveSettingsIfValideAndWriteToFile();
+				}
+				else if (e.getKeyCode() == KeyEvent.VK_S)
+				{
+					saveSettingsIfValideAndWriteToFile();
+				}
+				else if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+				{
+					gameSoundPlayer.stopBackGroundSounds();
+					gameSoundPlayer
+							.startBackgroundSound(GameSoundPlayer.SOUND_MENUE_WAV);
+					frmSettings.dispose();
 				}
 			}
 
