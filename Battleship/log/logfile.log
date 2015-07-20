@@ -103,3 +103,5 @@
 2015-07-15 21:34:38,482  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
 2015-07-15 21:34:46,378  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
 2015-07-15 21:34:50,898  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-07-20 19:24:35,862  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-07-20 21:58:44,249  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
