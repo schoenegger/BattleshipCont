@@ -64,6 +64,17 @@ public class Field
 		return activeShipsInField;
 	}
 
+	public FieldState getStateOfFieldElement(int x, int y)
+	{
+		FieldState fieldState = fieldElemtens[x][y].getFieldState();
+		return fieldState;
+	}
+
+	public FieldElement getFieldElement(int x, int y)
+	{
+		return fieldElemtens[x][y];
+	}
+
 	/**
 	 * Sets a ship on the Field max 2AirCarrier, 2YellowSubmarines, 2Destroyer
 	 * returnValue initValues valid = true, Invalid = false
@@ -283,5 +294,6 @@ public class Field
 			return;
 
 		this.shipsOnField.addElement(ship);
+		setTaken();
 	}
 }

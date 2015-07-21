@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.SystemColor;
-import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -70,6 +69,7 @@ public class GameWindow extends JDialog
 	{
 		// this.ownField = ownField;
 		// this.enemyField = enemyField;
+		this.refEnemyField = new Field();
 		this.refOwnField = new Field();
 		this.refStartView = refStartView;
 		this.gameViewListener = new GameViewListener(refLogic);
@@ -238,7 +238,7 @@ public class GameWindow extends JDialog
 
 	public void setShipButtonPressed()
 	{
-		System.out.println("Set Button pressed\n");
+
 		if (checkIfPositionTextIsValid(textField.getText()))
 		{
 			String[] points = textField.getText().split(",");
@@ -249,7 +249,7 @@ public class GameWindow extends JDialog
 					.toString()))
 			{
 
-				setShipToField(this.comboBox.getSelectedItem().toString(), x, y);
+				setShipToField();
 			}
 		}
 
@@ -273,13 +273,14 @@ public class GameWindow extends JDialog
 		rdbtnVertical.setVisible(false);
 	}
 
-	private void setShipToField(String type, int x, int y)
+	private void setShipToField()
 	{
-		Vector<Ship> ships = new Vector<Ship>();
-
-		refOwnField.setShipsOnField(ships);
+		refOwnField.setShipOnField(currShipToSet);
+		frmSettings.revalidate();
+		frmSettings.repaint();
 	}
 
+	// function also creates ship
 	private boolean checkIfPositionIsAvailable(int x, int y,
 			String shipFromCombobox)
 	{
@@ -327,7 +328,6 @@ public class GameWindow extends JDialog
 	{
 		this.lblXY.setText("X: " + x + " Y: " + y);
 		this.lblXY.revalidate();
-		// this.drawPanel.refresh
 
 	}
 

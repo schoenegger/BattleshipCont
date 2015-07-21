@@ -4,10 +4,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import GameUtilities.Field.Field;
+import GameUtilities.Field.FieldElement;
+import GameUtilities.Field.FieldState;
 
 public class DrawingPanelGameFields extends JPanel
 {
@@ -87,10 +92,55 @@ public class DrawingPanelGameFields extends JPanel
 				graphic.draw(new Rectangle2D.Double(startX, startY, widthReck,
 						heightReck));
 
+				BufferedImage image = getImageByFildType(gameField
+						.getFieldElement(i, j));
+
+				if (image != null)
+				{
+					graphic.drawImage(image,
+							(int) (startX + (widthReck / 2 - 25)),
+							(int) (startY + (heightReck / 2 - 25)), this);
+				}
+
 				startX += widthReck;
 			}
 			startX = this.getWidth() * factorStartX;
 			startY += heightReck;
 		}
+	}
+
+	private BufferedImage getImageByFildType(FieldElement fieldElement)
+	{
+		BufferedImage image = null;
+		String path = "";
+
+		if (fieldElement.isTaken())
+		{
+			if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
+			{
+
+			}
+			else
+			{
+				path = "src\\img\\ship.png";
+			}
+		}
+
+		if (!fieldElement.isTaken())
+		{
+			path = "src\\img\\ocean5.png";
+		}
+
+		try
+		{
+			image = ImageIO.read(new File(path));
+		}
+		catch (IOException e)
+		{
+			System.out.println("Fuck you 'Image");
+			e.printStackTrace();
+		}
+
+		return image;
 	}
 }
