@@ -49,6 +49,8 @@ public class StartSettingsWindow extends JDialog
 
 	/**
 	 * Create the application.
+	 * 
+	 * @wbp.parser.constructor
 	 */
 	// Add Didi
 	public StartSettingsWindow(StartViewSettingData startSettData,

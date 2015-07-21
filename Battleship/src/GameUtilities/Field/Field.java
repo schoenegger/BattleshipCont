@@ -33,8 +33,8 @@ public class Field
 	public boolean checkIfPositionIsInField(int x, int y)
 	{
 		boolean inField = true;
-		inField &= (x <= 10 && x >= 0);
-		inField &= (y <= 10 && y >= 0);
+		inField &= (x <= 9 && x >= 0);
+		inField &= (y <= 9 && y >= 0);
 		return inField;
 	}
 
@@ -290,8 +290,11 @@ public class Field
 
 	public void setShipOnField(Ship ship)
 	{
-		if (shipsOnField.size() > 6)
+		if (shipsOnField.size() > 5)
+		{
+			isFieldInit = true;
 			return;
+		}
 
 		this.shipsOnField.addElement(ship);
 		setTaken();

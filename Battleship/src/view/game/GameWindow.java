@@ -238,13 +238,17 @@ public class GameWindow extends JDialog
 
 	public void setShipButtonPressed()
 	{
+		if (refOwnField.isFieldInit())
+		{
+			startGame();
+		}
 
 		if (checkIfPositionTextIsValid(textField.getText()))
 		{
 			String[] points = textField.getText().split(",");
-			int x = Integer.parseInt(points[0]);
-			int y = Integer.parseInt(points[1]);
-
+			int y = Integer.parseInt(points[0]);
+			int x = Integer.parseInt(points[1]);
+			// TODO refactor x and y Position
 			if (checkIfPositionIsAvailable(x, y, comboBox.getSelectedItem()
 					.toString()))
 			{
@@ -253,15 +257,11 @@ public class GameWindow extends JDialog
 			}
 		}
 
-		if (refOwnField.isFieldInit())
-		{
-			startGame();
-		}
 	}
 
 	private void startGame()
 	{
-		refStartView.buildConnection();
+		// refStartView.buildConnection();
 		refStartView.setInitFieldInLogic(this.refOwnField);
 		this.disableInitButtons();
 	}

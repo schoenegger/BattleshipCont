@@ -97,6 +97,7 @@ public class DrawingPanelGameFields extends JPanel
 
 				if (image != null)
 				{
+					// 25 = half of iconWidth
 					graphic.drawImage(image,
 							(int) (startX + (widthReck / 2 - 25)),
 							(int) (startY + (heightReck / 2 - 25)), this);

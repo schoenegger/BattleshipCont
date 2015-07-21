@@ -124,13 +124,13 @@ public class StartView extends JDialog
 		// add didi
 		this.startSettWindow = new StartSettingsWindow(startSettData,
 				this.languageView, refGameLogic.getgameSoundPlayer());
-		// old this.startSettWindow = new StartSettingsWindow(startSettData,
-		// this.languageView);
+		buildConnection();
 	}
 
 	public void openViewGameFields()
 	{
 		this.gameWindow = new GameWindow(this, refGameLogic);
+
 	}
 
 	public String getNextCommandFromGameWindow()
@@ -175,10 +175,11 @@ public class StartView extends JDialog
 
 	}
 
-	public void buildConnection()
+	private void buildConnection()
 	{
-		// TODO Auto-generated method stub
 
+		refGameLogic.startConnection(startSettData.getMode(),
+				startSettData.getIpAddress(), startSettData.getPort());
 	}
 
 	public void sendMouseMoveToGameView(int x, int y)

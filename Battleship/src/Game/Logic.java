@@ -18,6 +18,8 @@ import GameUtilities.Field.Field;
  */
 public class Logic
 {
+	private Thread connectionCommandHandler;
+
 	private Frontend referenceFrontend;
 	private StartView startView;
 	private CommandHandler commandHandler;
@@ -184,6 +186,37 @@ public class Logic
 		{
 			System.out.println(e);
 		}
+	}
+
+	public boolean startConnection(String defConnType, String ipAdd, String port)
+	{
+		switch (defConnType.toLowerCase())
+		{
+		case "host" :
+			connectionCommandHandler = new Thread(new ConnectionCommandHandler(
+					Integer.parseInt(port)));
+			connectionCommandHandler.start();
+			return true;
+
+		case "client" :
+			connectionCommandHandler = new Thread(new ConnectionCommandHandler(
+					Integer.parseInt(port), ipAdd));
+			connectionCommandHandler.start();
+			isMyTurn = false;
+			return true;
+
+		case "cpu" :
+			connectionCommandHandler = new Thread(
+					new ConnectionCommandHandler());
+			connectionCommandHandler.start();
+			return true;
+
+		default :
+			connectionCommandHandler = new Thread(
+					new ConnectionCommandHandler());
+			return false;
+		}
+
 	}
 
 	/********************** FUNCTION FOR COMMAND HANDLER *************************/

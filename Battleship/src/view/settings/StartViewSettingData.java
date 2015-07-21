@@ -48,6 +48,11 @@ public class StartViewSettingData
 		this.port = port;
 	}
 
+	/**
+	 * Mode = Client, Host
+	 * 
+	 * @return
+	 */
 	public String getMode()
 	{
 		return mode;
