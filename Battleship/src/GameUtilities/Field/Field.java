@@ -7,7 +7,7 @@ import GameUtilities.Ship;
 
 public class Field
 {
-	private Vector<Ship> shipsOnField = new Vector<Ship>();
+	public static private Vector<Ship> shipsOnField = new Vector<Ship>();
 	private FieldElement[][] fieldElemtens;
 	private boolean isFieldInit = false;
 
@@ -22,6 +22,20 @@ public class Field
 	public boolean isFieldInit()
 	{
 		return isFieldInit;
+	}
+
+	public boolean canSetShip(Ship ship)
+	{
+		// TODO valid check
+		return true;
+	}
+
+	public boolean checkIfPositionIsInField(int x, int y)
+	{
+		boolean inField = true;
+		inField &= (x <= 10 && x >= 0);
+		inField &= (y <= 10 && y >= 0);
+		return inField;
 	}
 
 	private void initNewField()

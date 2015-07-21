@@ -212,11 +212,13 @@ public class GameWindow extends JDialog
 	{
 		if (checkIfPositionTextIsValid(textField.getText()))
 		{
-			if (checkIfPositionIsAvailable())
+			String[] points = textField.getText().split(",");
+			int x = Integer.parseInt(points[0]);
+			int y = Integer.parseInt(points[1]);
+
+			if (checkIfPositionIsAvailable(x, y, comboBox.getSelectedItem()
+					.toString()))
 			{
-				String[] points = textField.getText().split(",");
-				int x = Integer.parseInt(points[0]);
-				int y = Integer.parseInt(points[1]);
 
 				setShipToField(this.comboBox.getSelectedItem().toString(), x, y);
 			}
@@ -247,10 +249,14 @@ public class GameWindow extends JDialog
 
 	}
 
-	private boolean checkIfPositionIsAvailable()
+	private boolean checkIfPositionIsAvailable(int x, int y)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		boolean posAvailable = true;
+		
+		posAvailable &= refOwnField.checkIfPositionIsInField(x, y);
+		posAvailable &= refOwnField.
+		
+		return posAvailable;
 	}
 
 	public void refreshAttacTextField(String attacFieldText)

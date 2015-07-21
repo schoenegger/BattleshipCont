@@ -8,6 +8,8 @@ package GameUtilities;
  */
 public class Ship
 {
+	// static final ALIGN_VERTICAL = "VERTICAL";
+	// static final ALIGN_HORIZONTAL = "HORIZONTAL";
 
 	private ShipType shipType;
 	private ShipPosition shipPosition;
