@@ -265,4 +265,15 @@ public class Logic
 		return this.startView.getNextCommandFromGameWindow();
 	}
 
+	public void sendMousPositionsToGameView(int x, int y)
+	{
+		startView.sendMouseMoveToGameView(x, y);
+
+	}
+
+	public void setShipButtonPressed()
+	{
+		startView.sendSetButtonPressed();
+
+	}
 }

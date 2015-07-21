@@ -7,7 +7,7 @@ import GameUtilities.Ship;
 
 public class Field
 {
-	public static private Vector<Ship> shipsOnField = new Vector<Ship>();
+	private Vector<Ship> shipsOnField = new Vector<Ship>();
 	private FieldElement[][] fieldElemtens;
 	private boolean isFieldInit = false;
 

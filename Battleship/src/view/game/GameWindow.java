@@ -4,7 +4,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.SystemColor;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -17,8 +19,15 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import logging.Logging;
 import net.miginfocom.swing.MigLayout;
 import view.StartView;
+import view.GlobalStrings.Definitions;
+import view.listener.GameViewListener;
+import Game.Logic;
+import GameUtilities.Ship;
+import GameUtilities.ShipPosition;
+import GameUtilities.ShipType;
 import GameUtilities.Field.Field;
 
 public class GameWindow extends JDialog
@@ -34,6 +43,7 @@ public class GameWindow extends JDialog
 	private JFrame frmSettings;
 	private JPanel drawPanel;
 	private JTextField textField;
+	private JLabel lblMessages;
 	private Field refOwnField;
 	private Field refEnemyField;
 	private volatile String nextMove = null;
@@ -43,8 +53,11 @@ public class GameWindow extends JDialog
 	private JButton btnSetShip;
 	private JComboBox comboBox;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private Ship currShipToSet;
 
-	// private DrawingPanelGameFields drawingPanelGameField;
+	private GameViewListener gameViewListener;
+	private JLabel lblXY;
+	private int shipCounter = 0;
 
 	/**
 	 * Launch the application.
@@ -53,18 +66,20 @@ public class GameWindow extends JDialog
 	/**
 	 * Create the frame.
 	 */
-	public GameWindow(StartView refStartView)
+	public GameWindow(StartView refStartView, Logic refLogic)
 	{
 		// this.ownField = ownField;
 		// this.enemyField = enemyField;
+		this.refOwnField = new Field();
 		this.refStartView = refStartView;
+		this.gameViewListener = new GameViewListener(refLogic);
 		initializeComponents();
 		initGameField();
+
 	}
 
 	private void initGameField()
 	{
-		Field refOwnField = new Field();
 
 	}
 
@@ -87,6 +102,7 @@ public class GameWindow extends JDialog
 
 		drawPanel = new DrawingPanelGameFields(refOwnField, refEnemyField);
 		drawPanel.setBackground(SystemColor.info);
+		drawPanel.addMouseMotionListener(gameViewListener);
 		drawPanel.revalidate();
 		drawPanel.repaint();
 
@@ -97,16 +113,17 @@ public class GameWindow extends JDialog
 		frmSettings.getContentPane().add(panel_1, "cell 0 1,grow");
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]
-		{ 57, 90, 97, 176, 496, 86, 0 };
+		{ 57, 90, 97, 176, 496, 86, 0, 0, 0, 0, 0 };
 		gbl_panel_1.rowHeights = new int[]
 		{ 16, 0, 23, 0 };
 		gbl_panel_1.columnWeights = new double[]
-		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_panel_1.rowWeights = new double[]
 		{ 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
 		JButton btnExit = new JButton("EXIT");
+		btnExit.setEnabled(false);
 		GridBagConstraints gbc_btnExit = new GridBagConstraints();
 		gbc_btnExit.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnExit.insets = new Insets(0, 0, 5, 5);
@@ -125,7 +142,7 @@ public class GameWindow extends JDialog
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[]
-		{ "Destroyer", "Air Carrier", "Yellow Submarine" }));
+		{ "Destroyer", "AirCarrier", "YellowSubmarine" }));
 		comboBox.setToolTipText("ShipType");
 		comboBox.setEditable(true);
 		comboBox.setMinimumSize(new Dimension(20, 20));
@@ -138,6 +155,7 @@ public class GameWindow extends JDialog
 		panel_1.add(comboBox, gbc_comboBox);
 
 		JButton btnAttack = new JButton("Attack");
+		btnAttack.setEnabled(false);
 		btnAttack.setMaximumSize(new Dimension(100, 30));
 		GridBagConstraints gbc_btnAttack = new GridBagConstraints();
 		gbc_btnAttack.anchor = GridBagConstraints.NORTHWEST;
@@ -154,7 +172,7 @@ public class GameWindow extends JDialog
 		gbc_rdbtnHorizontal.gridy = 1;
 		panel_1.add(rdbtnHorizontal, gbc_rdbtnHorizontal);
 
-		JLabel lblMessages = new JLabel("Messages");
+		lblMessages = new JLabel("INIT FIELD..........");
 		GridBagConstraints gbc_lblMessages = new GridBagConstraints();
 		gbc_lblMessages.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMessages.gridx = 4;
@@ -162,7 +180,7 @@ public class GameWindow extends JDialog
 		panel_1.add(lblMessages, gbc_lblMessages);
 
 		textField = new JTextField();
-		textField.setText("0;1");
+		textField.setText("1,2");
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 0, 5);
 		gbc_textField.anchor = GridBagConstraints.WEST;
@@ -172,11 +190,21 @@ public class GameWindow extends JDialog
 		textField.setColumns(10);
 
 		btnSetShip = new JButton("Set Ship");
+		btnSetShip.setActionCommand(Definitions.BUTTON_SET_SHIP);
+		btnSetShip.addActionListener(this.gameViewListener);
+
 		GridBagConstraints gbc_btnSetShip = new GridBagConstraints();
 		gbc_btnSetShip.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSetShip.gridx = 2;
 		gbc_btnSetShip.gridy = 2;
 		panel_1.add(btnSetShip, gbc_btnSetShip);
+
+		lblXY = new JLabel("X:    Y:");
+		GridBagConstraints gbc_lblXY = new GridBagConstraints();
+		gbc_lblXY.anchor = GridBagConstraints.EAST;
+		gbc_lblXY.gridx = 9;
+		gbc_lblXY.gridy = 2;
+		panel_1.add(lblXY, gbc_lblXY);
 
 		frmSettings.revalidate();
 		frmSettings.repaint();
@@ -210,6 +238,7 @@ public class GameWindow extends JDialog
 
 	public void setShipButtonPressed()
 	{
+		System.out.println("Set Button pressed\n");
 		if (checkIfPositionTextIsValid(textField.getText()))
 		{
 			String[] points = textField.getText().split(",");
@@ -246,16 +275,20 @@ public class GameWindow extends JDialog
 
 	private void setShipToField(String type, int x, int y)
 	{
+		Vector<Ship> ships = new Vector<Ship>();
 
+		refOwnField.setShipsOnField(ships);
 	}
 
-	private boolean checkIfPositionIsAvailable(int x, int y)
+	private boolean checkIfPositionIsAvailable(int x, int y,
+			String shipFromCombobox)
 	{
 		boolean posAvailable = true;
-		
+
+		currShipToSet = createShipByPositionAndName(x, y, shipFromCombobox);
 		posAvailable &= refOwnField.checkIfPositionIsInField(x, y);
-		posAvailable &= refOwnField.
-		
+		posAvailable &= refOwnField.canSetShip(currShipToSet);
+
 		return posAvailable;
 	}
 
@@ -265,7 +298,7 @@ public class GameWindow extends JDialog
 		this.textField.setText(attacFieldText);
 	}
 
-	/************** default help functions ************/
+	/************** general help functions ************/
 
 	private boolean checkIfPositionTextIsValid(String positionText)
 	{
@@ -280,8 +313,7 @@ public class GameWindow extends JDialog
 		}
 		catch (InterruptedException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logging.writeErrorMessage("Error wait function in Game View");
 		}
 	}
 
@@ -289,5 +321,48 @@ public class GameWindow extends JDialog
 	{
 		textField.setText(message);
 		textField.revalidate();
+	}
+
+	public void refreshByMouseMove(int x, int y)
+	{
+		this.lblXY.setText("X: " + x + " Y: " + y);
+		this.lblXY.revalidate();
+		// this.drawPanel.refresh
+
+	}
+
+	private Ship createShipByPositionAndName(int x, int y,
+			String shipFromCombobox)
+	{
+		String shipAlignment = "";
+
+		if (rdbtnHorizontal.isSelected())
+		{
+			shipAlignment = " HORIZONTAL";
+		}
+		else
+		{
+			shipAlignment = "VERTICAL";
+		}
+
+		ShipPosition shipPos = new ShipPosition(new Point(x, y), shipAlignment);
+
+		ShipType shipType;
+		if (shipFromCombobox.equals("Destroyer"))
+		{
+			shipType = ShipType.DESTROYER;
+		}
+		else if (shipFromCombobox.equals("AirCarrier"))
+		{
+			shipType = ShipType.AIRCARRIER;
+		}
+		else
+		{
+			shipType = ShipType.YELLOW_SUBMARINE;
+		}
+
+		Ship ship = new Ship(shipPos, shipType, ++shipCounter);
+
+		return ship;
 	}
 }

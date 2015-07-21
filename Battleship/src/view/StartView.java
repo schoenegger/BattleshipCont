@@ -70,7 +70,7 @@ public class StartView extends JDialog
 				SystemColor.activeCaption);
 		frmBattleshipCommander.setResizable(false);
 		frmBattleshipCommander.setTitle("BATTLESHIP COMMANDER");
-		frmBattleshipCommander.setBounds(100, 100, 339, 286);
+		frmBattleshipCommander.setBounds(100, 100, 373, 323);
 		frmBattleshipCommander.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBattleshipCommander.getContentPane().setLayout(null);
 		this.btnPlayerCom = new JButton(
@@ -80,7 +80,7 @@ public class StartView extends JDialog
 		btnPlayerCom.addActionListener(this.viewButtListener);
 		btnPlayerCom.addKeyListener(this.viewButtListener);
 		btnPlayerCom.setMnemonic(KeyEvent.VK_C);
-		btnPlayerCom.setBounds(171, 0, 162, 42);
+		btnPlayerCom.setBounds(204, 0, 162, 42);
 		btnPlayerCom.setActionCommand(Definitions.PLAYER_VS_COM);
 		frmBattleshipCommander.getContentPane().add(this.btnPlayerCom);
 		this.btn2Player = new JButton(
@@ -103,7 +103,7 @@ public class StartView extends JDialog
 		btnSettings.addKeyListener(this.viewButtListener);
 		btnSettings.setMnemonic(KeyEvent.VK_S);
 
-		btnSettings.setBounds(83, 210, 162, 42);
+		btnSettings.setBounds(111, 244, 162, 42);
 		btnSettings.setActionCommand(Definitions.SETTING_START_VIEW);
 
 		frmBattleshipCommander.getContentPane().add(btnSettings);
@@ -111,7 +111,7 @@ public class StartView extends JDialog
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(StartView.class
 				.getResource("/img/shipBackground.jpg")));
-		label.setBounds(23, 28, 310, 203);
+		label.setBounds(46, 42, 310, 203);
 		frmBattleshipCommander.getContentPane().add(label);
 		frmBattleshipCommander.setVisible(true);
 		btnPlayerCom.requestFocus();
@@ -130,7 +130,7 @@ public class StartView extends JDialog
 
 	public void openViewGameFields()
 	{
-		this.gameWindow = new GameWindow(this);
+		this.gameWindow = new GameWindow(this, refGameLogic);
 	}
 
 	public String getNextCommandFromGameWindow()
@@ -179,6 +179,17 @@ public class StartView extends JDialog
 	{
 		// TODO Auto-generated method stub
 
+	}
+
+	public void sendMouseMoveToGameView(int x, int y)
+	{
+		gameWindow.refreshByMouseMove(x, y);
+
+	}
+
+	public void sendSetButtonPressed()
+	{
+		gameWindow.setShipButtonPressed();
 	}
 
 }
