@@ -88,7 +88,7 @@ public class GameWindow extends JDialog
 		}
 
 		this.refEnemyField = new Field();
-		this.refOwnField = new Field();
+		this.refOwnField = new Field(true);
 		this.refStartView = refStartView;
 		this.gameViewListener = new GameViewListener(refLogic);
 		initializeComponents();
@@ -345,7 +345,7 @@ public class GameWindow extends JDialog
 	{
 		this.lblXY.setText("X: " + x + " Y: " + y);
 		this.lblXY.revalidate();
-
+		// this.drawPanel.re
 	}
 
 	private Ship createShipByPositionAndName(int x, int y,

@@ -9,12 +9,20 @@ public class Field
 {
 	private Vector<Ship> shipsOnField = new Vector<Ship>();
 	private FieldElement[][] fieldElemtens;
+	private boolean isOwnField = false;
 	private boolean isFieldInit = false;
 
 	// Array of FieldElements 10x10--??
 
 	public Field()
 	{
+		fieldElemtens = new FieldElement[10][10];
+		initNewField();
+	}
+
+	public Field(boolean isOwnField)
+	{
+		this.isOwnField = isOwnField;
 		fieldElemtens = new FieldElement[10][10];
 		initNewField();
 	}
@@ -44,10 +52,19 @@ public class Field
 		{
 			for (int j = 0; j <= 9; j++)
 			{
-				fieldElemtens[i][j] = new FieldElement();
+				if (isOwnField)
+					fieldElemtens[i][j] = new FieldElement(true);
+				else
+					fieldElemtens[i][j] = new FieldElement(false);
+
 				fieldElemtens[i][j].setFieldState(FieldState.UNKNOWN);
 			}
 		}
+	}
+
+	public void isPointAvailableToSetShip(int x, int y, String align)
+	{
+
 	}
 
 	public Vector<Ship> getListOfActiveShips()
@@ -217,6 +234,10 @@ public class Field
 		}
 	}
 
+	@Deprecated
+	/**
+	 * Display Field in Console format
+	 */
 	public void display()
 	{
 		String printField = "_____________________";
@@ -255,6 +276,10 @@ public class Field
 		System.out.println(" 0 1 2 3 4 5 6 7 8 9");
 	}
 
+	@Deprecated
+	/**
+	 * Display hidden Field in console format
+	 */
 	public void displayIncognito()
 	{
 		String printField = "_____________________";

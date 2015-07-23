@@ -26,7 +26,7 @@ public class Logic
 
 	private GameSoundPlayer gameSoundPlayer;
 	private Command currAttacCommand = null;
-	private Field ownField = new Field();
+	private Field ownField = new Field(true);
 	private Field enemyField = new Field();
 	private boolean isMyTurn;
 	private boolean isHost;

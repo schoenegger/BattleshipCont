@@ -69,39 +69,49 @@ public class StartView extends JDialog
 
 		initializeListeners();
 		initializeComponets();
-		// colorHeaderLabel();
+		changeColorHeaderLabel();
 	}
 
-	private void colorHeaderLabel()
+	private void changeColorHeaderLabel()
 	{
-		// TODO Does not work!!!!!!!!1
-		Thread thread = new Thread()
+		synchronized (DEFAULT_MODALITY_TYPE)
 		{
-			public void run()
+			Thread thread = new Thread()
 			{
-				int blue = 100;
-				while (true)
+				public void run()
 				{
-					lblBattleComm.setForeground(new Color(0, 0, blue));
-
-					try
+					int blue = 100;
+					int green = 100;
+					int red = 0;
+					while (true)
 					{
-						Thread.sleep(150);
-						blue += 10;
-						if (blue > 245)
+						lblBattleComm
+								.setForeground(new Color(red, green, blue));
+						try
 						{
-							blue = 0;
+							Thread.sleep(50);
+							blue += 10;
+							green++;
+							if (blue > 245)
+							{
+								blue = 0;
+							}
+							if (green > 100)
+							{
+								green = 0;
+							}
+
+						}
+						catch (InterruptedException e)
+						{
+							Logging.writeErrorMessage("Label Coloring StartView does not work");
 						}
 					}
-					catch (InterruptedException e)
-					{
-						Logging.writeErrorMessage("Label Coloring StartView does not work");
-					}
 				}
-			}
-		};
+			};
 
-		thread.start();
+			thread.start();
+		}
 
 	}
 

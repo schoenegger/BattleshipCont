@@ -27,19 +27,21 @@ public class GameSoundPlayer
 
 	public void startBackgroundSound(String wavFilename)
 	{
-		try
+		synchronized (wavFilename)
 		{
-			this.soundClip = AudioSystem.getClip();
-			this.soundClip.open(AudioSystem.getAudioInputStream(new File(
-					"sound\\" + wavFilename)));
+			try
+			{
+				this.soundClip = AudioSystem.getClip();
+				this.soundClip.open(AudioSystem.getAudioInputStream(new File(
+						"sound\\" + wavFilename)));
+			}
+			catch (Exception e)
+			{
+				// logger no file loading possible
+				e.printStackTrace();
+			}
+			soundClip.loop(Clip.LOOP_CONTINUOUSLY);
 		}
-		catch (Exception e)
-		{
-			// logger no file loading possible
-			e.printStackTrace();
-		}
-
-		soundClip.loop(Clip.LOOP_CONTINUOUSLY);
 
 	}
 
