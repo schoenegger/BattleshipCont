@@ -1,6 +1,5 @@
 package Game;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import GameConnections.ConnectionCommandHandler;
@@ -15,7 +14,9 @@ public class Frontend
 {
 	private Field fieldWithSettings;
 	private Thread connectionCommandHandler;
-	private FrontendGame frontendGame = new FrontendGame(this); // Send referenz to frontendGame
+	private FrontendGame frontendGame = new FrontendGame(this); // Send referenz
+																// to
+																// frontendGame
 	private Player player = new Player(true);
 	private Logic logic = new Logic(true);
 
@@ -25,11 +26,14 @@ public class Frontend
 	public void callMenue()
 	{
 		String connectionType = "";
-		
-		System.out.println("***********************************************************");
-		System.out.println("*                  BATTLESHIP COMMANDER                   *");
-		System.out.println("***********************************************************");
-		
+
+		System.out
+				.println("***********************************************************");
+		System.out
+				.println("*                  BATTLESHIP COMMANDER                   *");
+		System.out
+				.println("***********************************************************");
+
 		System.out.println("Select Game \n");
 
 		System.out.println("vs Host Game = 'H'");
@@ -39,8 +43,8 @@ public class Frontend
 		System.out.println("Please select: ");
 
 		player.sendFrontendReferenceToLogic(this);
-		logic.setFrontendReference(this);
-		
+		// logic.setFrontendReference(this);
+
 		connectionType = readMenueInput();
 	}
 
@@ -74,20 +78,20 @@ public class Frontend
 	{
 		switch (connectionType)
 		{
-			case "H":
-				readHostSettings();
-				return true;
+		case "H" :
+			readHostSettings();
+			return true;
 
-			case "CL":
-				readClientSettings();
-				return true;
+		case "CL" :
+			readClientSettings();
+			return true;
 
-			case "CPU":
-				createCpuPlayerConnection();
-				return true;
+		case "CPU" :
+			createCpuPlayerConnection();
+			return true;
 
-			default:
-				return false;
+		default :
+			return false;
 		}
 	}
 
@@ -131,7 +135,8 @@ public class Frontend
 
 		if (checkPortNumber(portNo))
 		{
-			connectionCommandHandler = new Thread(new ConnectionCommandHandler(portNo));
+			connectionCommandHandler = new Thread(new ConnectionCommandHandler(
+					portNo));
 			connectionCommandHandler.start();
 			executeGameSetupMenue();
 			return true;
@@ -173,7 +178,8 @@ public class Frontend
 	 * @param ipAddress
 	 * @return boolean
 	 */
-	private boolean createClientConnectionByInput(String clientPort, String ipAddress)
+	private boolean createClientConnectionByInput(String clientPort,
+			String ipAddress)
 	{
 		int portNo;
 
@@ -191,9 +197,10 @@ public class Frontend
 		{
 			// this.player = new Player(false);
 			this.logic = new Logic(false);
-			connectionCommandHandler = new Thread(new ConnectionCommandHandler(portNo, ipAddress));
+			connectionCommandHandler = new Thread(new ConnectionCommandHandler(
+					portNo, ipAddress));
 			connectionCommandHandler.start();
-			logic.setFrontendReference(this);
+			// logic.setFrontendReference(this);
 			executeGameSetupMenue();
 
 			return true;
@@ -233,7 +240,7 @@ public class Frontend
 
 		System.out.println("cpu player game executed");
 
-		//TODO exceptionhandling for false
+		// TODO exceptionhandling for false
 		return true;
 	}
 
@@ -287,9 +294,11 @@ public class Frontend
 		logic.setInitField(fieldWithSettings);
 	}
 
-	// --------->>>>>now the Logic controlles the game<<<<<<---------------------------
+	// --------->>>>>now the Logic controlles the
+	// game<<<<<<---------------------------
 
-	// *******************************CALL BY REFERENCE******************************** //
+	// *******************************CALL BY
+	// REFERENCE******************************** //
 
 	/**
 	 * Send the feedback back, weather the enemy had initialized his field.
@@ -319,12 +328,12 @@ public class Frontend
 	{
 		return logic.isAttacMoveValid(nextMove);
 	}
-	
+
 	public void displayGameOver()
 	{
 		System.out.println("YOU LOSE!!!");
 	}
-	
+
 	public void displayWin()
 	{
 		System.out.println("YOU WIN!!!");

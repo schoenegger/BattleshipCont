@@ -2,6 +2,7 @@ package view.game;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -92,7 +93,6 @@ public class GameWindow extends JDialog
 		this.gameViewListener = new GameViewListener(refLogic);
 		initializeComponents();
 		initGameField();
-
 	}
 
 	private void initGameField()
@@ -108,7 +108,7 @@ public class GameWindow extends JDialog
 		frmSettings = new JFrame();
 		frmSettings.getContentPane().setBackground(new Color(135, 206, 235));
 		frmSettings.setBackground(SystemColor.inactiveCaption);
-		frmSettings.setMinimumSize(new Dimension(1200, 800));
+		frmSettings.setMinimumSize(new Dimension(1500, 1000));
 		frmSettings.setResizable(true);
 		frmSettings.setTitle("Game Field");
 
@@ -198,6 +198,7 @@ public class GameWindow extends JDialog
 		panel_1.add(rdbtnHorizontal, gbc_rdbtnHorizontal);
 
 		lblMessages = new JLabel("INIT FIELD..........");
+		lblMessages.setFont(new Font("Segoe Script", Font.BOLD, 16));
 		GridBagConstraints gbc_lblMessages = new GridBagConstraints();
 		gbc_lblMessages.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMessages.gridx = 4;
@@ -268,11 +269,9 @@ public class GameWindow extends JDialog
 			if (checkIfPositionIsAvailable(x, y, comboBox.getSelectedItem()
 					.toString()))
 			{
-
 				setShipToField();
 			}
 		}
-
 	}
 
 	private void startGame()
@@ -287,6 +286,7 @@ public class GameWindow extends JDialog
 		comboBox.setVisible(false);
 		rdbtnHorizontal.setVisible(false);
 		rdbtnVertical.setVisible(false);
+		btnSetShip.setVisible(false);
 		btnAttack.setEnabled(true);
 		btnExit.setEnabled(true);
 	}
@@ -339,7 +339,6 @@ public class GameWindow extends JDialog
 	{
 		frmSettings.repaint();
 		frmSettings.revalidate();
-
 	}
 
 	public void refreshByMouseMove(int x, int y)
@@ -394,6 +393,5 @@ public class GameWindow extends JDialog
 	public void setEnemyField(Field enemyField)
 	{
 		drawPanel.setEnemyField(enemyField);
-
 	}
 }

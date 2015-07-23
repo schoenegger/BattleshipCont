@@ -39,7 +39,7 @@ public class Player // Player not needed
 	 */
 	public void sendFrontendReferenceToLogic(Frontend refFrontend)
 	{
-		logic.setFrontendReference(refFrontend);
+		// logic.setFrontendReference(refFrontend);
 	}
 
 }

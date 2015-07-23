@@ -194,15 +194,6 @@ public class StartView extends JDialog
 		this.gameWindow.getNextMove();
 	}
 
-	/******************* Called from Game View *************/
-
-	public void setInitFieldInLogic(Field ownInitField)
-	{
-		this.refGameLogic.setInitField(ownInitField);
-	}
-
-	/***************************** Listener *************/
-
 	/**
 	 * check which button have currently the focus for keylistener
 	 * 
@@ -231,13 +222,6 @@ public class StartView extends JDialog
 
 	}
 
-	private void buildConnection(String mode)
-	{
-
-		refGameLogic.startConnection(mode, startSettData.getIpAddress(),
-				startSettData.getPort());
-	}
-
 	public void sendMouseMoveToGameView(int x, int y)
 	{
 		gameWindow.refreshByMouseMove(x, y);
@@ -261,9 +245,22 @@ public class StartView extends JDialog
 
 	}
 
+	// *********************Functions for Logic****************
+
 	public void sendAttackCommandToEnemy(String attackCommand)
 	{
 		refGameLogic.sendAttackCommandToEnemy(attackCommand);
 
+	}
+
+	private void buildConnection(String mode)
+	{
+		refGameLogic.startConnection(mode, startSettData.getIpAddress(),
+				startSettData.getPort());
+	}
+
+	public void setInitFieldInLogic(Field ownInitField)
+	{
+		this.refGameLogic.setInitField(ownInitField);
 	}
 }

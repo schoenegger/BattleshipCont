@@ -37,7 +37,7 @@ public class GameViewListener implements ActionListener, MouseMotionListener
 			Logging.writeErrorMessage("Mouse Listener failed");
 		}
 
-		refLogic.sendMousPositionsToGameView(e.getX(), e.getY());
+		refLogic.sendMousePositionsToGameView(e.getX(), e.getY());
 		// JOptionPane.showMessageDialog(null,
 		// "mouseMoved  " + e.getX() + " " + e.getY(), "",
 		// JOptionPane.OK_CANCEL_OPTION);

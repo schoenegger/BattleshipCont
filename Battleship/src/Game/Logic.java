@@ -23,8 +23,6 @@ public class Logic
 	private Frontend referenceFrontend;
 	private StartView startView;
 	private CommandHandler commandHandler;
-	// private StartViewSettingData startSettData;
-	// private LanguageView languageView;
 
 	private GameSoundPlayer gameSoundPlayer;
 	private Command currAttacCommand = null;
@@ -32,11 +30,6 @@ public class Logic
 	private Field enemyField = new Field();
 	private boolean isMyTurn;
 	private boolean isHost;
-
-	// ********only for tests---------------------
-	// private TestEnemy testEnemy = new TestEnemy();
-
-	// *****************************************
 
 	/**
 	 * Logic
@@ -71,17 +64,6 @@ public class Logic
 	{
 		startView.openViewGameFieldsCPU();
 
-	}
-
-	/**
-	 * Set The Reference for the Logic
-	 * 
-	 * @param refFrontend
-	 */
-	public void setFrontendReference(Frontend refFrontend) // ----->>>REF
-															// FRONTEND
-	{
-		this.referenceFrontend = refFrontend;
 	}
 
 	/**
@@ -263,7 +245,6 @@ public class Logic
 	{
 		commandHandler = new CommandHandler(this); // Create commandHandler and
 													// send reference
-
 		commandHandler.sendInitField(buildInitCommand(this.ownField));
 
 		waitForSettingsOtherPlayer();
@@ -288,7 +269,6 @@ public class Logic
 		return initCommand;
 	}
 
-	// Add Didi Function for listener Keyevent
 	/**
 	 * 
 	 * @return the actual focus in the startview
@@ -306,7 +286,6 @@ public class Logic
 		// startView.closeWindow();
 	}
 
-	// Add Didi
 	public GameSoundPlayer getgameSoundPlayer()
 	{
 		return gameSoundPlayer;
@@ -318,16 +297,14 @@ public class Logic
 		this.startView.getNextCommandFromGameWindow();
 	}
 
-	public void sendMousPositionsToGameView(int x, int y)
+	public void sendMousePositionsToGameView(int x, int y)
 	{
 		startView.sendMouseMoveToGameView(x, y);
-
 	}
 
 	public void setShipButtonPressed()
 	{
 		startView.sendSetButtonPressed();
-
 	}
 
 	public void attacShipButtonPressed()

@@ -133,7 +133,7 @@ public class DrawingPanelGameFields extends JPanel
 		{
 			if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
 			{
-
+				path = "src\\img\\ship_dest.png";// strike ship
 			}
 			else
 			{
@@ -143,7 +143,14 @@ public class DrawingPanelGameFields extends JPanel
 
 		if (!fieldElement.isTaken())
 		{
-			path = "src\\img\\ocean5.png";
+			if (fieldElement.getFieldState() == FieldState.UNKNOWN)
+			{
+				path = "src\\img\\questm.png";
+			}
+			else
+			{
+				path = "src\\img\\wave.png";
+			}
 		}
 
 		try
