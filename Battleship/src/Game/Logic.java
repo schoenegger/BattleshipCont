@@ -67,6 +67,12 @@ public class Logic
 		startView.openViewGameFields();
 	}
 
+	public void openViewGameFieldCPU()
+	{
+		startView.openViewGameFieldsCPU();
+
+	}
+
 	/**
 	 * Set The Reference for the Logic
 	 * 
@@ -102,26 +108,36 @@ public class Logic
 
 	private void startNextMove()
 	{
-		System.out.println("*****************************************");
-		System.out.println("Own Field:");
-		ownField.display();
-		System.out.println("\nEnemy Field:");
-		enemyField.displayIncognito();
-		System.out.println("*****************************************");
+		// System.out.println("*****************************************");
+		// System.out.println("Own Field:");
+		// ownField.display();
+		// System.out.println("\nEnemy Field:");
+		// enemyField.displayIncognito();
+		// System.out.println("*****************************************");
+		startView.getNextCommandFromGameWindow();
+		startView.sendGameWindowMessage("Attac The Enemy");
 
-		if (isMyTurn)
-		{
-			fireToFieldPosition(referenceFrontend.getNextCommand());
-			setIsMyTurn(false);
-			wait(100);
-		}
-		else
-		{
-			System.out.println("Wait for enemy move");
+		// if (isMyTurn)
+		// {
+		// fireToFieldPosition(startView.getNextCommandFromGameWindow());
+		// setIsMyTurn(false);
+		// wait(100);
+		// }
+		// else
+		// {
+		// System.out.println("Wait for enemy move");
+		//
+		// setIsMyTurn(true);
+		// }
+		// commandHandler.receiveCommandFromDataBox();
+	}
 
-			setIsMyTurn(true);
-		}
-		commandHandler.receiveCommandFromDataBox();
+	public void sendAttackCommandToEnemy(String fireCommand)
+	{
+		startView.sendGameWindowMessage("Enemy Turn");
+		fireToFieldPosition(fireCommand);
+
+		// commandHandler.receiveCommandFromDataBox();
 	}
 
 	public void setIsMyTurn(boolean isMyTurn)
@@ -167,13 +183,15 @@ public class Logic
 	}
 
 	/**
-	 * set the enemy field
+	 * set the enemy field called by command Handler
 	 * 
 	 * @param enemyField
 	 */
 	public void setEnemyField(Field enemyField)
 	{
 		this.enemyField = enemyField;
+		this.startView.setEnemyFieldInGameWindow(enemyField);
+
 	}
 
 	private void wait(int ms)
@@ -225,6 +243,8 @@ public class Logic
 																	// Command
 																	// Handler
 	{
+		startView.sendGameWindowMessage("Attac from Enemy : "
+				+ attacPosition.toString());
 		currAttacCommand = new Command(1, attacPosition, "ATTAC_COMMAND");
 		ownField.fireToPosition(attacPosition.getXyPosition().x,
 				attacPosition.getXyPosition().y);
@@ -292,10 +312,10 @@ public class Logic
 		return gameSoundPlayer;
 	}
 
-	// ************* Commands To Logic*************
-	public String getNextMoveFromStartView()
+	// ************* Commands To Logic from startview*************
+	public void getNextMoveFromStartView()
 	{
-		return this.startView.getNextCommandFromGameWindow();
+		this.startView.getNextCommandFromGameWindow();
 	}
 
 	public void sendMousPositionsToGameView(int x, int y)
@@ -309,4 +329,10 @@ public class Logic
 		startView.sendSetButtonPressed();
 
 	}
+
+	public void attacShipButtonPressed()
+	{
+		startView.attacShipButtonPressed();
+	}
+
 }

@@ -52,6 +52,10 @@ public class GameViewListener implements ActionListener, MouseMotionListener
 		{
 		case Definitions.BUTTON_SET_SHIP :
 			refLogic.setShipButtonPressed();
+			break;
+		case Definitions.BUTTON_ATTAC :
+			refLogic.attacShipButtonPressed();
+			break;
 		}
 
 	}

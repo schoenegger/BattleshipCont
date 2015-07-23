@@ -197,7 +197,7 @@ public class Field
 			String alignment = ship.getShipPosition().getAlignment();
 			int countSector = ship.getCountSector();
 
-			if (alignment.equals("VERTICAL"))
+			if (alignment.toLowerCase().equals("horizontal"))
 			{
 				for (int i = 0; i < countSector; i++)
 				{
@@ -299,4 +299,5 @@ public class Field
 		this.shipsOnField.addElement(ship);
 		setTaken();
 	}
+
 }

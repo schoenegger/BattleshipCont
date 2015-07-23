@@ -26,10 +26,10 @@ public class StartViewButtonListener implements ActionListener, KeyListener
 		switch (command)
 		{
 		case Definitions.PLAYER_VS_COM :
-			refGameLogic.openViewGameField();
+			refGameLogic.openViewGameFieldCPU();
 			break;
 		case Definitions.PLAYER_VS_PLAYER :
-			;
+			refGameLogic.openViewGameField();
 			break;
 		case Definitions.SETTING_START_VIEW :
 			refGameLogic.openStartViewSettings();
@@ -52,8 +52,11 @@ public class StartViewButtonListener implements ActionListener, KeyListener
 			// System.exit(0);
 			refGameLogic.quitGame();
 			break;
-		case KeyEvent.VK_C :
+		case KeyEvent.VK_P :
 			refGameLogic.openViewGameField();
+			break;
+		case KeyEvent.VK_C :
+			refGameLogic.openViewGameFieldCPU();
 			break;
 		case KeyEvent.VK_S :
 			refGameLogic.openStartViewSettings();

@@ -1,5 +1,6 @@
 package view.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -29,8 +30,20 @@ public class DrawingPanelGameFields extends JPanel
 
 	public DrawingPanelGameFields(Field ownField, Field enemyField)
 	{
+		setBackground(new Color(169, 169, 169));
 		this.ownField = ownField;
 		this.enemyField = enemyField;
+		startRunningText(10);
+		this.setBackground(new Color(255, 255, 255));
+
+		this.setForeground(new Color(0, 0, 255));
+		this.repaint();
+		this.revalidate();
+	}
+
+	private void startRunningText(int i)
+	{
+		// graphic.drawString(
 	}
 
 	@Override
@@ -39,8 +52,10 @@ public class DrawingPanelGameFields extends JPanel
 
 		graphic = (Graphics2D) graph.create();
 
-		createFieldView(ownField, (1.0 / 12.0), (1.0 / 6.0), (1.0 / 30.0));
-		createFieldView(enemyField, (7.0 / 12.0), (1.0 / 6.0), (1.0 / 30.0));
+		createFieldView(ownField, (1.0 / 12.0), (1.0 / 6.0), (1.0 / 30.0),
+				"OWN FIELD");
+		createFieldView(enemyField, (7.0 / 12.0), (1.0 / 6.0), (1.0 / 30.0),
+				"ENEMY FIELD");
 
 	}
 
@@ -72,7 +87,7 @@ public class DrawingPanelGameFields extends JPanel
 	}
 
 	private void createFieldView(Field gameField, double factorStartX,
-			double factorStartY, double factorRect)
+			double factorStartY, double factorRect, String fieldName)
 	{
 
 		double widthReck = this.getWidth() * factorRect;
@@ -80,8 +95,7 @@ public class DrawingPanelGameFields extends JPanel
 		double startX = this.getWidth() * factorStartX;
 		double startY = this.getHeight() * factorStartY;
 
-		graphic.drawString("PanelWidht" + this.getWidth(), (int) startX,
-				(int) startY - 20);
+		graphic.drawString(fieldName, (int) startX, (int) startY - 20);
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -143,5 +157,10 @@ public class DrawingPanelGameFields extends JPanel
 		}
 
 		return image;
+	}
+
+	public void setEnemyField(Field enemyField)
+	{
+		this.enemyField = enemyField;
 	}
 }

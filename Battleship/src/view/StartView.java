@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -9,7 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
 
+import logging.Logging;
 import view.GlobalStrings.Definitions;
 import view.GlobalStrings.LanguageView;
 import view.game.GameWindow;
@@ -32,6 +36,7 @@ public class StartView extends JDialog
 	private GameWindow gameWindow;
 	private StartSettingsWindow startSettWindow;
 	private StartViewSettingData startSettData;
+	public static volatile JLabel lblBattleComm;
 
 	private LanguageView languageView;
 
@@ -47,6 +52,16 @@ public class StartView extends JDialog
 	 */
 	public StartView(Logic refGameLogic)// , StartViewSettingData startSettData
 	{
+		try
+		{
+			UIManager
+					.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		}
+		catch (Exception e)
+		{
+			Logging.writeErrorMessage("Look And Feel nimbus in StartView not possible");
+		}
+
 		this.startSettData = new StartViewSettingData();
 		this.refGameLogic = refGameLogic;
 
@@ -54,6 +69,40 @@ public class StartView extends JDialog
 
 		initializeListeners();
 		initializeComponets();
+		// colorHeaderLabel();
+	}
+
+	private void colorHeaderLabel()
+	{
+		// TODO Does not work!!!!!!!!1
+		Thread thread = new Thread()
+		{
+			public void run()
+			{
+				int blue = 100;
+				while (true)
+				{
+					lblBattleComm.setForeground(new Color(0, 0, blue));
+
+					try
+					{
+						Thread.sleep(150);
+						blue += 10;
+						if (blue > 245)
+						{
+							blue = 0;
+						}
+					}
+					catch (InterruptedException e)
+					{
+						Logging.writeErrorMessage("Label Coloring StartView does not work");
+					}
+				}
+			}
+		};
+
+		thread.start();
+
 	}
 
 	private void initializeListeners()
@@ -70,7 +119,7 @@ public class StartView extends JDialog
 				SystemColor.activeCaption);
 		frmBattleshipCommander.setResizable(false);
 		frmBattleshipCommander.setTitle("BATTLESHIP COMMANDER");
-		frmBattleshipCommander.setBounds(100, 100, 373, 323);
+		frmBattleshipCommander.setBounds(100, 100, 535, 331);
 		frmBattleshipCommander.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBattleshipCommander.getContentPane().setLayout(null);
 		this.btnPlayerCom = new JButton(
@@ -80,19 +129,14 @@ public class StartView extends JDialog
 		btnPlayerCom.addActionListener(this.viewButtListener);
 		btnPlayerCom.addKeyListener(this.viewButtListener);
 		btnPlayerCom.setMnemonic(KeyEvent.VK_C);
-		btnPlayerCom.setBounds(204, 0, 162, 42);
+		btnPlayerCom.setBounds(19, 128, 162, 42);
 		btnPlayerCom.setActionCommand(Definitions.PLAYER_VS_COM);
 		frmBattleshipCommander.getContentPane().add(this.btnPlayerCom);
 		this.btn2Player = new JButton(
 				languageView.getResourceString(LanguageView.PLAYER_VS_PLAYER));
 		btn2Player.setToolTipText("Alt+P");
-		btn2Player.setBounds(0, 0, 162, 42);
+		btn2Player.setBounds(19, 74, 162, 42);
 		btn2Player.setActionCommand(Definitions.PLAYER_VS_PLAYER);
-
-		// // add didi Activate when player vs. player is implements!
-		// btn2Player.addActionListener(this.viewButtListener);
-		// btn2Player.addKeyListener(this.viewButtListener);
-		// btn2Player.setMnemonic(KeyEvent.VK_P);
 
 		frmBattleshipCommander.getContentPane().add(btn2Player);
 		this.btnSettings = new JButton(
@@ -103,7 +147,7 @@ public class StartView extends JDialog
 		btnSettings.addKeyListener(this.viewButtListener);
 		btnSettings.setMnemonic(KeyEvent.VK_S);
 
-		btnSettings.setBounds(111, 244, 162, 42);
+		btnSettings.setBounds(19, 181, 162, 42);
 		btnSettings.setActionCommand(Definitions.SETTING_START_VIEW);
 
 		frmBattleshipCommander.getContentPane().add(btnSettings);
@@ -111,8 +155,15 @@ public class StartView extends JDialog
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(StartView.class
 				.getResource("/img/shipBackground.jpg")));
-		label.setBounds(46, 42, 310, 203);
+		label.setBounds(193, 38, 340, 241);
 		frmBattleshipCommander.getContentPane().add(label);
+
+		lblBattleComm = new JLabel("BATTLESHIP COMMANDER");
+		lblBattleComm.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC,
+				20));
+		lblBattleComm.setForeground(new Color(0, 0, 139));
+		lblBattleComm.setBounds(126, 6, 326, 42);
+		frmBattleshipCommander.getContentPane().add(lblBattleComm);
 		frmBattleshipCommander.setVisible(true);
 		btnPlayerCom.requestFocus();
 	}
@@ -124,18 +175,23 @@ public class StartView extends JDialog
 		// add didi
 		this.startSettWindow = new StartSettingsWindow(startSettData,
 				this.languageView, refGameLogic.getgameSoundPlayer());
-		buildConnection();
 	}
 
 	public void openViewGameFields()
 	{
 		this.gameWindow = new GameWindow(this, refGameLogic);
-
+		buildConnection(startSettData.getMode());
 	}
 
-	public String getNextCommandFromGameWindow()
+	public void openViewGameFieldsCPU()
 	{
-		return this.gameWindow.getNextMove();
+		this.gameWindow = new GameWindow(this, refGameLogic);
+		buildConnection("cpu");
+	}
+
+	public void getNextCommandFromGameWindow()
+	{
+		this.gameWindow.getNextMove();
 	}
 
 	/******************* Called from Game View *************/
@@ -175,11 +231,11 @@ public class StartView extends JDialog
 
 	}
 
-	private void buildConnection()
+	private void buildConnection(String mode)
 	{
 
-		refGameLogic.startConnection(startSettData.getMode(),
-				startSettData.getIpAddress(), startSettData.getPort());
+		refGameLogic.startConnection(mode, startSettData.getIpAddress(),
+				startSettData.getPort());
 	}
 
 	public void sendMouseMoveToGameView(int x, int y)
@@ -193,4 +249,21 @@ public class StartView extends JDialog
 		gameWindow.setShipButtonPressed();
 	}
 
+	public void attacShipButtonPressed()
+	{
+		gameWindow.attacShipButtonPressed();
+
+	}
+
+	public void setEnemyFieldInGameWindow(Field enemyField)
+	{
+		gameWindow.setEnemyField(enemyField);
+
+	}
+
+	public void sendAttackCommandToEnemy(String attackCommand)
+	{
+		refGameLogic.sendAttackCommandToEnemy(attackCommand);
+
+	}
 }

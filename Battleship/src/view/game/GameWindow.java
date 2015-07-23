@@ -1,5 +1,6 @@
 package view.game;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import logging.Logging;
 import net.miginfocom.swing.MigLayout;
@@ -38,11 +40,17 @@ public class GameWindow extends JDialog
 	private static final long serialVersionUID = 1L;
 
 	private StartView refStartView;
+
 	private JPanel panel_1;
 	private JFrame frmSettings;
-	private JPanel drawPanel;
+	private DrawingPanelGameFields drawPanel;
 	private JTextField textField;
 	private JLabel lblMessages;
+	private JComboBox comboBox;
+	private JLabel lblXY;
+	private JButton btnAttack;
+	private JButton btnExit;
+
 	private Field refOwnField;
 	private Field refEnemyField;
 	private volatile String nextMove = null;
@@ -50,12 +58,12 @@ public class GameWindow extends JDialog
 	private JRadioButton rdbtnVertical;
 	private JRadioButton rdbtnHorizontal;
 	private JButton btnSetShip;
-	private JComboBox comboBox;
+
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private Ship currShipToSet;
 
 	private GameViewListener gameViewListener;
-	private JLabel lblXY;
+
 	private int shipCounter = 0;
 
 	/**
@@ -67,8 +75,16 @@ public class GameWindow extends JDialog
 	 */
 	public GameWindow(StartView refStartView, Logic refLogic)
 	{
-		// this.ownField = ownField;
-		// this.enemyField = enemyField;
+		try
+		{
+			UIManager
+					.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		}
+		catch (Exception e)
+		{
+			Logging.writeErrorMessage("Look And Feel nimbus in GameView not possible");
+		}
+
 		this.refEnemyField = new Field();
 		this.refOwnField = new Field();
 		this.refStartView = refStartView;
@@ -89,10 +105,12 @@ public class GameWindow extends JDialog
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 		frmSettings = new JFrame();
+		frmSettings.getContentPane().setBackground(new Color(135, 206, 235));
+		frmSettings.setBackground(SystemColor.inactiveCaption);
 		frmSettings.setMinimumSize(new Dimension(1200, 800));
 		frmSettings.setResizable(true);
 		frmSettings.setTitle("Game Field");
-		// frmSettings.getContentPane().setBackground(SystemColor.activeCaption);
+
 		frmSettings.getContentPane().setLayout(null);
 
 		setBounds(100, 100, 1200, 735);
@@ -109,7 +127,7 @@ public class GameWindow extends JDialog
 		frmSettings.getContentPane().add(drawPanel, "cell 0 0,grow");
 
 		panel_1 = new JPanel();
-		panel_1.setBackground(SystemColor.activeCaption);
+		panel_1.setBackground(new Color(0, 100, 0));
 		frmSettings.getContentPane().add(panel_1, "cell 0 1,grow");
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]
@@ -122,7 +140,7 @@ public class GameWindow extends JDialog
 		{ 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
-		JButton btnExit = new JButton("EXIT");
+		btnExit = new JButton("EXIT");
 		btnExit.setEnabled(false);
 		GridBagConstraints gbc_btnExit = new GridBagConstraints();
 		gbc_btnExit.anchor = GridBagConstraints.NORTHWEST;
@@ -132,9 +150,11 @@ public class GameWindow extends JDialog
 		panel_1.add(btnExit, gbc_btnExit);
 
 		rdbtnVertical = new JRadioButton("vertical");
+		rdbtnVertical.setBackground(new Color(0, 100, 0));
 		rdbtnVertical.setSelected(true);
 		buttonGroup.add(rdbtnVertical);
 		GridBagConstraints gbc_rdbtnVertical = new GridBagConstraints();
+		gbc_rdbtnVertical.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnVertical.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnVertical.gridx = 2;
 		gbc_rdbtnVertical.gridy = 0;
@@ -154,7 +174,9 @@ public class GameWindow extends JDialog
 		gbc_comboBox.gridy = 0;
 		panel_1.add(comboBox, gbc_comboBox);
 
-		JButton btnAttack = new JButton("Attack");
+		btnAttack = new JButton("Attack");
+		btnAttack.setActionCommand(Definitions.BUTTON_ATTAC);
+		btnAttack.addActionListener(this.gameViewListener);
 		btnAttack.setEnabled(false);
 		btnAttack.setMaximumSize(new Dimension(100, 30));
 		GridBagConstraints gbc_btnAttack = new GridBagConstraints();
@@ -165,8 +187,10 @@ public class GameWindow extends JDialog
 		panel_1.add(btnAttack, gbc_btnAttack);
 
 		rdbtnHorizontal = new JRadioButton("horizontal");
+		rdbtnHorizontal.setBackground(new Color(0, 100, 0));
 		buttonGroup.add(rdbtnHorizontal);
 		GridBagConstraints gbc_rdbtnHorizontal = new GridBagConstraints();
+		gbc_rdbtnHorizontal.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnHorizontal.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnHorizontal.gridx = 2;
 		gbc_rdbtnHorizontal.gridy = 1;
@@ -194,6 +218,7 @@ public class GameWindow extends JDialog
 		btnSetShip.addActionListener(this.gameViewListener);
 
 		GridBagConstraints gbc_btnSetShip = new GridBagConstraints();
+		gbc_btnSetShip.anchor = GridBagConstraints.WEST;
 		gbc_btnSetShip.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSetShip.gridx = 2;
 		gbc_btnSetShip.gridy = 2;
@@ -220,20 +245,10 @@ public class GameWindow extends JDialog
 		drawPanel.repaint();
 	}
 
-	public String getNextMove()
+	public void getNextMove()
 	{
-		while (this.nextMove == null)
-		{
-			wait(500);
-			sendMessge("Make your next Move");
-		}
-		if (this.nextMove != null)
-		{
-			String currNextMove = this.nextMove;
-			nextMove = null;
-			return currNextMove;
-		}
-		return null;
+		sendMessge("Please Attac your Enemy");
+
 	}
 
 	public void setShipButtonPressed()
@@ -246,9 +261,9 @@ public class GameWindow extends JDialog
 		if (checkIfPositionTextIsValid(textField.getText()))
 		{
 			String[] points = textField.getText().split(",");
-			int y = Integer.parseInt(points[0]);
-			int x = Integer.parseInt(points[1]);
-			// TODO refactor x and y Position
+			int x = Integer.parseInt(points[0]);
+			int y = Integer.parseInt(points[1]);
+
 			if (checkIfPositionIsAvailable(x, y, comboBox.getSelectedItem()
 					.toString()))
 			{
@@ -263,14 +278,16 @@ public class GameWindow extends JDialog
 	{
 		// refStartView.buildConnection();
 		refStartView.setInitFieldInLogic(this.refOwnField);
-		this.disableInitButtons();
+		this.disableInitButtonsAndEnableAttacButtons();
 	}
 
-	private void disableInitButtons()
+	private void disableInitButtonsAndEnableAttacButtons()
 	{
 		comboBox.setVisible(false);
 		rdbtnHorizontal.setVisible(false);
 		rdbtnVertical.setVisible(false);
+		btnAttack.setEnabled(true);
+		btnExit.setEnabled(true);
 	}
 
 	private void setShipToField()
@@ -306,22 +323,9 @@ public class GameWindow extends JDialog
 		return true;
 	}
 
-	private void wait(int ms)
-	{
-		try
-		{
-			Thread.sleep(ms);
-		}
-		catch (InterruptedException e)
-		{
-			Logging.writeErrorMessage("Error wait function in Game View");
-		}
-	}
-
 	public void sendMessge(String message)
 	{
-		textField.setText(message);
-		textField.revalidate();
+		lblMessages.setText(message);
 	}
 
 	public void refreshByMouseMove(int x, int y)
@@ -364,5 +368,18 @@ public class GameWindow extends JDialog
 		Ship ship = new Ship(shipPos, shipType, ++shipCounter);
 
 		return ship;
+	}
+
+	public void attacShipButtonPressed()
+	{
+		String attackCommand = textField.getText();
+		refStartView.sendAttackCommandToEnemy(attackCommand);
+
+	}
+
+	public void setEnemyField(Field enemyField)
+	{
+		drawPanel.setEnemyField(enemyField);
+
 	}
 }
