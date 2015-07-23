@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -293,8 +294,7 @@ public class GameWindow extends JDialog
 	private void setShipToField()
 	{
 		refOwnField.setShipOnField(currShipToSet);
-		frmSettings.revalidate();
-		frmSettings.repaint();
+		refresh();
 	}
 
 	// function also creates ship
@@ -326,6 +326,20 @@ public class GameWindow extends JDialog
 	public void sendMessge(String message)
 	{
 		lblMessages.setText(message);
+
+		lblMessages.repaint();
+
+		lblMessages.revalidate();
+		JOptionPane.showMessageDialog(null, message, "test",
+				JOptionPane.OK_CANCEL_OPTION);
+		refresh();
+	}
+
+	private void refresh()
+	{
+		frmSettings.repaint();
+		frmSettings.revalidate();
+
 	}
 
 	public void refreshByMouseMove(int x, int y)
