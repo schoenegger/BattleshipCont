@@ -1,5 +1,8 @@
 package GameUtilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Ship
  * 
@@ -17,6 +20,7 @@ public class Ship
 	private int countSector;
 	private int number;
 	private boolean isAlive = true;
+	private List<int[]> coordinatesReservatedFields;
 
 	/**
 	 * Ship - define a ship with the parameters
@@ -102,5 +106,95 @@ public class Ship
 	public ShipType getType()
 	{
 		return this.shipType;
+	}
+
+	public List<int[]> getListOfReservatedFields()
+	{
+
+		List<int[]> list = new ArrayList<int[]>();
+
+		if (align.toLowerCase().equals("horizontal"))
+		{
+			int y = (int) shipPosition.getXyPosition().getY();
+
+			for (int x = (int) shipPosition.getXyPosition().getX(); x < this.countSector; x++)
+			{
+
+				addToListReservedFieldsAroundPosition(list, y, x);
+
+			}
+
+		}
+		else
+		{
+			int x = (int) shipPosition.getXyPosition().getX();
+
+			for (int y = (int) shipPosition.getXyPosition().getY(); y < this.countSector; y++)
+			{
+
+				addToListReservedFieldsAroundPosition(list, y, x);
+
+			}
+		}
+		return list;
+	}
+
+	private void addToListReservedFieldsAroundPosition(List<int[]> list, int y,
+			int x)
+	{
+		if (isInFieldPosition(x - 1, y - 1))
+		{
+			list.add(new int[]
+			{ x - 1, y - 1 });
+		}
+		if (isInFieldPosition(x + 1, y + 1))
+		{
+			list.add(new int[]
+			{ x + 1, y + 1 });
+		}
+		if (isInFieldPosition(x + 1, y))
+		{
+			list.add(new int[]
+			{ x + 1, y });
+		}
+		if (isInFieldPosition(x, y + 1))
+		{
+			list.add(new int[]
+			{ x, y + 1 });
+		}
+		if (isInFieldPosition(x - 1, y))
+		{
+			list.add(new int[]
+			{ x - 1, y });
+		}
+		if (isInFieldPosition(x, y - 1))
+		{
+			list.add(new int[]
+			{ x, y - 1 });
+		}
+		if (isInFieldPosition(x - 1, y + 1))
+		{
+			list.add(new int[]
+			{ x - 1, y + 1 });
+		}
+		if (isInFieldPosition(x + 1, y - 1))
+		{
+			list.add(new int[]
+			{ x + 1, y - 1 });
+		}
+		if (isInFieldPosition(x, y))
+		{
+			list.add(new int[]
+			{ x, y });
+		}
+	}
+
+	private boolean isInFieldPosition(int x, int y)
+	{
+		if (x >= 0 && x <= 9 && y >= 0 && y <= 9)
+		{
+			return true;
+		}
+		return false;
 	}
 }

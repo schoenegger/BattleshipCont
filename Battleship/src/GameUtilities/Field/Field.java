@@ -1,9 +1,13 @@
 package GameUtilities.Field;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import GameUtilities.Ship;
+import GameUtilities.ShipPosition;
+import GameUtilities.ShipType;
 
 public class Field
 {
@@ -60,11 +64,6 @@ public class Field
 				fieldElemtens[i][j].setFieldState(FieldState.UNKNOWN);
 			}
 		}
-	}
-
-	public void isPointAvailableToSetShip(int x, int y, String align)
-	{
-
 	}
 
 	public Vector<Ship> getListOfActiveShips()
@@ -164,11 +163,18 @@ public class Field
 
 	public boolean IsValidAttacPosition(int posX, int posY)
 	{
-
-		if (this.fieldElemtens[posX][posY].getFieldState().equals(
-				FieldState.UNKNOWN))
+		if (posX >= 0 && posX <= 9 && posY >= 0 && posY <= 9)
 		{
-			return true;
+
+			if (this.fieldElemtens[posX][posY].getFieldState().equals(
+					FieldState.UNKNOWN))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
@@ -230,6 +236,90 @@ public class Field
 					fieldElemtens[currShipPoint.x][currShipPoint.y + i]
 							.setTaken();
 				}
+			}
+		}
+	}
+
+	public void setShipOnField(Ship ship)
+	{
+		if (shipsOnField.size() > 5)
+		{
+			isFieldInit = true;
+			return;
+		}
+
+		this.shipsOnField.addElement(ship);
+		setTaken();
+	}
+
+	public void setPossibleFields(int x, int y, ShipType type, String align)
+	{
+		ShipPosition shipPos = new ShipPosition(new Point(x, y), align);
+		// +1 is number of next ship
+		Ship ship = new Ship(shipPos, type, shipsOnField.size() + 1);
+
+		unmarkFields();
+
+		if (!isOwnField && IsValidAttacPosition(x, y))
+		{
+			fieldElemtens[x][y].isAvailableToAttac();
+			fieldElemtens[x][y].setisPossibleField(true);
+			return;
+		}
+		else if (isOwnField && IsValidAttacPosition(x, y) && !isFieldInit)
+		{
+			if (checkAroundShipPosition(ship))
+			{
+				if (align.equals("horizontal"))
+				{
+					for (int i = x; i < ship.getCountSector(); i++)
+					{
+						if (i >= 0 && i <= 9 && y >= 0 && y <= 9)
+						{
+							fieldElemtens[i][y].setisPossibleField(true);
+						}
+					}
+				}
+				else
+				{
+					for (int i = y; i < ship.getCountSector(); i++)
+					{
+						if (x >= 0 && x <= 9 && i >= 0 && i <= 9)
+						{
+							fieldElemtens[x][i].setisPossibleField(true);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private boolean checkAroundShipPosition(Ship ship)
+	{
+		List<int[]> list = new ArrayList<int[]>();
+		list = ship.getListOfReservatedFields();
+		// boolean noFieldTaken = true;
+
+		for (int[] coordinate : list)
+		{
+			int x = coordinate[0];
+			int y = coordinate[1];
+			if (fieldElemtens[x][y].isTaken())
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private void unmarkFields()
+	{
+		for (FieldElement[] feRow : fieldElemtens)
+		{
+			for (FieldElement fe : feRow)
+			{
+				fe.setisPossibleField(false);
 			}
 		}
 	}
@@ -311,18 +401,6 @@ public class Field
 
 		System.out.println(printField);
 		System.out.println(" 0 1 2 3 4 5 6 7 8 9");
-	}
-
-	public void setShipOnField(Ship ship)
-	{
-		if (shipsOnField.size() > 5)
-		{
-			isFieldInit = true;
-			return;
-		}
-
-		this.shipsOnField.addElement(ship);
-		setTaken();
 	}
 
 }

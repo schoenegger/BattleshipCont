@@ -11,6 +11,7 @@ public class FieldElement
 	private boolean isTaken;
 	private boolean isOwnFieldElement = false;
 	private boolean isAvailableToSetShip = false;
+	private boolean isPossibleField = false;
 
 	public FieldElement(boolean isOwnFieldElement)
 	{
@@ -44,7 +45,18 @@ public class FieldElement
 
 	public boolean isAvailableToSetShip()
 	{
-		return isOwnFieldElement & isAvailableToSetShip;
+		return isOwnFieldElement & isAvailableToSetShip & isPossibleField;
+	}
+
+	public boolean isAvailableToAttac()
+	{
+		return !isOwnFieldElement & (fieldState == fieldState.UNKNOWN)
+				& isPossibleField;
+	}
+
+	public void setisPossibleField(boolean isPossible)
+	{
+		isPossibleField = isPossible;
 	}
 
 	/**

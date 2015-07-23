@@ -29,7 +29,7 @@ public class DrawingPanelGameFields extends JPanel
 	private BufferedImage image;
 	private Field ownField;
 	private Field enemyField;
-	private int mouseCuorserX = 0;
+	private int mouseCourserX = 0;
 	private int mouseCourserY = 0;
 	private ShipType currShipType = ShipType.AIRCARRIER;
 	private String align = "";
@@ -60,7 +60,7 @@ public class DrawingPanelGameFields extends JPanel
 
 	private void setMouseCourser(int x, int y, ShipType type, String align)
 	{
-		mouseCuorserX = x;
+		mouseCourserX = x;
 		mouseCourserY = y;
 		currShipType = type;
 		this.align = align;
@@ -125,7 +125,11 @@ public class DrawingPanelGameFields extends JPanel
 			// change coloum
 			for (int j = 0; j < 10; j++)
 			{
-				if (courserIsInField())
+				if (courserIsInField(startX, startY, widthReck, heightReck))
+				{
+					gameField.setPossibleFields();
+				}
+				if (false)
 				{
 					graphic.setPaint(NOT_VALID_COLOR);
 					graphic.fill(new Rectangle2D.Double(startX, startY,
@@ -155,9 +159,18 @@ public class DrawingPanelGameFields extends JPanel
 		}
 	}
 
-	private boolean courserIsInField()
+	private boolean courserIsInField(double startX, double startY,
+			double widthReck, double heightReck)
 	{
-		// TODO Auto-generated method stub
+		boolean isInField = true;
+		isInField &= ((mouseCourserX > (int) startX) && (mouseCourserX < ((int) startX + widthReck)));
+		isInField &= ((mouseCourserY > (int) startY) && (mouseCourserY < ((int) startY + heightReck)));
+		return isInField;
+	}
+
+	private boolean setElementPositionByMouseCouser(Field gameField)
+	{
+
 		return false;
 	}
 

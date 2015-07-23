@@ -170,9 +170,9 @@ public class StartView extends JDialog
 
 		lblBattleComm = new JLabel("BATTLESHIP COMMANDER");
 		lblBattleComm.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC,
-				20));
+				26));
 		lblBattleComm.setForeground(new Color(0, 0, 139));
-		lblBattleComm.setBounds(126, 6, 326, 42);
+		lblBattleComm.setBounds(59, 6, 393, 42);
 		frmBattleshipCommander.getContentPane().add(lblBattleComm);
 		frmBattleshipCommander.setVisible(true);
 		btnPlayerCom.requestFocus();
@@ -182,7 +182,6 @@ public class StartView extends JDialog
 
 	public void openStartViewSettings()
 	{
-		// add didi
 		this.startSettWindow = new StartSettingsWindow(startSettData,
 				this.languageView, refGameLogic.getgameSoundPlayer());
 	}

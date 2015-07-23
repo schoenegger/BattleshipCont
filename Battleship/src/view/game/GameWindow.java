@@ -333,6 +333,7 @@ public class GameWindow extends JDialog
 		JOptionPane.showMessageDialog(null, message, "test",
 				JOptionPane.OK_CANCEL_OPTION);
 		refresh();
+
 	}
 
 	private void refresh()
