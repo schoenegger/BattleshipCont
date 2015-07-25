@@ -3,15 +3,14 @@ package view.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import logging.Logging;
 import view.GlobalStrings.Definitions;
 import Game.Logic;
 
-public class GameViewListener implements ActionListener, MouseMotionListener,
-		MouseListener
+public class GameViewListener implements ActionListener, MouseMotionListener
+
 {
 
 	private Logic refLogic;
@@ -59,39 +58,7 @@ public class GameViewListener implements ActionListener, MouseMotionListener,
 
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e)
-	{
-		refLogic.mouseClickToGameView();
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
+	// must be called by valid Mouse Click Event
+	// refLogic.mouseClickToGameView();
 
 }

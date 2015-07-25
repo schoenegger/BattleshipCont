@@ -88,34 +88,6 @@ public class DrawingPanelGameFields extends JPanel
 
 	}
 
-	//
-	// private void creatFioeldView(double factorStartX, double factorStartY,
-	// double factorRect)
-	// {
-	// double widthReck = this.getWidth() * factorRect;
-	// double heightReck = widthReck;
-	// double startX = this.getWidth() * factorStartX;
-	// double startY = this.getHeight() * factorStartY;
-	//
-	// graphic.drawString("PanelWidht" + this.getWidth(), (int) startX,
-	// (int) startY - 20);
-	//
-	// for (int i = 0; i < 10; i++)
-	// {
-	// // change coloum
-	// for (int j = 0; j < 10; j++)
-	// {
-	//
-	// graphic.draw(new Rectangle2D.Double(startX, startY, widthReck,
-	// heightReck));
-	//
-	// startX += widthReck;
-	// }
-	// startX = this.getWidth() * factorStartX;
-	// startY += heightReck;
-	// }
-	// }
-
 	private void createFieldView(Field gameField, double factorStartX,
 			double factorStartY, double factorRect, String fieldName,
 			boolean isOwmField)
