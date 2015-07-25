@@ -122,6 +122,7 @@ public class GameWindow extends JDialog
 		drawPanel = new DrawingPanelGameFields(refOwnField, refEnemyField);
 		drawPanel.setBackground(SystemColor.info);
 		drawPanel.addMouseMotionListener(gameViewListener);
+		drawPanel.addMouseListener(gameViewListener);
 		drawPanel.revalidate();
 		drawPanel.repaint();
 
