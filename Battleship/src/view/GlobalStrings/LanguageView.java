@@ -37,6 +37,8 @@ public class LanguageView
 	public static final String COLOR = "Color";
 	public static final String CHANGE = "Change";
 
+	public static final String HELP = "Help";
+
 	public LanguageView(String language)
 	{
 
