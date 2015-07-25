@@ -3,13 +3,15 @@ package view.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import logging.Logging;
 import view.GlobalStrings.Definitions;
 import Game.Logic;
 
-public class GameViewListener implements ActionListener, MouseMotionListener
+public class GameViewListener implements ActionListener, MouseMotionListener,
+		MouseListener
 {
 
 	private Logic refLogic;
@@ -30,7 +32,7 @@ public class GameViewListener implements ActionListener, MouseMotionListener
 	{
 		try
 		{
-			Thread.sleep(150);
+			Thread.sleep(20);
 		}
 		catch (InterruptedException e1)
 		{
@@ -38,9 +40,6 @@ public class GameViewListener implements ActionListener, MouseMotionListener
 		}
 
 		refLogic.sendMousePositionsToGameView(e.getX(), e.getY());
-		// JOptionPane.showMessageDialog(null,
-		// "mouseMoved  " + e.getX() + " " + e.getY(), "",
-		// JOptionPane.OK_CANCEL_OPTION);
 
 	}
 
@@ -57,6 +56,41 @@ public class GameViewListener implements ActionListener, MouseMotionListener
 			refLogic.attacShipButtonPressed();
 			break;
 		}
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+		refLogic.mouseClickToGameView();
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
 
 	}
 

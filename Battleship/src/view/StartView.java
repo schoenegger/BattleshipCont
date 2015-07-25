@@ -272,4 +272,9 @@ public class StartView extends JDialog
 	{
 		this.refGameLogic.setInitField(ownInitField);
 	}
+
+	public void mouseClickToGameView()
+	{
+		gameWindow.MouseClickToGameView();
+	}
 }

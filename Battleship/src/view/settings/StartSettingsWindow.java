@@ -2,7 +2,10 @@ package view.settings;
 
 import gameSounds.GameSoundPlayer;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,6 +13,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -46,6 +50,7 @@ public class StartSettingsWindow extends JDialog
 	private JLabel lblLanguage;
 	private JButton btnSave;
 	private StartViewSettingsListener viewSettListener;
+	private JLabel lblHeadSettings;
 
 	/**
 	 * Create the application.
@@ -72,6 +77,49 @@ public class StartSettingsWindow extends JDialog
 		initialize();
 	}
 
+	private void changeColorHeaderLabel()
+	{
+		synchronized (DEFAULT_MODALITY_TYPE)
+		{
+			Thread thread = new Thread()
+			{
+				public void run()
+				{
+					int blue = 100;
+					int green = 100;
+					int red = 0;
+					while (true)
+					{
+						lblHeadSettings.setForeground(new Color(red, green,
+								blue));
+						try
+						{
+							Thread.sleep(50);
+							blue += 10;
+							green++;
+							if (blue > 245)
+							{
+								blue = 0;
+							}
+							if (green > 100)
+							{
+								green = 0;
+							}
+
+						}
+						catch (InterruptedException e)
+						{
+							Logging.writeErrorMessage("Label Coloring StartView does not work");
+						}
+					}
+				}
+			};
+
+			thread.start();
+		}
+
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -79,6 +127,8 @@ public class StartSettingsWindow extends JDialog
 	{
 		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		frmSettings = new JFrame();
+		frmSettings.setIconImage(Toolkit.getDefaultToolkit().getImage(
+				StartSettingsWindow.class.getResource("/img/settings-24.png")));
 		frmSettings.setResizable(false);
 		frmSettings.setTitle(languageView
 				.getResourceString(LanguageView.SETTINGS));
@@ -87,27 +137,27 @@ public class StartSettingsWindow extends JDialog
 
 		txtIPAddress = new JTextField();
 		txtIPAddress.setText(startViewSettingsData.getIpAddress());
-		txtIPAddress.setBounds(149, 7, 133, 27);
+		txtIPAddress.setBounds(182, 79, 133, 27);
 		frmSettings.getContentPane().add(txtIPAddress);
 		txtIPAddress.setColumns(10);
 
 		spinnerPort = new JSpinner();
 		spinnerPort.setModel(new SpinnerNumberModel(8000, 8000, 8500, 1));
-		spinnerPort.setBounds(149, 49, 63, 28);
+		spinnerPort.setBounds(182, 121, 63, 28);
 		frmSettings.getContentPane().add(spinnerPort);
 		spinnerPort.setValue(Integer.parseInt(startViewSettingsData.getPort()));
 
 		lblIpAddress = new JLabel(
 				languageView.getResourceString(LanguageView.IP_ADDRESS));
-		lblIpAddress.setBounds(27, 4, 73, 35);
+		lblIpAddress.setBounds(40, 71, 73, 35);
 		frmSettings.getContentPane().add(lblIpAddress);
 
 		lblPort = new JLabel(languageView.getResourceString(LanguageView.PORT));
-		lblPort.setBounds(27, 42, 73, 35);
+		lblPort.setBounds(40, 109, 73, 35);
 		frmSettings.getContentPane().add(lblPort);
 
 		lblHost = new JLabel("Host");
-		lblHost.setBounds(27, 83, 73, 35);
+		lblHost.setBounds(40, 155, 73, 35);
 		frmSettings.getContentPane().add(lblHost);
 
 		chckbxNewCheckBox = new JCheckBox("");
@@ -119,28 +169,28 @@ public class StartSettingsWindow extends JDialog
 		{
 			chckbxNewCheckBox.setSelected(false);
 		}
-		chckbxNewCheckBox.setBounds(149, 95, 21, 23);
+		chckbxNewCheckBox.setBounds(182, 166, 21, 23);
 		frmSettings.getContentPane().add(chckbxNewCheckBox);
 
 		lblLevel = new JLabel(
 				languageView.getResourceString(LanguageView.LEVEL));
-		lblLevel.setBounds(27, 132, 73, 35);
+		lblLevel.setBounds(40, 208, 73, 35);
 		frmSettings.getContentPane().add(lblLevel);
 
 		spinnerLevel = new JSpinner();
 		spinnerLevel.setModel(new SpinnerNumberModel(1, 1, 3, 1));
-		spinnerLevel.setBounds(149, 139, 63, 28);
+		spinnerLevel.setBounds(182, 211, 63, 28);
 		frmSettings.getContentPane().add(spinnerLevel);
 
 		lblLanguage = new JLabel(
 				languageView.getResourceString(LanguageView.LANGUAGE));
-		lblLanguage.setBounds(27, 188, 73, 35);
+		lblLanguage.setBounds(40, 255, 73, 35);
 		frmSettings.getContentPane().add(lblLanguage);
 
 		comboBox = new JComboBox<String>();
 		comboBox.addItem("ENGLISH");
 		comboBox.addItem("DEUTSCH");
-		comboBox.setBounds(149, 192, 133, 26);
+		comboBox.setBounds(182, 264, 133, 26);
 
 		if (this.startViewSettingsData.getLanguage().equals(
 				LanguageView.ENGLISH))
@@ -150,7 +200,7 @@ public class StartSettingsWindow extends JDialog
 		frmSettings.getContentPane().add(comboBox);
 
 		btnSave = new JButton(languageView.getResourceString(LanguageView.SAVE));
-		btnSave.setBounds(27, 241, 100, 28);
+		btnSave.setBounds(38, 313, 100, 28);
 
 		// add didi
 		frmSettings.addWindowListener(new WindowListener()
@@ -203,6 +253,7 @@ public class StartSettingsWindow extends JDialog
 			}
 		});
 		btnSave.setMnemonic(KeyEvent.VK_S);
+
 		btnSave.addKeyListener(new KeyListener()
 		{
 			public void keyPressed(KeyEvent e)
@@ -246,9 +297,18 @@ public class StartSettingsWindow extends JDialog
 			}
 		});
 		frmSettings.getContentPane().add(btnSave);
-		frmSettings.setBounds(100, 100, 354, 303);
+
+		lblHeadSettings = new JLabel("SETTINGS");
+		lblHeadSettings.setIcon(new ImageIcon(StartSettingsWindow.class
+				.getResource("/img/settings-24.png")));
+		lblHeadSettings.setFont(new Font("Segoe Script", Font.BOLD
+				| Font.ITALIC, 26));
+		lblHeadSettings.setBounds(93, 16, 200, 50);
+		frmSettings.getContentPane().add(lblHeadSettings);
+		frmSettings.setBounds(100, 100, 387, 424);
 
 		frmSettings.setVisible(true);
+		changeColorHeaderLabel();
 	}
 
 	private void saveSettingsIfValideAndWriteToFile()

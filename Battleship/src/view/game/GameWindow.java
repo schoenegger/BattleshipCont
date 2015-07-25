@@ -344,9 +344,45 @@ public class GameWindow extends JDialog
 
 	public void refreshByMouseMove(int x, int y)
 	{
+		String align;
 		this.lblXY.setText("X: " + x + " Y: " + y);
 		this.lblXY.revalidate();
-		// this.drawPanel.re
+
+		if (rdbtnHorizontal.isSelected())
+			align = "horizontal";
+		else
+			align = "vertical";
+
+		this.drawPanel.setMouseCourser(x, y, getShipTypeFromComboBox(), align);
+		this.drawPanel.repaint();
+		refresh();
+	}
+
+	public void MouseClickToGameView()
+	{
+		textField.setText(this.drawPanel.getCurrentMousePosition());
+	}
+
+	private ShipType getShipTypeFromComboBox()
+	{
+		String itemCombBox = this.comboBox.getSelectedItem().toString();
+
+		switch (itemCombBox.toLowerCase())
+		{
+		case "destroyer" :
+			return ShipType.DESTROYER;
+
+		case "aircarrier" :
+			return ShipType.AIRCARRIER;
+
+		case "yellowsubmarine" :
+			return ShipType.YELLOW_SUBMARINE;
+
+		default :
+			return ShipType.AIRCARRIER;
+
+		}
+
 	}
 
 	private Ship createShipByPositionAndName(int x, int y,
@@ -395,4 +431,5 @@ public class GameWindow extends JDialog
 	{
 		drawPanel.setEnemyField(enemyField);
 	}
+
 }

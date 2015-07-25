@@ -45,7 +45,7 @@ public class FieldElement
 
 	public boolean isAvailableToSetShip()
 	{
-		return isOwnFieldElement & isAvailableToSetShip & isPossibleField;
+		return isOwnFieldElement & isPossibleField;
 	}
 
 	public boolean isAvailableToAttac()

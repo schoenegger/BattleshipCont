@@ -15,6 +15,7 @@ public class Field
 	private FieldElement[][] fieldElemtens;
 	private boolean isOwnField = false;
 	private boolean isFieldInit = false;
+	private boolean isShipSettingPossible = false;
 
 	// Array of FieldElements 10x10--??
 
@@ -256,41 +257,49 @@ public class Field
 	{
 		ShipPosition shipPos = new ShipPosition(new Point(x, y), align);
 		// +1 is number of next ship
-		Ship ship = new Ship(shipPos, type, shipsOnField.size() + 1);
-
+		Ship ship = new Ship(shipPos, type, shipsOnField.size() + 1, align);
+		isShipSettingPossible = true;
 		unmarkFields();
 
-		if (!isOwnField && IsValidAttacPosition(x, y))
-		{
-			fieldElemtens[x][y].isAvailableToAttac();
-			fieldElemtens[x][y].setisPossibleField(true);
-			return;
-		}
-		else if (isOwnField && IsValidAttacPosition(x, y) && !isFieldInit)
+		if (isOwnField && IsValidAttacPosition(x, y) && !isFieldInit)
 		{
 			if (checkAroundShipPosition(ship))
 			{
 				if (align.equals("horizontal"))
 				{
-					for (int i = x; i < ship.getCountSector(); i++)
+					for (int i = x; i < (x + ship.getCountSector()); i++)
 					{
 						if (i >= 0 && i <= 9 && y >= 0 && y <= 9)
 						{
 							fieldElemtens[i][y].setisPossibleField(true);
 						}
+						else
+						{
+							isShipSettingPossible = false;
+						}
 					}
 				}
 				else
 				{
-					for (int i = y; i < ship.getCountSector(); i++)
+					for (int i = y; i < (y + ship.getCountSector()); i++)
 					{
 						if (x >= 0 && x <= 9 && i >= 0 && i <= 9)
 						{
 							fieldElemtens[x][i].setisPossibleField(true);
 						}
+						else
+						{
+							isShipSettingPossible = false;
+						}
 					}
 				}
 			}
+		}
+		else if (!isOwnField && IsValidAttacPosition(x, y))
+		{
+			fieldElemtens[x][y].isAvailableToAttac();
+			fieldElemtens[x][y].setisPossibleField(true);
+			return;
 		}
 	}
 
@@ -313,7 +322,7 @@ public class Field
 		return true;
 	}
 
-	private void unmarkFields()
+	public void unmarkFields()
 	{
 		for (FieldElement[] feRow : fieldElemtens)
 		{
@@ -401,6 +410,11 @@ public class Field
 
 		System.out.println(printField);
 		System.out.println(" 0 1 2 3 4 5 6 7 8 9");
+	}
+
+	public boolean isShipSettingPossiple()
+	{
+		return isShipSettingPossible & !isFieldInit;
 	}
 
 }

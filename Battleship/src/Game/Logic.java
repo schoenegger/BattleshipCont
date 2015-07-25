@@ -312,4 +312,10 @@ public class Logic
 		startView.attacShipButtonPressed();
 	}
 
+	public void mouseClickToGameView()
+	{
+		startView.mouseClickToGameView();
+
+	}
+
 }

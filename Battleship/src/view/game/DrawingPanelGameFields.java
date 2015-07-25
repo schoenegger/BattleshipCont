@@ -32,8 +32,11 @@ public class DrawingPanelGameFields extends JPanel
 	private int mouseCourserX = 0;
 	private int mouseCourserY = 0;
 	private ShipType currShipType = ShipType.AIRCARRIER;
-	private String align = "";
+	private String align = "horizontal";
+	private int currMousePosX = 5;
+	private int currMousePosY = 5;
 
+	private final Color ATTAC_COLOR = Color.red;
 	private final Color NOT_VALID_COLOR = Color.gray;
 	private final Color VALID_COLOR = Color.green;
 	private final Color DEFAULT_FOREGROUND = new Color(0, 0, 255);
@@ -58,12 +61,18 @@ public class DrawingPanelGameFields extends JPanel
 		// graphic.drawString(
 	}
 
-	private void setMouseCourser(int x, int y, ShipType type, String align)
+	public void setMouseCourser(int x, int y, ShipType type, String align)
 	{
 		mouseCourserX = x;
 		mouseCourserY = y;
 		currShipType = type;
 		this.align = align;
+
+	}
+
+	public String getCurrentMousePosition()
+	{
+		return currMousePosX + "," + currMousePosY;
 	}
 
 	@Override
@@ -127,16 +136,55 @@ public class DrawingPanelGameFields extends JPanel
 			{
 				if (courserIsInField(startX, startY, widthReck, heightReck))
 				{
-					gameField.setPossibleFields();
+					currMousePosX = i;
+					currMousePosY = j;
+
+					gameField.setPossibleFields(i, j, currShipType, align);
+
 				}
-				if (false)
+				// ***If own ship in INIT MODE****************
+				if (gameField.getFieldElement(i, j).isOwn()
+						&& gameField.getFieldElement(i, j)
+								.isAvailableToSetShip())
 				{
-					graphic.setPaint(NOT_VALID_COLOR);
-					graphic.fill(new Rectangle2D.Double(startX, startY,
-							widthReck, heightReck));
+
+					if (gameField.isShipSettingPossiple())
+					{
+						drawFilledRectangle(widthReck, heightReck, startX,
+								startY, VALID_COLOR);
+					}
+					else
+					{
+						drawFilledRectangle(widthReck, heightReck, startX,
+								startY, NOT_VALID_COLOR);
+					}
+				}
+				// ******************************************
+
+				else if ((!gameField.getFieldElement(i, j).isOwn())
+						&& (ownField.isFieldInit()))
+				{
+					if (gameField.getFieldElement(i, j).isAvailableToAttac())
+					{
+						drawFilledRectangle(widthReck, heightReck, startX,
+								startY, ATTAC_COLOR);
+					}
+					else
+					{
+						graphic.setPaint(DEFAULT_FOREGROUND);
+						graphic.draw(new Rectangle2D.Double(startX, startY,
+								widthReck, heightReck));
+					}
+					// else
+					// {
+					// drawFilledRectangle(widthReck, heightReck, startX,
+					// startY, NOT_VALID_COLOR);
+					// }
+
 				}
 				else
 				{
+					graphic.setPaint(DEFAULT_FOREGROUND);
 					graphic.draw(new Rectangle2D.Double(startX, startY,
 							widthReck, heightReck));
 				}
@@ -157,14 +205,23 @@ public class DrawingPanelGameFields extends JPanel
 			startX = this.getWidth() * factorStartX;
 			startY += heightReck;
 		}
+		gameField.unmarkFields();
+	}
+
+	private void drawFilledRectangle(double widthReck, double heightReck,
+			double startX, double startY, Color color)
+	{
+		graphic.setPaint(color);
+		graphic.fill(new Rectangle2D.Double(startX, startY, widthReck,
+				heightReck));
 	}
 
 	private boolean courserIsInField(double startX, double startY,
 			double widthReck, double heightReck)
 	{
 		boolean isInField = true;
-		isInField &= ((mouseCourserX > (int) startX) && (mouseCourserX < ((int) startX + widthReck)));
-		isInField &= ((mouseCourserY > (int) startY) && (mouseCourserY < ((int) startY + heightReck)));
+		isInField &= ((mouseCourserX > (int) startX) && (mouseCourserX < (int) (startX + widthReck)));
+		isInField &= ((mouseCourserY > (int) startY) && (mouseCourserY < (int) (startY + heightReck)));
 		return isInField;
 	}
 

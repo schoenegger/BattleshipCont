@@ -51,6 +51,30 @@ public class Ship
 
 	}
 
+	public Ship(ShipPosition shipPosition, ShipType type, int ShipNumber,
+			String align)
+	{
+
+		this.shipPosition = shipPosition;
+		this.shipType = type;
+		this.number = ShipNumber;
+		this.align = align;
+
+		switch (this.shipType)
+		{
+		case AIRCARRIER :
+			countSector = 5;
+			break;
+		case DESTROYER :
+			countSector = 4;
+			break;
+		default :
+			countSector = 3;
+			break;
+		}
+
+	}
+
 	/**
 	 * generate the transfere strigt
 	 * 
@@ -117,7 +141,8 @@ public class Ship
 		{
 			int y = (int) shipPosition.getXyPosition().getY();
 
-			for (int x = (int) shipPosition.getXyPosition().getX(); x < this.countSector; x++)
+			int xStart = (int) shipPosition.getXyPosition().getX();
+			for (int x = xStart; x < (xStart + this.countSector); x++)
 			{
 
 				addToListReservedFieldsAroundPosition(list, y, x);
@@ -129,7 +154,8 @@ public class Ship
 		{
 			int x = (int) shipPosition.getXyPosition().getX();
 
-			for (int y = (int) shipPosition.getXyPosition().getY(); y < this.countSector; y++)
+			int yStart = (int) shipPosition.getXyPosition().getY();
+			for (int y = yStart; y < (yStart + this.countSector); y++)
 			{
 
 				addToListReservedFieldsAroundPosition(list, y, x);
