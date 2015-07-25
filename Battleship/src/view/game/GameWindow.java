@@ -108,7 +108,7 @@ public class GameWindow extends JDialog
 		frmSettings = new JFrame();
 		frmSettings.getContentPane().setBackground(new Color(135, 206, 235));
 		frmSettings.setBackground(SystemColor.inactiveCaption);
-		frmSettings.setMinimumSize(new Dimension(1500, 1000));
+		frmSettings.setMinimumSize(new Dimension(1500, 850));
 		frmSettings.setResizable(true);
 		frmSettings.setTitle("Game Field");
 
