@@ -34,7 +34,7 @@ public class CpuPlayer
 	 */
 	public void sendCommand(Command command)
 	{
-		cpuPlayerLogic.sendCommand(command);
+		cpuPlayerLogic.sendCommandToCpuLogic(command);
 	}
 
 }

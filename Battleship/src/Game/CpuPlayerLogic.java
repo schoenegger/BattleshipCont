@@ -39,7 +39,7 @@ public class CpuPlayerLogic
 		return actualCommand;
 	}
 
-	public void sendCommand(Command command)
+	public void sendCommandToCpuLogic(Command command)
 	{
 		if (command == null)
 		{
