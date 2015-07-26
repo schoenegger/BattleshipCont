@@ -267,6 +267,7 @@ public class GameWindow extends JDialog
 			int x = Integer.parseInt(points[0]);
 			int y = Integer.parseInt(points[1]);
 
+<<<<<<< HEAD
 			if (checkIfPositionIsAvailableAndCreateCurrentShip(x, y, comboBox
 					.getSelectedItem().toString()))
 			{
@@ -398,6 +399,139 @@ public class GameWindow extends JDialog
 		else
 		{
 			shipAlignment = "vertical";
+=======
+			if (checkIfPositionIsAvailable(x, y, comboBox.getSelectedItem()
+					.toString()))
+			{
+				setShipToField();
+			}
+		}
+	}
+
+	private void startGame()
+	{
+		// refStartView.buildConnection();
+		refStartView.setInitFieldInLogic(this.refOwnField);
+		this.disableInitButtonsAndEnableAttacButtons();
+	}
+
+	private void disableInitButtonsAndEnableAttacButtons()
+	{
+		comboBox.setVisible(false);
+		rdbtnHorizontal.setVisible(false);
+		rdbtnVertical.setVisible(false);
+		btnSetShip.setVisible(false);
+		btnAttack.setEnabled(true);
+		btnExit.setEnabled(true);
+	}
+
+	private void setShipToField()
+	{
+		refOwnField.setShipOnField(currShipToSet);
+		refresh();
+	}
+
+	// function also creates ship
+	private boolean checkIfPositionIsAvailable(int x, int y,
+			String shipFromCombobox)
+	{
+		boolean posAvailable = true;
+
+		currShipToSet = createShipByPositionAndName(x, y, shipFromCombobox);
+		posAvailable &= refOwnField.checkIfPositionIsInField(x, y);
+		posAvailable &= refOwnField.canSetShip(currShipToSet);
+
+		return posAvailable;
+	}
+
+	public void refreshAttacTextField(String attacFieldText)
+	{
+		textField.getText();
+		this.textField.setText(attacFieldText);
+	}
+
+	/************** general help functions ************/
+
+	private boolean checkIfPositionTextIsValid(String positionText)
+	{
+		return true;
+	}
+
+	public void sendMessge(String message)
+	{
+		lblMessages.setText(message);
+
+		lblMessages.repaint();
+
+		lblMessages.revalidate();
+		JOptionPane.showMessageDialog(null, message, "test",
+				JOptionPane.OK_CANCEL_OPTION);
+		refresh();
+
+	}
+
+	private void refresh()
+	{
+		frmSettings.repaint();
+		frmSettings.revalidate();
+	}
+
+	public void refreshByMouseMove(int x, int y)
+	{
+		String align;
+		this.lblXY.setText("X: " + x + " Y: " + y);
+		this.lblXY.revalidate();
+
+		if (rdbtnHorizontal.isSelected())
+			align = "horizontal";
+		else
+			align = "vertical";
+
+		this.drawPanel.setMouseCourser(x, y, getShipTypeFromComboBox(), align);
+		this.drawPanel.repaint();
+		refresh();
+	}
+
+	public void MouseClickToGameView()
+	{
+		textField.setText(this.drawPanel.getCurrentMousePosition());
+	}
+
+	private ShipType getShipTypeFromComboBox()
+	{
+		String itemCombBox = this.comboBox.getSelectedItem().toString();
+
+		switch (itemCombBox.toLowerCase())
+		{
+		case "destroyer" :
+			return ShipType.DESTROYER;
+
+		case "aircarrier" :
+			return ShipType.AIRCARRIER;
+
+		case "yellowsubmarine" :
+			return ShipType.YELLOW_SUBMARINE;
+
+		default :
+			return ShipType.AIRCARRIER;
+
+		}
+
+	}
+
+	private Ship createShipByPositionAndName(int x, int y,
+			String shipFromCombobox)
+	{
+		String shipAlignment = "";
+
+		if (rdbtnHorizontal.isSelected())
+		{
+			shipAlignment = " HORIZONTAL";
+		}
+		else
+		{
+			shipAlignment = "VERTICAL";
+>>>>>>> branch 'Battle' of https://github.com/schoenegger/BattleshipCont.git
 		}
 
 		ShipPosition shipPos = new ShipPosition(new Point(x, y), shipAlignment);

@@ -206,10 +206,15 @@ public class StartSettingsWindow extends JDialog
 
 		refGameLogic.getgameSoundPlayer().addActionListener(
 				this.viewSettingsListener);
+<<<<<<< HEAD
 		frmSettings.addWindowListener(viewSettingsListener);
 
 		btnSave.setMnemonic(KeyEvent.VK_S);
 
+=======
+		frmSettings.addWindowListener(this.viewSettingsListener);
+		btnSave.setMnemonic(KeyEvent.VK_S);
+>>>>>>> branch 'Battle' of https://github.com/schoenegger/BattleshipCont.git
 		btnSave.addKeyListener(this.viewSettingsListener);
 		btnSave.addActionListener(this.viewSettingsListener);
 		btnSave.setActionCommand(Definitions.SAVE_BUTTON_START_SETTINGS_VIEW);
