@@ -318,4 +318,24 @@ public class Logic
 
 	}
 
+	// ************* Commands To Logic from startSettingsWindow*************
+	public void stopBackGroundSounds()
+	{
+		gameSoundPlayer.stopBackGroundSounds();
+	}
+
+	public void startBackgroundSound(String wavFilename)
+	{
+		gameSoundPlayer.startBackgroundSound(wavFilename);
+	}
+
+	public void turnSoundOnOrOff()
+	{
+		gameSoundPlayer.turnSoundOnOrOFF();
+	}
+
+	public void startBombSound(String wavFilename)
+	{
+		gameSoundPlayer.startBombSound(wavFilename);
+	}
 }
