@@ -101,23 +101,26 @@ public class DrawingPanelGameFields extends JPanel
 		graphic.setPaint(DEFAULT_FOREGROUND);
 		graphic.drawString(fieldName, (int) startX, (int) startY - 20);
 
-		for (int i = 0; i < 10; i++)
+		for (int line = 0; line < 10; line++)
 		{
 			// change coloum
-			for (int j = 0; j < 10; j++)
+			for (int coloum = 0; coloum < 10; coloum++)
 			{
 				if (courserIsInField(startX, startY, widthReck, heightReck))
 				{
-					currMousePosX = i;
-					currMousePosY = j;
+					currMousePosX = coloum;
+					currMousePosY = line;
 
-					gameField.setPossibleFields(i, j, currShipType, align);
+					gameField.setPossibleFields(line, coloum, currShipType,
+							align);
 
 				}
+
 				// ***If own ship in INIT MODE****************
-				if (gameField.getFieldElement(i, j).isOwn()
-						&& gameField.getFieldElement(i, j)
+				if (gameField.getFieldElement(line, coloum).isOwn()
+						&& gameField.getFieldElement(line, coloum)
 								.isAvailableToSetShip())
+
 				{
 
 					if (gameField.isShipSettingPossiple())
@@ -133,11 +136,13 @@ public class DrawingPanelGameFields extends JPanel
 				}
 				// ******************************************
 
-				else if ((!gameField.getFieldElement(i, j).isOwn())
+				else if ((!gameField.getFieldElement(line, coloum).isOwn())
 						&& (ownField.isFieldInit()))
 				{
-					if (gameField.getFieldElement(i, j).isAvailableToAttac())
+					if (gameField.getFieldElement(line, coloum)
+							.isAvailableToAttac())
 					{
+
 						drawFilledRectangle(widthReck, heightReck, startX,
 								startY, ATTAC_COLOR);
 					}
@@ -147,11 +152,6 @@ public class DrawingPanelGameFields extends JPanel
 						graphic.draw(new Rectangle2D.Double(startX, startY,
 								widthReck, heightReck));
 					}
-					// else
-					// {
-					// drawFilledRectangle(widthReck, heightReck, startX,
-					// startY, NOT_VALID_COLOR);
-					// }
 
 				}
 				else
@@ -162,7 +162,7 @@ public class DrawingPanelGameFields extends JPanel
 				}
 
 				BufferedImage image = getImageByFildType(gameField
-						.getFieldElement(i, j));
+						.getFieldElement(line, coloum));
 
 				if (image != null)
 				{

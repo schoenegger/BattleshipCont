@@ -256,8 +256,10 @@ public class Field
 	public void setPossibleFields(int x, int y, ShipType type, String align)
 	{
 		ShipPosition shipPos = new ShipPosition(new Point(x, y), align);
+
 		// +1 is number of next ship
-		Ship ship = new Ship(shipPos, type, shipsOnField.size() + 1, align);
+		Ship ship = new Ship(shipPos, type, 0, align); // ship never get add to
+														// field
 		isShipSettingPossible = true;
 		unmarkFields();
 

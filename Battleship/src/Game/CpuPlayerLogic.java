@@ -31,7 +31,6 @@ public class CpuPlayerLogic
 		catch (InterruptedException e)
 		{
 			Logging.writeErrorMessage("Problem in wait Time Answer Command CPU Logic");
-
 		}
 
 		Command actualCommand = nextReturnCommand;
