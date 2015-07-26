@@ -267,8 +267,8 @@ public class GameWindow extends JDialog
 			int x = Integer.parseInt(points[0]);
 			int y = Integer.parseInt(points[1]);
 
-			if (checkIfPositionIsAvailable(x, y, comboBox.getSelectedItem()
-					.toString()))
+			if (checkIfPositionIsAvailableAndCreateCurrentShip(x, y, comboBox
+					.getSelectedItem().toString()))
 			{
 				setShipToField();
 			}
@@ -299,8 +299,8 @@ public class GameWindow extends JDialog
 	}
 
 	// function also creates ship
-	private boolean checkIfPositionIsAvailable(int x, int y,
-			String shipFromCombobox)
+	private boolean checkIfPositionIsAvailableAndCreateCurrentShip(int x,
+			int y, String shipFromCombobox)
 	{
 		boolean posAvailable = true;
 
@@ -393,11 +393,11 @@ public class GameWindow extends JDialog
 
 		if (rdbtnHorizontal.isSelected())
 		{
-			shipAlignment = " HORIZONTAL";
+			shipAlignment = "horizontal";
 		}
 		else
 		{
-			shipAlignment = "VERTICAL";
+			shipAlignment = "vertical";
 		}
 
 		ShipPosition shipPos = new ShipPosition(new Point(x, y), shipAlignment);
