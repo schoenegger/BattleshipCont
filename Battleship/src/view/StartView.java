@@ -183,13 +183,13 @@ public class StartView extends JDialog
 	public void openStartViewSettings()
 	{
 		this.startSettWindow = new StartSettingsWindow(startSettData,
-				this.languageView, refGameLogic.getgameSoundPlayer());
+				this.languageView, refGameLogic);
 	}
 
 	public void openViewGameFields()
 	{
-		this.gameWindow = new GameWindow(this, refGameLogic);
 		buildConnection(startSettData.getMode());
+		this.gameWindow = new GameWindow(this, refGameLogic);
 	}
 
 	public void openViewGameFieldsCPU()
