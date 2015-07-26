@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import logging.Logging;
 import GameUtilities.Ship;
 import GameUtilities.ShipPosition;
 import GameUtilities.ShipType;
@@ -220,25 +221,43 @@ public class Field
 			Point currShipPoint = ship.getShipPosition().getXyPosition();
 			String alignment = ship.getShipPosition().getAlignment();
 			int countSector = ship.getCountSector();
-
-			if (alignment.toLowerCase().equals("horizontal"))
+			boolean isShipInField = checkIfShipIsInField(ship);
+			if (isShipInField)
 			{
-				for (int i = 0; i < countSector; i++)
+				if (alignment.toLowerCase().equals("horizontal"))
 				{
-					fieldElemtens[currShipPoint.x + i][currShipPoint.y]
-							.setTaken();
+					for (int i = 0; i < countSector; i++)
+					{
+						fieldElemtens[currShipPoint.x + i][currShipPoint.y]
+								.setTaken();
+					}
+				}
+				else
+				// Horizontal
+				{
+					for (int i = 0; i < countSector; i++)
+					{
+						fieldElemtens[currShipPoint.x][currShipPoint.y + i]
+								.setTaken();
+					}
 				}
 			}
 			else
-			// Horizontal
 			{
-				for (int i = 0; i < countSector; i++)
-				{
-					fieldElemtens[currShipPoint.x][currShipPoint.y + i]
-							.setTaken();
-				}
+				System.out.println("Field.setTaken -> Ship is not in field");
+				Logging.writeInfoMessage("Field.setTaken -> Ship is not in field");
 			}
 		}
+		if (shipsOnField.size() > 5)
+			System.out.println("all ships setTaken");
+	}
+
+	private boolean checkIfShipIsInField(Ship ship)
+	{
+		int pointX = ship.getShipPosition().getXyPosition().x;
+		int pointY = ship.getShipPosition().getXyPosition().y;
+
+		return (pointX < 10) && (pointX >= 0) && (pointY < 10) && (pointY >= 0);
 	}
 
 	public void setShipOnField(Ship ship)
@@ -267,7 +286,7 @@ public class Field
 		{
 			if (checkAroundShipPosition(ship))
 			{
-				if (align.equals("horizontal"))
+				if (align.equals("vertical"))
 				{
 					for (int i = x; i < (x + ship.getCountSector()); i++)
 					{

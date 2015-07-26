@@ -108,8 +108,8 @@ public class DrawingPanelGameFields extends JPanel
 			{
 				if (courserIsInField(startX, startY, widthReck, heightReck))
 				{
-					currMousePosX = coloum;
-					currMousePosY = line;
+					currMousePosX = line;
+					currMousePosY = coloum;
 
 					gameField.setPossibleFields(line, coloum, currShipType,
 							align);
@@ -117,6 +117,7 @@ public class DrawingPanelGameFields extends JPanel
 				}
 
 				// ***If own ship in INIT MODE****************
+
 				if (gameField.getFieldElement(line, coloum).isOwn()
 						&& gameField.getFieldElement(line, coloum)
 								.isAvailableToSetShip())
@@ -136,6 +137,8 @@ public class DrawingPanelGameFields extends JPanel
 				}
 				// ******************************************
 
+				// **************It Game is in Attac mode**********
+
 				else if ((!gameField.getFieldElement(line, coloum).isOwn())
 						&& (ownField.isFieldInit()))
 				{
@@ -154,6 +157,7 @@ public class DrawingPanelGameFields extends JPanel
 					}
 
 				}
+
 				else
 				{
 					graphic.setPaint(DEFAULT_FOREGROUND);
@@ -195,12 +199,6 @@ public class DrawingPanelGameFields extends JPanel
 		isInField &= ((mouseCourserX > (int) startX) && (mouseCourserX < (int) (startX + widthReck)));
 		isInField &= ((mouseCourserY > (int) startY) && (mouseCourserY < (int) (startY + heightReck)));
 		return isInField;
-	}
-
-	private boolean setElementPositionByMouseCouser(Field gameField)
-	{
-
-		return false;
 	}
 
 	private BufferedImage getImageByFildType(FieldElement fieldElement)

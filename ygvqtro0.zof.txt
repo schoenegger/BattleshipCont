@@ -1,0 +1,70 @@
+﻿Merge branch 'Battle' of https://github.com/schoenegger/BattleshipCont.git into Battle
+
+Conflicts:
+	Battleship/src/view/StartView.java
+	Battleship/src/view/game/GameWindow.java
+	Battleship/src/view/settings/StartSettingsWindow.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch Battle
+# Your branch and 'origin/Battle' have diverged,
+# and have 7 and 1 different commit each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   Battleship/src/view/StartView.java
+#	modified:   Battleship/src/view/game/GameWindow.java
+#	modified:   Battleship/src/view/listener/StartViewButtonListener.java
+#	modified:   Battleship/src/view/settings/StartSettingsWindow.java
+#
+# Changes not staged for commit:
+#	modified:   .gitignore
+#	modified:   Battleship/.classpath
+#	modified:   Battleship/.settings/org.eclipse.jdt.ui.prefs
+#	modified:   Battleship/bin/.gitignore
+#	modified:   Battleship/bin/GameUtilities/Field/Field.class
+#	modified:   Battleship/bin/GameUtilities/Field/FieldElement.class
+#	modified:   Battleship/bin/GameUtilities/Ship.class
+#	modified:   Battleship/bin/GameUtilities/ShipPosition.class
+#	modified:   Battleship/bin/LanguageViewStrings_DEUTSCH.properties
+#	modified:   Battleship/bin/LanguageViewStrings_ENGLISH.properties
+#	deleted:    Battleship/bin/Ring05.wav
+#	deleted:    Battleship/bin/bomb.wav
+#	modified:   Battleship/bin/configGame.txt
+#	deleted:    Battleship/bin/gameSounds/GameSoundPlayer$SoundTypes.class
+#	modified:   Battleship/bin/gameSounds/GameSoundPlayer.class
+#	deleted:    Battleship/bin/manofthehour.mp3
+#	modified:   Battleship/bin/sound_menue.wav
+#	modified:   Battleship/configFilePath
+#	modified:   Battleship/log/logfile.log
+#	modified:   Battleship/src/Game/CpuPlayer.java
+#	modified:   Battleship/src/Game/CpuPlayerLogic.java
+#	modified:   Battleship/src/Game/Frontend.java
+#	modified:   Battleship/src/Game/Game.java
+#	modified:   Battleship/src/Game/Player.java
+#	modified:   Battleship/src/GameUtilities/Field/Field.java
+#	modified:   Battleship/src/GameUtilities/Field/FieldElement.java
+#	modified:   Battleship/src/GameUtilities/Ship.java
+#	modified:   Battleship/src/GameUtilities/ShipPosition.java
+#	modified:   Battleship/src/view/StartView.java
+#	modified:   Battleship/src/view/game/DrawingPanelGameFields.java
+#	modified:   Battleship/src/view/listener/GameViewListener.java
+#	modified:   Battleship/src/view/settings/StartViewSettingData.java
+#
+# Untracked files:
+#	Battleship/Project_View_Version.ucls
+#	Battleship/bin/UnitTests/MockObjects/
+#	Battleship/bin/UnitTests/TestConnectionCommandHandler/
+#	Battleship/bin/sound_settings.wav
+#	Battleship/log/logfile.log.2015-07-25
+#
+
