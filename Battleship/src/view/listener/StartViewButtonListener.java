@@ -43,8 +43,8 @@ public class StartViewButtonListener implements ActionListener, KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		int i = 0;
-		i = 123;
+		// int i = 0;
+		// i = 123;
 		// JFrame source = (JFrame) e.getSource();
 		switch (e.getKeyCode())
 		{

@@ -6,12 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,8 +21,10 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import logging.Logging;
+import view.GlobalStrings.Definitions;
 import view.GlobalStrings.LanguageView;
 import view.listener.StartViewSettingsListener;
+import Game.Logic;
 import GameUtilities.GlobalValues;
 
 public class StartSettingsWindow extends JDialog
@@ -35,7 +32,9 @@ public class StartSettingsWindow extends JDialog
 
 	private StartViewSettingData startViewSettingsData;
 	private LanguageView languageView;
-	GameSoundPlayer gameSoundPlayer;
+	private GameSoundPlayer gameSoundPlayer;
+	private Logic refGameLogic;
+	private StartViewSettingsListener viewSettingsListener;
 
 	private JFrame frmSettings;
 	private JTextField txtIPAddress;
@@ -49,7 +48,6 @@ public class StartSettingsWindow extends JDialog
 	private JComboBox<String> comboBox;
 	private JLabel lblLanguage;
 	private JButton btnSave;
-	private StartViewSettingsListener viewSettListener;
 	private JLabel lblHeadSettings;
 
 	/**
@@ -57,23 +55,16 @@ public class StartSettingsWindow extends JDialog
 	 * 
 	 * @wbp.parser.constructor
 	 */
-	// Add Didi
 	public StartSettingsWindow(StartViewSettingData startSettData,
-			LanguageView languageView, GameSoundPlayer gameSoundPlayer)
+			LanguageView languageView, Logic refLogic)
 	{
 		this.languageView = languageView;
-		this.viewSettListener = new StartViewSettingsListener();
 		startViewSettingsData = startSettData;
-		this.gameSoundPlayer = gameSoundPlayer;
-		initialize();
-	}
-
-	public StartSettingsWindow(StartViewSettingData startSettData,
-			LanguageView languageView)
-	{
-		this.languageView = languageView;
-		this.viewSettListener = new StartViewSettingsListener();
-		startViewSettingsData = startSettData;
+		this.refGameLogic = refLogic;
+		this.viewSettingsListener = new StartViewSettingsListener(refGameLogic,
+				this);
+		this.gameSoundPlayer = refLogic.getgameSoundPlayer();
+		// this.gameSoundPlayer = gameSoundPlayer;
 		initialize();
 	}
 
@@ -192,8 +183,8 @@ public class StartSettingsWindow extends JDialog
 		comboBox.addItem("DEUTSCH");
 		comboBox.setBounds(182, 264, 133, 26);
 
-		if (this.startViewSettingsData.getLanguage().equals(
-				LanguageView.ENGLISH))
+		if (this.startViewSettingsData.getLanguage().toLowerCase()
+				.equals(LanguageView.ENGLISH.toLowerCase()))
 			comboBox.setSelectedIndex(0);
 		else
 			comboBox.setSelectedIndex(1);
@@ -202,100 +193,25 @@ public class StartSettingsWindow extends JDialog
 		btnSave = new JButton(languageView.getResourceString(LanguageView.SAVE));
 		btnSave.setBounds(38, 313, 100, 28);
 
-		// add didi
-		frmSettings.addWindowListener(new WindowListener()
-		{
+		// gameSoundPlayer.setMnemonic(KeyEvent.VK_M);
+		// gameSoundPlayer.setActionCommand(Definitions.TURN_MUSIC_ON_OFF);
+		// Listener adds
+		// gameSoundPlayer.addActionListener(this.viewSettingsListener);
+		refGameLogic.getgameSoundPlayer().setMnemonic(KeyEvent.VK_M);
+		refGameLogic.getgameSoundPlayer().setActionCommand(
+				Definitions.TURN_MUSIC_ON_OFF);
+		txtIPAddress.addKeyListener(this.viewSettingsListener);
+		chckbxNewCheckBox.addKeyListener(this.viewSettingsListener);
+		comboBox.addKeyListener(this.viewSettingsListener);
 
-			@Override
-			public void windowOpened(WindowEvent e)
-			{
-				gameSoundPlayer.stopBackGroundSounds();
-				gameSoundPlayer
-						.startBackgroundSound(GameSoundPlayer.SOUND_SETTING_WAV);
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e)
-			{
-
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e)
-			{
-
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e)
-			{
-
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e)
-			{
-				gameSoundPlayer.stopBackGroundSounds();
-				gameSoundPlayer
-						.startBackgroundSound(GameSoundPlayer.SOUND_MENUE_WAV);
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e)
-			{
-
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e)
-			{
-
-			}
-		});
+		refGameLogic.getgameSoundPlayer().addActionListener(
+				this.viewSettingsListener);
+		frmSettings.addWindowListener(this.viewSettingsListener);
 		btnSave.setMnemonic(KeyEvent.VK_S);
-
-		btnSave.addKeyListener(new KeyListener()
-		{
-			public void keyPressed(KeyEvent e)
-			{
-				if (e.getKeyCode() == KeyEvent.VK_ENTER
-						&& btnSave.isFocusOwner() == true)
-				{
-					saveSettingsIfValideAndWriteToFile();
-				}
-				else if (e.getKeyCode() == KeyEvent.VK_S)
-				{
-					saveSettingsIfValideAndWriteToFile();
-				}
-				else if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-				{
-					gameSoundPlayer.stopBackGroundSounds();
-					gameSoundPlayer
-							.startBackgroundSound(GameSoundPlayer.SOUND_MENUE_WAV);
-					frmSettings.dispose();
-				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent arg0)
-			{
-
-			}
-
-			@Override
-			public void keyTyped(KeyEvent arg0)
-			{
-
-			}
-
-		});
-		btnSave.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				saveSettingsIfValideAndWriteToFile();
-			}
-		});
+		btnSave.addKeyListener(this.viewSettingsListener);
+		btnSave.addActionListener(this.viewSettingsListener);
+		btnSave.setActionCommand(Definitions.SAVE_BUTTON_START_SETTINGS_VIEW);
+		frmSettings.getContentPane().add(refGameLogic.getgameSoundPlayer());
 		frmSettings.getContentPane().add(btnSave);
 
 		lblHeadSettings = new JLabel("SETTINGS");
@@ -308,10 +224,11 @@ public class StartSettingsWindow extends JDialog
 		frmSettings.setBounds(100, 100, 387, 424);
 
 		frmSettings.setVisible(true);
+		btnSave.requestFocus();
 		changeColorHeaderLabel();
 	}
 
-	private void saveSettingsIfValideAndWriteToFile()
+	public void saveSettingsIfValidAndWriteToFile()
 	{
 		if (checkIfSettingAreValid())
 		{
@@ -346,6 +263,16 @@ public class StartSettingsWindow extends JDialog
 		return true;
 	}
 
+	public boolean focusOnBtnSave()
+	{
+		return btnSave.isFocusOwner();
+	}
+
+	public void closeWindow()
+	{
+		frmSettings.dispose();
+	}
+
 	private String getHostState()
 	{
 		if (chckbxNewCheckBox.isSelected())
@@ -357,4 +284,5 @@ public class StartSettingsWindow extends JDialog
 			return "client";
 		}
 	}
+
 }

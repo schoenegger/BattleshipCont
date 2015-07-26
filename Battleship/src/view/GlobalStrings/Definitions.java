@@ -13,4 +13,6 @@ public class Definitions
 	public final static String SAVE_BUTTON_START_SETTINGS_VIEW = "SaveButtonStartSettingsView";
 	public final static String BUTTON_SET_SHIP = "ButtonSetShip";
 	public final static String BUTTON_ATTAC = "ButtonAttac";
+
+	public final static String TURN_MUSIC_ON_OFF = "TurnMusicOnOff";
 }
