@@ -4,18 +4,17 @@ import java.awt.Point;
 
 import logging.Logging;
 import GameUtilities.Command;
-import GameUtilities.Ship;
-import GameUtilities.ShipPosition;
-import GameUtilities.ShipType;
 import GameUtilities.AttackPosition.AttackPosition;
 import GameUtilities.Field.Field;
 
 public class CpuPlayerLogic
 {
 
-	Field ownField = new Field();
-	Field enemyField = new Field();
-	Command nextReturnCommand;
+	private Field ownField = new Field();
+	private Field enemyField = new Field();
+	private Command nextReturnCommand;
+	private CpuGameHandler cpuGameHandler;
+	private int level;
 
 	public CpuPlayerLogic()
 	{
@@ -43,14 +42,14 @@ public class CpuPlayerLogic
 	{
 		if (command == null)
 		{
-			System.out.println("send command Cpu PlayerLogic null objectCPU");
+			Logging.writeInfoMessage("send command Cpu PlayerLogic null objectCPU");
 		}
 
 		if (isCommandInitField(command))
 		{
 			setEnemyField(command);
 			setShipsOnOwnField();
-			nextReturnCommand = buildFieldCommand();
+			nextReturnCommand = buildFieldCommandByOwnField();
 		}
 		else if (isCommandAttacCommand(command))
 		{
@@ -60,7 +59,7 @@ public class CpuPlayerLogic
 		}
 	}
 
-	private Command buildFieldCommand()
+	private Command buildFieldCommandByOwnField()
 	{
 		Command fieldCommand = new Command(1, ownField, "INIT_FIELD");
 
@@ -125,29 +124,37 @@ public class CpuPlayerLogic
 
 	private void setShipsOnOwnField()
 	{
+		this.cpuGameHandler = new CpuGameHandler(level, enemyField);
+		ownField = cpuGameHandler.getInitField();
+
 		// TODO Random!
 		// simple ship init for Alpha Version
-		Ship ship1 = new Ship(new ShipPosition(new Point(2, 2), "HORIZONTAL"),
-				ShipType.DESTROYER, 1);
-		Ship ship2 = new Ship(new ShipPosition(new Point(4, 3), "HORIZONTAL"),
-				ShipType.DESTROYER, 1);
-		Ship ship3 = new Ship(new ShipPosition(new Point(1, 3), "HORIZONTAL"),
-				ShipType.YELLOW_SUBMARINE, 1);
-		Ship ship4 = new Ship(new ShipPosition(new Point(2, 5), "VERTICAL"),
-				ShipType.YELLOW_SUBMARINE, 1);
-		Ship ship5 = new Ship(new ShipPosition(new Point(3, 4), "VERTICAL"),
-				ShipType.AIRCARRIER, 1);
-		Ship ship6 = new Ship(new ShipPosition(new Point(1, 4), "VERTICAL"),
-				ShipType.AIRCARRIER, 1);
+		// Ship ship1 = new Ship(new ShipPosition(new Point(2, 2),
+		// "HORIZONTAL"),
+		// ShipType.DESTROYER, 1);
+		// Ship ship2 = new Ship(new ShipPosition(new Point(4, 3),
+		// "HORIZONTAL"),
+		// ShipType.DESTROYER, 1);
+		// Ship ship3 = new Ship(new ShipPosition(new Point(1, 3),
+		// "HORIZONTAL"),
+		// ShipType.YELLOW_SUBMARINE, 1);
+		// Ship ship4 = new Ship(new ShipPosition(new Point(2, 5), "VERTICAL"),
+		// ShipType.YELLOW_SUBMARINE, 1);
+		// Ship ship5 = new Ship(new ShipPosition(new Point(3, 4), "VERTICAL"),
+		// ShipType.AIRCARRIER, 1);
+		// Ship ship6 = new Ship(new ShipPosition(new Point(1, 4), "VERTICAL"),
+		// ShipType.AIRCARRIER, 1);
+		//
 
-		ownField.setShipOnField(ship1);
-		ownField.setShipOnField(ship2);
-		ownField.setShipOnField(ship3);
-		ownField.setShipOnField(ship4);
-		ownField.setShipOnField(ship5);
-		ownField.setShipOnField(ship6);
+		// ownField.setShipOnField(ship1);
+		// ownField.setShipOnField(ship2);
+		// ownField.setShipOnField(ship3);
+		// ownField.setShipOnField(ship4);
+		// ownField.setShipOnField(ship5);
+		// ownField.setShipOnField(ship6);
+		//
 
-		ownField.setTaken();
+		// ownField.setTaken();
 	}
 
 }
