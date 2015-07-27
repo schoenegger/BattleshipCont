@@ -1,5 +1,6 @@
 package GameUtilities;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Ship
 	private ShipType shipType;
 	private ShipPosition shipPosition;
 	private String align;
-	private int countSector;
+	private int countSector = 3;
 	private int number;
 	private boolean isAlive = true;
 	private List<int[]> coordinatesReservatedFields;
@@ -76,7 +77,7 @@ public class Ship
 	}
 
 	/**
-	 * generate the transfere strigt
+	 * generate the transfer string
 	 * 
 	 * @return String
 	 */
@@ -125,6 +126,11 @@ public class Ship
 	public ShipPosition getShipPosition()
 	{
 		return this.shipPosition;
+	}
+
+	public void setShipPosition(Point xy, String alignment)
+	{
+		this.shipPosition = new ShipPosition(xy, alignment);
 	}
 
 	public ShipType getType()

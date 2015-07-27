@@ -230,7 +230,7 @@ public class Field
 				}
 			}
 			else
-			// Horizontal
+
 			{
 				for (int i = 0; i < countSector; i++)
 				{
