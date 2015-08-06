@@ -1,0 +1,99 @@
+2015-08-03 19:00:03,812  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 19:03:50,489  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 19:10:49,937  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 19:12:28,076  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 19:13:17,529 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Game Window -> no valid Input
+2015-08-03 22:04:03,149  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:05:03,273  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:05:53,782  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:07:17,370  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:08:39,087  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:08:48,967  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-03 22:08:56,288  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-03 22:23:35,099  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:27:23,119  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:44:33,823  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:45:18,526  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:47:32,967  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:47:36,210  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:47:45,135  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 22:49:28,209  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:45:01,013  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:45:04,163 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - LogView -> cannot read from Textfile
+2015-08-03 23:45:11,414 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - LogView -> cannot read from Textfile
+2015-08-03 23:45:11,845 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - LogView -> cannot read from Textfile
+2015-08-03 23:46:32,590  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:46:34,586 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - LogView -> cannot read from Textfile
+2015-08-03 23:47:49,128  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:49:25,387  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:51:07,672  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:52:25,159  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:52:55,069  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-03 23:52:57,650  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-03 23:52:57,831  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-03 23:52:58,031  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-03 23:52:58,201  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-03 23:53:36,723  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:56:04,749  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:56:52,996  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-03 23:58:59,331  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 00:24:59,435  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:00:07,574  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:07:50,923  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:12:36,638  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:13:18,791  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:15:36,801  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:20:00,062  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:51:44,386  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:51:51,802  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 20:51:59,603  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 20:52:11,568  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 20:52:18,408  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 20:57:40,681  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 21:01:46,272  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 21:02:51,307  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 21:04:30,274  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 21:06:46,171  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 21:18:40,970  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 21:25:09,601  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 21:25:52,871 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Game Window -> no valid Input
+2015-08-04 21:45:01,127  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 21:47:27,717  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:00:32,138  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:47:17,393  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:48:24,683  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:48:31,968  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:48:39,218  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:52:12,902  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:52:15,362  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:52:17,523  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:52:26,878  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:52:32,488  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:52:37,084 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command
+2015-08-04 22:52:37,084 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command
+2015-08-04 22:56:31,353  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:57:00,706  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:57:07,566  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:57:08,707  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:57:10,518  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:57:20,453  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:57:23,713  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:57:25,719 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command
+2015-08-04 22:57:25,729 ERROR [Thread-7] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command
+2015-08-04 22:58:49,048  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:58:56,328  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:58:58,329  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:59:04,564  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 22:59:07,584  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 22:59:09,578 ERROR [Thread-7] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command
+2015-08-04 22:59:09,588 ERROR [Thread-7] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command
+2015-08-04 23:00:01,105  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 23:00:06,455  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 23:00:12,480  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 23:00:16,720  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 23:04:17,940 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command
+2015-08-04 23:06:21,513  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 23:06:29,082  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-04 23:06:36,977  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-04 23:06:37,947 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Can not create connection. Please restart the Game !!!
+ Exception:java.net.BindException: Address already in use: JVM_Bind

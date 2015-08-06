@@ -1,6 +1,10 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +14,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -25,7 +26,6 @@ public class LogView
 
 	private JFrame frmLogFile;
 	private JTextArea textArea;
-	private JPanel panel;
 	private JButton btnClearLog;
 	private JButton btnSaveLog;
 
@@ -69,13 +69,16 @@ public class LogView
 		frmLogFile.getContentPane().setBackground(SystemColor.activeCaption);
 		frmLogFile.setTitle("LOG FILE");
 		frmLogFile.setBounds(100, 100, 800, 526);
-
-		JScrollPane scrollPane = new JScrollPane();
-
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
-		textArea.setEditable(false);
-		textArea.setBackground(Color.LIGHT_GRAY);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]
+		{ 87, 687, 0 };
+		gridBagLayout.rowHeights = new int[]
+		{ 23, 456, 0 };
+		gridBagLayout.columnWeights = new double[]
+		{ 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[]
+		{ 0.0, 1.0, Double.MIN_VALUE };
+		frmLogFile.getContentPane().setLayout(gridBagLayout);
 
 		btnClearLog = new JButton("Clear Log");
 		btnClearLog.addActionListener(new ActionListener()
@@ -85,58 +88,34 @@ public class LogView
 				clearTextFromLogfile();
 			}
 		});
+		GridBagConstraints gbc_btnClearLog = new GridBagConstraints();
+		gbc_btnClearLog.anchor = GridBagConstraints.NORTHEAST;
+		gbc_btnClearLog.insets = new Insets(0, 0, 5, 5);
+		gbc_btnClearLog.gridx = 0;
+		gbc_btnClearLog.gridy = 0;
+		frmLogFile.getContentPane().add(btnClearLog, gbc_btnClearLog);
 
-		JButton btnSaveLog = new JButton("Save Log");
-		GroupLayout groupLayout = new GroupLayout(frmLogFile.getContentPane());
-		groupLayout
-				.setHorizontalGroup(groupLayout
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								groupLayout
-										.createSequentialGroup()
-										.addGroup(
-												groupLayout
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addComponent(
-																scrollPane,
-																GroupLayout.PREFERRED_SIZE,
-																784,
-																GroupLayout.PREFERRED_SIZE)
-														.addGroup(
-																groupLayout
-																		.createSequentialGroup()
-																		.addContainerGap()
-																		.addComponent(
-																				btnClearLog)
-																		.addGap(10)
-																		.addComponent(
-																				btnSaveLog)))
-										.addContainerGap(
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				Alignment.LEADING)
-				.addGroup(
-						groupLayout
-								.createSequentialGroup()
-								.addGroup(
-										groupLayout
-												.createParallelGroup(
-														Alignment.BASELINE)
-												.addComponent(btnSaveLog)
-												.addComponent(btnClearLog))
-								.addGap(9)
-								.addComponent(scrollPane,
-										GroupLayout.PREFERRED_SIZE, 456,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
+		JButton btnSaveLog_1 = new JButton("Save Log");
+		GridBagConstraints gbc_btnSaveLog_1 = new GridBagConstraints();
+		gbc_btnSaveLog_1.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnSaveLog_1.insets = new Insets(0, 0, 5, 0);
+		gbc_btnSaveLog_1.gridx = 1;
+		gbc_btnSaveLog_1.gridy = 0;
+		frmLogFile.getContentPane().add(btnSaveLog_1, gbc_btnSaveLog_1);
 
-		panel = new JPanel();
-		scrollPane.setColumnHeaderView(panel);
-		panel.setLayout(null);
-		frmLogFile.getContentPane().setLayout(groupLayout);
+		JScrollPane scrollPane = new JScrollPane();
+
+		textArea = new JTextArea();
+		textArea.setAlignmentX(Component.LEFT_ALIGNMENT);
+		scrollPane.setViewportView(textArea);
+		textArea.setEditable(false);
+		textArea.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		frmLogFile.getContentPane().add(scrollPane, gbc_scrollPane);
 		frmLogFile.setVisible(true);
 	}
 
