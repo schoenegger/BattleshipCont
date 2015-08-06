@@ -36,6 +36,8 @@ public class StartViewSettingsListener implements ActionListener, KeyListener,
 		case Definitions.SAVE_BUTTON_START_SETTINGS_VIEW :
 			refSettingsWindow.saveSettingsIfValidAndWriteToFile();
 			break;
+		case Definitions.SHOW_LOG_BUTTON_START_SETTINGS_VIEW :
+			refSettingsWindow.showLogView();
 		case Definitions.TURN_MUSIC_ON_OFF :
 			refLogic.turnSoundOnOrOff();
 			break;

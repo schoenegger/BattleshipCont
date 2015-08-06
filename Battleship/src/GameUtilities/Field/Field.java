@@ -40,7 +40,15 @@ public class Field
 
 	public boolean canSetShip(Ship ship)
 	{
-		// TODO valid check
+
+		return checkIfShipIsInField(ship) && !isFieldInit
+				&& checkAroundShipPosition(ship);
+
+	}
+
+	private boolean checkAroundField()
+	{
+
 		return true;
 	}
 
@@ -117,7 +125,7 @@ public class Field
 
 	private boolean checkIfShipsListIsValid()
 	{
-		// TODO Auto-generated method stub
+
 		return true;
 	}
 
@@ -135,7 +143,6 @@ public class Field
 				}
 			}
 		}
-
 		return true;
 	}
 
@@ -150,7 +157,7 @@ public class Field
 				if (fieldElemtens[i][j].getFieldState().equals(
 						FieldState.STRIKE_SHIP))
 				{
-					// TODO maybe something more intelligent^^
+
 				}
 				if (fieldElemtens[i][j].getFieldState().equals(
 						FieldState.UNKNOWN))
@@ -167,22 +174,12 @@ public class Field
 	{
 		if (posX >= 0 && posX <= 9 && posY >= 0 && posY <= 9)
 		{
-
-			if (this.fieldElemtens[posX][posY].getFieldState().equals(
-					FieldState.UNKNOWN))
+			if (this.fieldElemtens[posX][posY].getFieldState() == FieldState.UNKNOWN)
 			{
 				return true;
 			}
-			else
-			{
-				return false;
-			}
 		}
-		else
-		{
-			return false;
-		}
-
+		return false;
 	}
 
 	// TODO maybe second fireToPosition
@@ -221,8 +218,8 @@ public class Field
 			Point currShipPoint = ship.getShipPosition().getXyPosition();
 			String alignment = ship.getShipPosition().getAlignment();
 			int countSector = ship.getCountSector();
-			boolean isShipInField = checkIfShipIsInField(ship);
-			if (isShipInField)
+
+			if (checkIfShipIsInField(ship))
 			{
 				if (alignment.toLowerCase().equals("horizontal"))
 				{
@@ -248,8 +245,7 @@ public class Field
 				Logging.writeInfoMessage("Field.setTaken -> Ship is not in field");
 			}
 		}
-		if (shipsOnField.size() > 5)
-			System.out.println("all ships setTaken");
+
 	}
 
 	private boolean checkIfShipIsInField(Ship ship)
@@ -257,18 +253,28 @@ public class Field
 		int pointX = ship.getShipPosition().getXyPosition().x;
 		int pointY = ship.getShipPosition().getXyPosition().y;
 
+		if (ship.getShipPosition().getAlignment().toLowerCase()
+				.equals("horizontal")
+				&& (pointX + ship.getCountSector()) > 10)
+			return false;
+
+		if (ship.getShipPosition().getAlignment().toLowerCase()
+				.equals("vertical")
+				&& (pointY + ship.getCountSector()) > 10)
+			return false;
+
 		return (pointX < 10) && (pointX >= 0) && (pointY < 10) && (pointY >= 0);
 	}
 
 	public void setShipOnField(Ship ship)
 	{
+		this.shipsOnField.addElement(ship);
+
 		if (shipsOnField.size() > 5)
 		{
 			isFieldInit = true;
-			return;
 		}
 
-		this.shipsOnField.addElement(ship);
 		setTaken();
 	}
 
@@ -286,7 +292,7 @@ public class Field
 		{
 			if (checkAroundShipPosition(ship))
 			{
-				if (align.equals("vertical"))
+				if (align.equals("horizontal"))
 				{
 					for (int i = x; i < (x + ship.getCountSector()); i++)
 					{
@@ -339,7 +345,6 @@ public class Field
 				return false;
 			}
 		}
-
 		return true;
 	}
 
@@ -352,6 +357,11 @@ public class Field
 				fe.setisPossibleField(false);
 			}
 		}
+	}
+
+	public boolean isShipSettingPossiple()
+	{
+		return isShipSettingPossible & !isFieldInit;
 	}
 
 	@Deprecated
@@ -431,11 +441,6 @@ public class Field
 
 		System.out.println(printField);
 		System.out.println(" 0 1 2 3 4 5 6 7 8 9");
-	}
-
-	public boolean isShipSettingPossiple()
-	{
-		return isShipSettingPossible & !isFieldInit;
 	}
 
 }

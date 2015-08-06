@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import logging.Logging;
+import view.LogView;
 import view.GlobalStrings.Definitions;
 import view.GlobalStrings.LanguageView;
 import view.listener.StartViewSettingsListener;
@@ -49,6 +50,7 @@ public class StartSettingsWindow extends JDialog
 	private JLabel lblLanguage;
 	private JButton btnSave;
 	private JLabel lblHeadSettings;
+	private JButton buttonShowLog;
 
 	/**
 	 * Create the application.
@@ -223,6 +225,14 @@ public class StartSettingsWindow extends JDialog
 				| Font.ITALIC, 26));
 		lblHeadSettings.setBounds(93, 16, 200, 50);
 		frmSettings.getContentPane().add(lblHeadSettings);
+
+		buttonShowLog = new JButton("Show Log");
+		buttonShowLog.setMnemonic(KeyEvent.VK_L);
+		buttonShowLog.addActionListener(this.viewSettingsListener);
+		buttonShowLog
+				.setActionCommand(Definitions.SHOW_LOG_BUTTON_START_SETTINGS_VIEW);
+		buttonShowLog.setBounds(182, 313, 100, 28);
+		frmSettings.getContentPane().add(buttonShowLog);
 		frmSettings.setBounds(100, 100, 387, 424);
 
 		frmSettings.setVisible(true);
@@ -287,4 +297,9 @@ public class StartSettingsWindow extends JDialog
 		}
 	}
 
+	public void showLogView()
+	{
+		LogView logView = new LogView();
+
+	}
 }

@@ -6,10 +6,11 @@ import GameUtilities.AttackPosition.AttackPosition;
 import GameUtilities.Field.Field;
 
 /**
+ * Handler for the commands between the component
+ * 
  * @author Team Schoenegger / Purkart / Koch
  *
- *
- *         Handler for the commands between the component
+ * 
  */
 
 public class CommandHandler
@@ -23,7 +24,7 @@ public class CommandHandler
 	}
 
 	/**
-	 * Send the inititalised field
+	 * Send the initialized field
 	 * 
 	 * @param initCommand
 	 *            command
@@ -37,7 +38,7 @@ public class CommandHandler
 	}
 
 	/**
-	 * Send the Attac Command
+	 * Send the Attack Command
 	 * 
 	 * @param attacCommand
 	 *            command
@@ -49,7 +50,7 @@ public class CommandHandler
 	}
 
 	/**
-	 * Received the attact command from the emeny player
+	 * Received the attack command from the enemy player
 	 */
 	private void receiveAttacCommandFromEnemy()
 	{
@@ -58,11 +59,12 @@ public class CommandHandler
 	}
 
 	// **************receive Command********************
-	// create a List of sendet commandos
-	// If commando was not done locate Command per number and send it again!!
+
+	// create a List of sended commands
+	// If command was not done locate Command per number and send it again!!
 
 	/**
-	 * received the initialised field from enemy
+	 * received the initialized field from enemy
 	 * 
 	 */
 	public void receiveInitFieldFromEnemy()
@@ -91,12 +93,12 @@ public class CommandHandler
 		// check type of Commands
 		switch (command.getType())
 		{
-			case "INIT_FIELD":
-				setEnemyFieldInLogicByCommand(command);
-				break;
-			case "ATTAC_COMMAND":
-				sendValidAttacCommandToLogic(command);
-				break;
+		case "INIT_FIELD" :
+			setEnemyFieldInLogicByCommand(command);
+			break;
+		case "ATTAC_COMMAND" :
+			sendValidAttacCommandToLogic(command);
+			break;
 		}
 	}
 
@@ -104,7 +106,8 @@ public class CommandHandler
 	{
 		if (command.getCommandData() instanceof AttackPosition)
 		{
-			referenceLogic.setEnemyAttacCommand((AttackPosition) command.getCommandData());
+			referenceLogic.setEnemyAttacCommand((AttackPosition) command
+					.getCommandData());
 		}
 		else
 		{

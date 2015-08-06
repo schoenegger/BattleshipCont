@@ -35,6 +35,7 @@ public class Ship
 		this.shipPosition = shipPosition;
 		this.shipType = type;
 		this.number = ShipNumber;
+		this.align = shipPosition.getAlignment();
 
 		switch (this.shipType)
 		{
@@ -144,9 +145,7 @@ public class Ship
 			int xStart = (int) shipPosition.getXyPosition().getX();
 			for (int x = xStart; x < (xStart + this.countSector); x++)
 			{
-
 				addToListReservedFieldsAroundPosition(list, y, x);
-
 			}
 
 		}
@@ -157,9 +156,7 @@ public class Ship
 			int yStart = (int) shipPosition.getXyPosition().getY();
 			for (int y = yStart; y < (yStart + this.countSector); y++)
 			{
-
 				addToListReservedFieldsAroundPosition(list, y, x);
-
 			}
 		}
 		return list;

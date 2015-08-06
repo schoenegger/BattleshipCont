@@ -155,7 +155,6 @@ public class DrawingPanelGameFields extends JPanel
 						graphic.draw(new Rectangle2D.Double(startX, startY,
 								widthReck, heightReck));
 					}
-
 				}
 
 				else
@@ -206,32 +205,48 @@ public class DrawingPanelGameFields extends JPanel
 		BufferedImage image = null;
 		String path = "";
 
-		if (fieldElement.isTaken())
+		if (fieldElement.isOwn())
 		{
-			if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
+			if (fieldElement.isTaken())
 			{
-				path = "src\\img\\ship_dest.png";// strike ship
+				if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
+				{
+					path = "src\\img\\ship_dest.png";// strike ship
+				}
+				else
+				{
+					path = "src\\img\\ship.png";
+				}
 			}
-			else
+			if (!fieldElement.isTaken())
 			{
-				path = "src\\img\\ship.png";
+				if (fieldElement.getFieldState() == FieldState.UNKNOWN)
+				{
+
+					path = "src\\img\\questm.png";
+				}
+				else
+				{
+					path = "src\\img\\wave.png";
+				}
 			}
 		}
-
-		if (!fieldElement.isTaken())
+		if (!fieldElement.isOwn())
 		{
-			if (fieldElement.getFieldState() == FieldState.UNKNOWN
-					&& !fieldElement.isOwn())
+			if (fieldElement.getFieldState() == FieldState.UNKNOWN)
 			{
 
 				path = "src\\img\\questm.png";
+			}
+			else if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
+			{
+				path = "src\\img\\ship_dest.png";
 			}
 			else
 			{
 				path = "src\\img\\wave.png";
 			}
 		}
-
 		try
 		{
 			image = ImageIO.read(new File(path));
@@ -249,4 +264,5 @@ public class DrawingPanelGameFields extends JPanel
 	{
 		this.enemyField = enemyField;
 	}
+
 }
