@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 2015-07-30 20:53:29,357  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
 2015-07-30 20:53:29,388  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
 2015-07-30 20:54:05,312  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
@@ -20,5 +21,7 @@
 2015-08-06 22:42:30,303 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Can not create connection. Please restart the Game !!!
  Exception:java.net.ConnectException: Connection refused: connect
 >>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
+=======
+>>>>>>> parent of a05d704... write Unit Test cases
 =======
 >>>>>>> parent of a05d704... write Unit Test cases
