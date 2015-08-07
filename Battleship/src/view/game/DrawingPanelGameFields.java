@@ -101,6 +101,7 @@ public class DrawingPanelGameFields extends JPanel
 		graphic.setPaint(DEFAULT_FOREGROUND);
 		graphic.drawString(fieldName, (int) startX, (int) startY - 20);
 
+<<<<<<< HEAD
 		for (int i = 0; i < 10; i++)
 		{
 			// change coloum
@@ -118,6 +119,29 @@ public class DrawingPanelGameFields extends JPanel
 				if (gameField.getFieldElement(i, j).isOwn()
 						&& gameField.getFieldElement(i, j)
 								.isAvailableToSetShip())
+=======
+		for (int line = 0; line < 10; line++)
+		{
+			// change coloum
+			for (int coloum = 0; coloum < 10; coloum++)
+			{
+				if (courserIsInField(startX, startY, widthReck, heightReck))
+				{
+					currMousePosX = line;
+					currMousePosY = coloum;
+
+					gameField.setPossibleFields(line, coloum, currShipType,
+							align);
+
+				}
+
+				// ***If own ship in INIT MODE****************
+
+				if (gameField.getFieldElement(line, coloum).isOwn()
+						&& gameField.getFieldElement(line, coloum)
+								.isAvailableToSetShip())
+
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 				{
 
 					if (gameField.isShipSettingPossiple())
@@ -133,11 +157,23 @@ public class DrawingPanelGameFields extends JPanel
 				}
 				// ******************************************
 
+<<<<<<< HEAD
 				else if ((!gameField.getFieldElement(i, j).isOwn())
 						&& (ownField.isFieldInit()))
 				{
 					if (gameField.getFieldElement(i, j).isAvailableToAttac())
 					{
+=======
+				// **************It Game is in Attac mode**********
+
+				else if ((!gameField.getFieldElement(line, coloum).isOwn())
+						&& (ownField.isFieldInit()))
+				{
+					if (gameField.getFieldElement(line, coloum)
+							.isAvailableToAttac())
+					{
+
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 						drawFilledRectangle(widthReck, heightReck, startX,
 								startY, ATTAC_COLOR);
 					}
@@ -147,6 +183,7 @@ public class DrawingPanelGameFields extends JPanel
 						graphic.draw(new Rectangle2D.Double(startX, startY,
 								widthReck, heightReck));
 					}
+<<<<<<< HEAD
 					// else
 					// {
 					// drawFilledRectangle(widthReck, heightReck, startX,
@@ -154,6 +191,10 @@ public class DrawingPanelGameFields extends JPanel
 					// }
 
 				}
+=======
+				}
+
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 				else
 				{
 					graphic.setPaint(DEFAULT_FOREGROUND);
@@ -162,7 +203,11 @@ public class DrawingPanelGameFields extends JPanel
 				}
 
 				BufferedImage image = getImageByFildType(gameField
+<<<<<<< HEAD
 						.getFieldElement(i, j));
+=======
+						.getFieldElement(line, coloum));
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 
 				if (image != null)
 				{
@@ -197,17 +242,21 @@ public class DrawingPanelGameFields extends JPanel
 		return isInField;
 	}
 
+<<<<<<< HEAD
 	private boolean setElementPositionByMouseCouser(Field gameField)
 	{
 
 		return false;
 	}
 
+=======
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 	private BufferedImage getImageByFildType(FieldElement fieldElement)
 	{
 		BufferedImage image = null;
 		String path = "";
 
+<<<<<<< HEAD
 		if (fieldElement.isTaken())
 		{
 			if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
@@ -224,16 +273,57 @@ public class DrawingPanelGameFields extends JPanel
 		{
 			if (fieldElement.getFieldState() == FieldState.UNKNOWN
 					&& !fieldElement.isOwn())
+=======
+		if (fieldElement.isOwn())
+		{
+			if (fieldElement.isTaken())
+			{
+				if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
+				{
+					path = "src\\img\\ship_dest.png";// strike ship
+				}
+				else
+				{
+					path = "src\\img\\ship.png";
+				}
+			}
+			if (!fieldElement.isTaken())
+			{
+				if (fieldElement.getFieldState() == FieldState.UNKNOWN)
+				{
+
+					path = "src\\img\\questm.png";
+				}
+				else
+				{
+					path = "src\\img\\wave.png";
+				}
+			}
+		}
+		if (!fieldElement.isOwn())
+		{
+			if (fieldElement.getFieldState() == FieldState.UNKNOWN)
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 			{
 
 				path = "src\\img\\questm.png";
 			}
+<<<<<<< HEAD
+=======
+			else if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
+			{
+				path = "src\\img\\ship_dest.png";
+			}
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 			else
 			{
 				path = "src\\img\\wave.png";
 			}
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 		try
 		{
 			image = ImageIO.read(new File(path));
@@ -251,4 +341,8 @@ public class DrawingPanelGameFields extends JPanel
 	{
 		this.enemyField = enemyField;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 }

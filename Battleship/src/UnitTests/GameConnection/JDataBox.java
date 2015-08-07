@@ -32,7 +32,7 @@ public class JDataBox
 		field.setShipOnField(ship2);
 
 		Command command1 = new Command(1, field, "INIT_FIELD");
-		Command command2 = new Command(2, field, "INIT_FIELD");
+		// Command command2 = new Command(2, field, "INIT_FIELD");
 
 		DataBox.pushSendCommand(command1);
 		// DataBox.pushSendCommand(command2);

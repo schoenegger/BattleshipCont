@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.SystemColor;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -32,13 +33,16 @@ import GameUtilities.Ship;
 import GameUtilities.ShipPosition;
 import GameUtilities.ShipType;
 import GameUtilities.Field.Field;
+import GameUtilities.Field.FieldState;
 
+/**
+ * Game Window
+ * 
+ * @author Thomas Schönegger
+ * @version 1.0
+ */
 public class GameWindow extends JDialog
 {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private StartView refStartView;
@@ -67,10 +71,7 @@ public class GameWindow extends JDialog
 	private GameViewListener gameViewListener;
 
 	private int shipCounter = 0;
-
-	/**
-	 * Launch the application.
-	 */
+	private JLabel lblYourTurn;
 
 	/**
 	 * Create the frame.
@@ -93,6 +94,7 @@ public class GameWindow extends JDialog
 		this.gameViewListener = new GameViewListener(refLogic);
 		initializeComponents();
 		initGameField();
+		setYourTurnLabel(true);
 	}
 
 	private void initGameField()
@@ -180,6 +182,7 @@ public class GameWindow extends JDialog
 		btnAttack.setActionCommand(Definitions.BUTTON_ATTAC);
 		btnAttack.addActionListener(this.gameViewListener);
 		btnAttack.setEnabled(false);
+		btnAttack.setVisible(false);
 		btnAttack.setMaximumSize(new Dimension(100, 30));
 		GridBagConstraints gbc_btnAttack = new GridBagConstraints();
 		gbc_btnAttack.anchor = GridBagConstraints.NORTHWEST;
@@ -205,6 +208,16 @@ public class GameWindow extends JDialog
 		gbc_lblMessages.gridx = 4;
 		gbc_lblMessages.gridy = 1;
 		panel_1.add(lblMessages, gbc_lblMessages);
+
+		lblYourTurn = new JLabel("YOUR TURN");
+		lblYourTurn.setVisible(false);
+		lblYourTurn.setForeground(Color.RED);
+		lblYourTurn.setFont(new Font("SansSerif", Font.BOLD, 13));
+		GridBagConstraints gbc_lblYourTurn = new GridBagConstraints();
+		gbc_lblYourTurn.insets = new Insets(0, 0, 5, 5);
+		gbc_lblYourTurn.gridx = 8;
+		gbc_lblYourTurn.gridy = 1;
+		panel_1.add(lblYourTurn, gbc_lblYourTurn);
 
 		textField = new JTextField();
 		textField.setText("1,2");
@@ -240,7 +253,12 @@ public class GameWindow extends JDialog
 		frmSettings.setVisible(true);
 	}
 
-	// *****************Functions called by Logic*******************
+	public void setYourTurnLabel(boolean on)
+	{
+		lblYourTurn.setVisible(on);
+		refresh();
+
+	}
 
 	public void createGameViewByGameFields()
 	{
@@ -251,33 +269,58 @@ public class GameWindow extends JDialog
 	public void getNextMove()
 	{
 		sendMessge("Please Attac your Enemy");
-
 	}
 
-	public void setShipButtonPressed()
+	private void updateComboBox()
 	{
-		if (refOwnField.isFieldInit())
-		{
-			startGame();
-		}
+		Vector<Ship> activeShipsInField = refOwnField.getListOfActiveShips();
 
-		if (checkIfPositionTextIsValid(textField.getText()))
-		{
-			String[] points = textField.getText().split(",");
-			int x = Integer.parseInt(points[0]);
-			int y = Integer.parseInt(points[1]);
+		int counterAirCarr = 0;
+		int counterDestr = 0;
+		int counterYellSubmar = 0;
 
-			if (checkIfPositionIsAvailable(x, y, comboBox.getSelectedItem()
-					.toString()))
+		for (Ship ship : activeShipsInField)
+		{
+			if (ship.getType() == ShipType.AIRCARRIER)
 			{
-				setShipToField();
+				counterAirCarr++;
+			}
+			else if (ship.getType() == ShipType.DESTROYER)
+			{
+				counterDestr++;
+			}
+			else
+			{
+				counterYellSubmar++;
 			}
 		}
+
+		for (int i = 0; i < comboBox.getItemCount(); i++)
+		{
+			String currItemString = comboBox.getItemAt(i).toString()
+					.toLowerCase();
+
+			if (currItemString.equals("destroyer") && counterDestr >= 2)
+			{
+				comboBox.removeItemAt(i);
+			}
+			else if (currItemString.equals("aircarrier") && counterAirCarr >= 2)
+			{
+				comboBox.removeItemAt(i);
+			}
+			else if (currItemString.equals("yellowsubmarine")
+					&& counterYellSubmar >= 2)
+			{
+				comboBox.removeItemAt(i);
+			}
+		}
+		comboBox.revalidate();
+		refresh();
+
 	}
 
 	private void startGame()
 	{
-		// refStartView.buildConnection();
 		refStartView.setInitFieldInLogic(this.refOwnField);
 		this.disableInitButtonsAndEnableAttacButtons();
 	}
@@ -289,6 +332,7 @@ public class GameWindow extends JDialog
 		rdbtnVertical.setVisible(false);
 		btnSetShip.setVisible(false);
 		btnAttack.setEnabled(true);
+		btnAttack.setVisible(true);
 		btnExit.setEnabled(true);
 	}
 
@@ -298,9 +342,8 @@ public class GameWindow extends JDialog
 		refresh();
 	}
 
-	// function also creates ship
-	private boolean checkIfPositionIsAvailable(int x, int y,
-			String shipFromCombobox)
+	private boolean checkIfPositionIsAvailableAndCreateCurrentShip(int x,
+			int y, String shipFromCombobox)
 	{
 		boolean posAvailable = true;
 
@@ -311,79 +354,80 @@ public class GameWindow extends JDialog
 		return posAvailable;
 	}
 
-	public void refreshAttacTextField(String attacFieldText)
-	{
-		textField.getText();
-		this.textField.setText(attacFieldText);
-	}
-
-	/************** general help functions ************/
-
 	private boolean checkIfPositionTextIsValid(String positionText)
 	{
+		boolean isValid = true;
+
+		if (positionText.length() > 3)
+			isValid = false;
+
+		String[] position = positionText.split(",");
+
+		if (position.length < 2)
+			isValid = false;
+
+		int posx = 0;
+		int posy = 0;
+
+		try
+		{
+			posx = Integer.parseInt(position[0]);
+			posy = Integer.parseInt(position[1]);
+		}
+		catch (NumberFormatException e)
+		{
+			isValid = false;
+		}
+
+		isValid &= (posx < 10) && (posx >= 0) && (posy < 10) && (posy >= 0);
+		if (posx > 0 && posy > 0) // no negative Index allowed
+		{
+			isValid &= (refEnemyField.getFieldElement(posx, posy)
+					.getFieldState() == FieldState.UNKNOWN);
+		}
+
+		if (!isValid)
+		{
+			writeWrongMoveMessage();
+		}
+
 		return true;
 	}
 
-	public void sendMessge(String message)
-	{
-		lblMessages.setText(message);
-
-		lblMessages.repaint();
-
-		lblMessages.revalidate();
-		JOptionPane.showMessageDialog(null, message, "test",
-				JOptionPane.OK_CANCEL_OPTION);
-		refresh();
-
-	}
-
-	private void refresh()
-	{
-		frmSettings.repaint();
-		frmSettings.revalidate();
-	}
-
-	public void refreshByMouseMove(int x, int y)
+	private String getAlignmentFromRdButton()
 	{
 		String align;
-		this.lblXY.setText("X: " + x + " Y: " + y);
-		this.lblXY.revalidate();
-
 		if (rdbtnHorizontal.isSelected())
 			align = "horizontal";
 		else
 			align = "vertical";
 
-		this.drawPanel.setMouseCourser(x, y, getShipTypeFromComboBox(), align);
-		this.drawPanel.repaint();
-		refresh();
-	}
-
-	public void MouseClickToGameView()
-	{
-		textField.setText(this.drawPanel.getCurrentMousePosition());
+		return align;
 	}
 
 	private ShipType getShipTypeFromComboBox()
 	{
-		String itemCombBox = this.comboBox.getSelectedItem().toString();
-
-		switch (itemCombBox.toLowerCase())
+		if (comboBox.getItemCount() > 0)
 		{
-		case "destroyer" :
-			return ShipType.DESTROYER;
+			String itemCombBox = this.comboBox.getSelectedItem().toString();
 
-		case "aircarrier" :
-			return ShipType.AIRCARRIER;
+			switch (itemCombBox.toLowerCase())
+			{
+			case "destroyer" :
+				return ShipType.DESTROYER;
 
-		case "yellowsubmarine" :
-			return ShipType.YELLOW_SUBMARINE;
+			case "aircarrier" :
+				return ShipType.AIRCARRIER;
 
-		default :
-			return ShipType.AIRCARRIER;
+			case "yellowsubmarine" :
+				return ShipType.YELLOW_SUBMARINE;
 
+			default :
+				return ShipType.AIRCARRIER;
+
+			}
 		}
-
+		return ShipType.AIRCARRIER;
 	}
 
 	private Ship createShipByPositionAndName(int x, int y,
@@ -391,14 +435,7 @@ public class GameWindow extends JDialog
 	{
 		String shipAlignment = "";
 
-		if (rdbtnHorizontal.isSelected())
-		{
-			shipAlignment = " HORIZONTAL";
-		}
-		else
-		{
-			shipAlignment = "VERTICAL";
-		}
+		shipAlignment = getAlignmentFromRdButton();
 
 		ShipPosition shipPos = new ShipPosition(new Point(x, y), shipAlignment);
 
@@ -421,16 +458,154 @@ public class GameWindow extends JDialog
 		return ship;
 	}
 
-	public void attacShipButtonPressed()
-	{
-		String attackCommand = textField.getText();
-		refStartView.sendAttackCommandToEnemy(attackCommand);
-
-	}
-
 	public void setEnemyField(Field enemyField)
 	{
 		drawPanel.setEnemyField(enemyField);
+		refEnemyField = enemyField;
+	}
+
+	// ************ Called from Listener*******************
+
+	public void attacShipButtonPressed()
+	{
+		String attackCommand = textField.getText();
+		if (checkIfPositionTextIsValid(attackCommand))
+		{
+			String[] points = attackCommand.split(",");
+			int x;
+			int y;
+
+			try
+			{
+				x = Integer.parseInt(points[0]);
+				y = Integer.parseInt(points[1]);
+
+				if (refOwnField.IsValidAttacPosition(x, y))
+				{
+					setYourTurnLabel(false);
+					refStartView.sendAttackCommandToEnemy(attackCommand);
+				}
+				else
+				{
+					writeWrongAttacMessage();
+				}
+			}
+			catch (NumberFormatException e)
+			{
+				Logging.writeErrorMessage("Game Window -> no valid Input");
+				writeWrongAttacMessage();
+			}
+		}
+	}
+
+	public void setShipButtonPressed()
+	{
+		try
+		{
+			if (comboBox.getItemCount() > 0)
+			{
+				if (checkIfPositionTextIsValid(textField.getText().trim()))
+				{
+					String[] points = textField.getText().split(",");
+					int x = Integer.parseInt(points[0]);
+					int y = Integer.parseInt(points[1]);
+
+					if (checkIfPositionIsAvailableAndCreateCurrentShip(x, y,
+							comboBox.getSelectedItem().toString()))
+					{
+						setShipToField();
+						updateComboBox();
+					}
+					else
+					{
+						writeWrongMoveMessage();
+					}
+				}
+				else
+				{
+					writeWrongMoveMessage();
+				}
+			}
+		}
+		catch (NumberFormatException e)
+		{
+			Logging.writeInfoMessage("Game Window -> Not valid input To Set Ship");
+			writeWrongMoveMessage();
+		}
+
+		if (refOwnField.isFieldInit())
+		{
+			startGame();
+		}
+	}
+
+	public void refreshByMouseMove(int x, int y)
+	{
+		String align;
+		this.lblXY.setText("X: " + x + " Y: " + y);
+		this.lblXY.revalidate();
+
+		align = getAlignmentFromRdButton();
+
+		this.drawPanel.setMouseCourser(x, y, getShipTypeFromComboBox(), align);
+		this.drawPanel.repaint();
+		refresh();
+	}
+
+	public void MouseClickToGameView()
+	{
+		textField.setText(this.drawPanel.getCurrentMousePosition());
+	}
+
+	// ******** Messages *********************************
+
+	private void writeWrongMoveMessage()
+	{
+		textField.setText("-1,0");
+		JOptionPane.showMessageDialog(null,
+				"Wrong Attac Command, Command must be written like this : 0,1",
+				"Not Valid Input", JOptionPane.OK_CANCEL_OPTION);
+	}
+
+	private void writeWrongAttacMessage()
+	{
+		textField.setText("-1,0");
+		JOptionPane.showMessageDialog(null,
+				"Wrong Attac Position, Position is not attackable",
+				"Not Valid Position", JOptionPane.OK_CANCEL_OPTION);
+	}
+
+	public void sendMessge(String message)
+	{
+		lblMessages.setText(message);
+		try
+		{
+			Thread.sleep(1000);
+		}
+		catch (InterruptedException e)
+		{
+			Logging.writeErrorMessage("GameWindow -> wait send message not possible");
+		}
+
+		lblMessages.repaint();
+
+		lblMessages.revalidate();
+
+		refresh();
+	}
+
+	// *********************Refresh**************************
+
+	private void refresh()
+	{
+		frmSettings.repaint();
+		frmSettings.revalidate();
+	}
+
+	public void refreshAttacTextField(String attacFieldText)
+	{
+		textField.getText();
+		this.textField.setText(attacFieldText);
 	}
 
 }

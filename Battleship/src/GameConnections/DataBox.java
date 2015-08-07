@@ -33,7 +33,8 @@ public class DataBox
 			}
 			catch (Exception e)
 			{
-				System.out.println(e.toString() + "Error getAccessSendCommands");
+				System.out
+						.println(e.toString() + "Error getAccessSendCommands");
 			}
 		}
 
@@ -57,7 +58,8 @@ public class DataBox
 			}
 			catch (Exception e)
 			{
-				System.out.println(e.toString() + "Error getAccessreceiveCommands");
+				System.out.println(e.toString()
+						+ "Error getAccessreceiveCommands");
 			}
 		}
 

@@ -23,9 +23,13 @@ import view.settings.StartViewSettingData;
 import Game.Logic;
 import GameUtilities.Field.Field;
 
+/**
+ * 
+ * @author Thomas Schönegger
+ *
+ */
 public class StartView extends JDialog
 {
-
 	/**
 	 * 
 	 */
@@ -123,6 +127,7 @@ public class StartView extends JDialog
 	private void initializeComponets()
 	{
 		frmBattleshipCommander = new JFrame();
+		frmBattleshipCommander.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBattleshipCommander.setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(StartView.class.getResource("/img/ship.png")));
 		frmBattleshipCommander.getContentPane().setBackground(
@@ -130,7 +135,6 @@ public class StartView extends JDialog
 		frmBattleshipCommander.setResizable(false);
 		frmBattleshipCommander.setTitle("BATTLESHIP COMMANDER");
 		frmBattleshipCommander.setBounds(100, 100, 535, 331);
-		frmBattleshipCommander.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBattleshipCommander.getContentPane().setLayout(null);
 		this.btnPlayerCom = new JButton(
 				languageView.getResourceString(LanguageView.PLAYER_VS_CPU));
@@ -147,6 +151,7 @@ public class StartView extends JDialog
 		btn2Player.setToolTipText("Alt+P");
 		btn2Player.setBounds(19, 74, 162, 42);
 		btn2Player.setActionCommand(Definitions.PLAYER_VS_PLAYER);
+		btn2Player.addActionListener(this.viewButtListener);
 
 		frmBattleshipCommander.getContentPane().add(btn2Player);
 		this.btnSettings = new JButton(
@@ -182,20 +187,37 @@ public class StartView extends JDialog
 
 	public void openStartViewSettings()
 	{
-		this.startSettWindow = new StartSettingsWindow(startSettData,
-				this.languageView, this.refGameLogic);
+		// Singelton StartView Setting
+		if (startSettWindow == null)
+		{
+			this.startSettWindow = new StartSettingsWindow(startSettData,
+					this.languageView, refGameLogic);
+		}
+		// if (!startSettWindow.isShowing())
+		// {
+		// this.startSettWindow = new StartSettingsWindow(startSettData,
+		// this.languageView, refGameLogic);
+		// }
 	}
 
 	public void openViewGameFields()
 	{
-		this.gameWindow = new GameWindow(this, refGameLogic);
-		buildConnection(startSettData.getMode());
+		// Singelton Game
+		if (gameWindow == null)
+		{
+			buildConnection(startSettData.getMode());
+			this.gameWindow = new GameWindow(this, refGameLogic);
+		}
 	}
 
 	public void openViewGameFieldsCPU()
 	{
-		this.gameWindow = new GameWindow(this, refGameLogic);
-		buildConnection("cpu");
+		// Singeton Game
+		if (gameWindow == null)
+		{
+			this.gameWindow = new GameWindow(this, refGameLogic);
+			buildConnection("cpu");
+		}
 	}
 
 	public void getNextCommandFromGameWindow()
@@ -276,5 +298,10 @@ public class StartView extends JDialog
 	public void mouseClickToGameView()
 	{
 		gameWindow.MouseClickToGameView();
+	}
+
+	public void setMyTurnInGameWindow(boolean isMyTurn)
+	{
+		this.gameWindow.setYourTurnLabel(isMyTurn);
 	}
 }

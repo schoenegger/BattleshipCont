@@ -1,5 +1,10 @@
 ipAddress;localhost
+<<<<<<< HEAD
 port;8000
 mode;host
+=======
+port;8009
+mode;client
+>>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
 level;1
 language;ENGLISH

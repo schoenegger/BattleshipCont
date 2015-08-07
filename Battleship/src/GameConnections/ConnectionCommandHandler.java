@@ -1,5 +1,6 @@
 package GameConnections;
 
+import logging.Logging;
 import Game.GlobalGameData;
 import GameUtilities.Command;
 import UnitTests.MockObjects.MockConnection;
@@ -15,17 +16,25 @@ public class ConnectionCommandHandler implements Runnable
 	private Command commandSend;
 	private Command commandReceive;
 	private Connection connection = null;
+	// private List<String> stringList =
 
 	private static boolean abortConnection = false; // static.. you can call it
-													// from everywhere
 
 	/**
 	 * Constructor
 	 */
 	public ConnectionCommandHandler()
 	{
-		this.connection = new LocalConnection();
-		this.connectionLogic = new ConnectionLogic(connection);
+		try
+		{
+			this.connection = new LocalConnection();
+			this.connectionLogic = new ConnectionLogic(connection);
+		}
+		catch (Exception exception)
+		{
+			Logging.writeErrorMessage("Can not create connection. Please restart the Game !!!\n Exception:"
+					+ exception.toString());
+		}
 	}
 
 	/**
@@ -52,9 +61,8 @@ public class ConnectionCommandHandler implements Runnable
 		}
 		catch (Exception exception)
 		{
-			System.out
-					.println("Can not create connection. Please restart the Game !!!\n Exception:"
-							+ exception.toString());
+			Logging.writeErrorMessage("Can not create connection. Please restart the Game !!!\n Exception:"
+					+ exception.toString());
 		}
 	}
 
@@ -75,9 +83,8 @@ public class ConnectionCommandHandler implements Runnable
 		}
 		catch (Exception exception)
 		{
-			System.out
-					.println("Can not create connection. Please restart the Game !!!\n Exception:"
-							+ exception.toString());
+			Logging.writeErrorMessage("Can not create connection. Please restart the Game !!!\n Exception:"
+					+ exception.toString());
 		}
 	}
 

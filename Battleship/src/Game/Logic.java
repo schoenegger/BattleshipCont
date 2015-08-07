@@ -13,8 +13,7 @@ import GameUtilities.Field.Field;
 /**
  * Contains the logic of the game
  * 
- * @author Schoenegger / Purkart / Koch
- *
+ * @author Schoenegger / Purkart / Koch @
  */
 public class Logic
 {
@@ -38,9 +37,6 @@ public class Logic
 	 */
 	public Logic(boolean isFirstPlayer)
 	{
-		// startSettData = new StartViewSettingData();
-
-		// languageView = new LanguageView(startSettData.getLanguage());
 
 		startView = new StartView(this); // , startSettData
 		gameSoundPlayer = new GameSoundPlayer();
@@ -90,41 +86,26 @@ public class Logic
 
 	private void startNextMove()
 	{
-		// System.out.println("*****************************************");
-		// System.out.println("Own Field:");
-		// ownField.display();
-		// System.out.println("\nEnemy Field:");
-		// enemyField.displayIncognito();
-		// System.out.println("*****************************************");
 		startView.getNextCommandFromGameWindow();
 		startView.sendGameWindowMessage("Attac The Enemy");
-
-		// if (isMyTurn)
-		// {
-		// fireToFieldPosition(startView.getNextCommandFromGameWindow());
-		// setIsMyTurn(false);
-		// wait(100);
-		// }
-		// else
-		// {
-		// System.out.println("Wait for enemy move");
-		//
-		// setIsMyTurn(true);
-		// }
-		// commandHandler.receiveCommandFromDataBox();
 	}
 
+	/**
+	 * send attac commando to Enemy
+	 * 
+	 * @param fireCommand
+	 */
 	public void sendAttackCommandToEnemy(String fireCommand)
 	{
 		startView.sendGameWindowMessage("Enemy Turn");
 		fireToFieldPosition(fireCommand);
-
 		// commandHandler.receiveCommandFromDataBox();
 	}
 
 	public void setIsMyTurn(boolean isMyTurn)
 	{
 		this.isMyTurn = isMyTurn;
+		this.startView.setMyTurnInGameWindow(isMyTurn);
 	}
 
 	private boolean fireToFieldPosition(String fireMove)
@@ -315,7 +296,6 @@ public class Logic
 	public void mouseClickToGameView()
 	{
 		startView.mouseClickToGameView();
-
 	}
 
 	// ************* Commands To Logic from startSettingsWindow*************

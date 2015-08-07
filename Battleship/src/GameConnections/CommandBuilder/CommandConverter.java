@@ -2,6 +2,7 @@ package GameConnections.CommandBuilder;
 
 import java.awt.Point;
 
+import logging.Logging;
 import GameUtilities.Command;
 import GameUtilities.Ship;
 import GameUtilities.ShipPosition;
@@ -16,126 +17,130 @@ import GameUtilities.Field.Field;
  */
 public class CommandConverter
 {
-    /**
-     * Consturctor
-     */
-    public CommandConverter()
-    {
 
-    }
-
-    /**
-     * Converts the command string ready to a TCP String
-     * 
-     * @param command
-     * @return String
-     */
-    public String convertToTCPString(Command command)
-    {
-
-//	if (command == null)
-//	{
-//	    // System.out.println("command is null!!!");
-//
-//	}
-	String string = command.toString();
-	return string;
-    }
-
-    /**
-     * convert the command string to a game command
-     * 
-     * @param commandString
-     * @return command
-     */
-    public Command convertToGameCommand(String commandString)
-    {
-	String[] segments = commandString.split(";");
-
-	int commandNr = Integer.parseInt(segments[0]);
-
-	if (commandNr == 99)
+	/**
+	 * Converts the command string ready to a TCP String
+	 * 
+	 * @param command
+	 * @return String
+	 */
+	public String convertToTCPString(Command command)
 	{
-	    Command dummyCommand = new Command(commandNr, null, "KEEP_ALIVE");
-	    return dummyCommand;
+		String string = command.toString();
+		return string;
 	}
 
-	String commandType = segments[1];
-
-	Object commandData = null;
-
-	switch (commandType)
+	/**
+	 * convert the command string to a game command
+	 * 
+	 * @param commandString
+	 * @return command
+	 */
+	public Command convertToGameCommand(String commandString)
 	{
-	    case "INIT_FIELD":
-		commandData = parseField(segments[2]);
-		break;
-	    case "ATTAC_COMMAND":
-		commandData = parseAttackPosition(segments[2]);
-		break;
-	    default:
-		commandData = null;
-		break;
+		String[] segments = commandString.split(";");
+		// ; => is in Command.toString() method
+
+		int commandNr = 0;
+		try
+		{
+			commandNr = Integer.parseInt(segments[0]);
+		}
+		catch (NumberFormatException e)
+		{
+			Logging.writeErrorMessage("Command Converter -> Cannot Convert to Game Command -> "
+					+ commandString);
+		}
+
+		if (commandNr == 99)
+		{
+			Command dummyCommand = new Command(commandNr, null, "KEEP_ALIVE");
+			return dummyCommand;
+		}
+
+		Command convertCommand = null;
+
+		if (segments.length > 1)
+		{
+			String commandType = segments[1];
+
+			Object commandData = null;
+
+			switch (commandType)
+			{
+			case "INIT_FIELD" :
+				commandData = parseField(segments[2]);
+				break;
+			case "ATTAC_COMMAND" :
+				commandData = parseAttackPosition(segments[2]);
+				break;
+			default :
+				commandData = null;
+				break;
+			}
+
+			convertCommand = new Command(commandNr, commandData, commandType);
+		}
+		return convertCommand;
 	}
 
-	Command convertCommand = new Command(commandNr, commandData, commandType);
-	return convertCommand;
-    }
-
-    private AttackPosition parseAttackPosition(String string)
-    {
-	String[] xyPositions = string.split(",");
-	Point attackedPoint = new Point(Integer.parseInt(xyPositions[0]), Integer.parseInt(xyPositions[1]));
-	AttackPosition transmittedAttack = new AttackPosition(attackedPoint);
-
-	return transmittedAttack;
-    }
-
-    private Field parseField(String string)
-    {
-	Field transmittedField = new Field();
-
-	String[] segments = string.split("-");
-
-	for (String shipString : segments)
+	private AttackPosition parseAttackPosition(String string)
 	{
-	    if (shipString.isEmpty())
-		continue;
-	    transmittedField.setShipOnField(parseShip(shipString));
+		String[] xyPositions = string.split(",");
+		Point attackedPoint = new Point(Integer.parseInt(xyPositions[0]),
+				Integer.parseInt(xyPositions[1]));
+		AttackPosition transmittedAttack = new AttackPosition(attackedPoint);
+
+		return transmittedAttack;
 	}
 
-	return transmittedField;
-    }
-
-    private Ship parseShip(String string)
-    {
-	String[] segments = string.split(",");
-
-	int shipNumber = Integer.parseInt(segments[0]);
-
-	ShipType shipType = ShipType.AIRCARRIER;
-	switch (segments[1])
+	private Field parseField(String string)
 	{
-	    case "AIRCARRIER":
-		shipType = ShipType.AIRCARRIER;
-		break;
-	    case "YELLOW_SUBMARINE":
-		shipType = ShipType.YELLOW_SUBMARINE;
-		break;
-	    case "DESTROYER":
-		shipType = ShipType.DESTROYER;
-		break;
-	    default:
-		break;
+		Field transmittedField = new Field();
+
+		String[] segments = string.split("-");
+
+		for (String shipString : segments)
+		{
+			if (shipString.isEmpty())
+				continue;
+			transmittedField.setShipOnField(parseShip(shipString));
+		}
+
+		return transmittedField;
 	}
 
-	Point position = new Point(Integer.parseInt(segments[2]), Integer.parseInt(segments[3]));
+	private Ship parseShip(String string)
+	{
+		String[] segments = string.split(",");
 
-	String alignment = segments[4];
+		int shipNumber = Integer.parseInt(segments[0]);
 
-	ShipPosition shipPosition = new ShipPosition(position, alignment);
+		ShipType shipType = ShipType.AIRCARRIER;
+		switch (segments[1])
+		{
+		case "AIRCARRIER" :
+			shipType = ShipType.AIRCARRIER;
+			break;
+		case "YELLOW_SUBMARINE" :
+			shipType = ShipType.YELLOW_SUBMARINE;
+			break;
+		case "DESTROYER" :
+			shipType = ShipType.DESTROYER;
+			break;
+		default :
+			break;
+		}
 
-	Ship ship = new Ship(shipPosition, shipType, shipNumber);
+		Point position = new Point(Integer.parseInt(segments[2]),
+				Integer.parseInt(segments[3]));
 
-	return ship;
-    }
+		String alignment = segments[4];
+
+		ShipPosition shipPosition = new ShipPosition(position, alignment);
+
+		Ship ship = new Ship(shipPosition, shipType, shipNumber);
+
+		return ship;
+	}
 }
