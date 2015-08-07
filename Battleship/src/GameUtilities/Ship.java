@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package GameUtilities;
 
 import java.awt.Point;
@@ -461,4 +460,4 @@ public class Ship
 		return false;
 	}
 }
->>>>>>> a05d704da415a51aff84a9dccb92fa25f1d1d3d3
+
