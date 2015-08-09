@@ -22,6 +22,7 @@ import GameUtilities.AttackPosition.AttackPosition;
 public class CommandHandlerTest
 {
 	Logic refLogic = mock(Logic.class);
+	CommandHandler commandHandler;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception
@@ -37,11 +38,13 @@ public class CommandHandlerTest
 	@Before
 	public void setUp() throws Exception
 	{
+		this.commandHandler = new CommandHandler(refLogic);
 	}
 
 	@After
 	public void tearDown() throws Exception
 	{
+		this.commandHandler = null;
 	}
 
 	@Test
@@ -49,9 +52,9 @@ public class CommandHandlerTest
 	{
 		Command attacCommand = new Command(1, new AttackPosition(
 				new Point(5, 5)), "ATTAC_COMMAND");
-		CommandHandler commandHandler = new CommandHandler(refLogic);
+
 		DataBox.pushReceiveCommand(attacCommand);
-		commandHandler.sendAttacCommand(attacCommand);
+		this.commandHandler.sendAttacCommand(attacCommand);
 
 		Command recCommand = DataBox.popSendCommand();
 		assertTrue(recCommand.getCommandData() instanceof AttackPosition);
