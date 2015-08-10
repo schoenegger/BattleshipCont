@@ -214,7 +214,8 @@ public class Logic
 
 		if (ownField.checkIfAllShipsAreCountersunk())
 		{
-			referenceFrontend.displayGameOver();
+			// referenceFrontend.displayGameOver();
+			startView.displayGameOver();
 			wait(10000);
 			ConnectionCommandHandler.abortConnection();
 		}

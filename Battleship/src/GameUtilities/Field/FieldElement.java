@@ -12,6 +12,7 @@ public class FieldElement
 	private boolean isOwnFieldElement = false;
 	private boolean isAvailableToSetShip = false;
 	private boolean isPossibleField = false;
+	private boolean isSunkenShipOnIt = false;
 
 	public FieldElement(boolean isOwnFieldElement)
 	{
@@ -38,6 +39,11 @@ public class FieldElement
 		return this.isTaken;
 	}
 
+	public boolean isSunkenShipOnIt()
+	{
+		return this.isSunkenShipOnIt;
+	}
+
 	public boolean isOwn()
 	{
 		return isOwnFieldElement;
@@ -50,7 +56,7 @@ public class FieldElement
 
 	public boolean isAvailableToAttac()
 	{
-		return !isOwnFieldElement & (fieldState == fieldState.UNKNOWN)
+		return !isOwnFieldElement & (fieldState == FieldState.UNKNOWN)
 				& isPossibleField;
 	}
 
@@ -76,4 +82,10 @@ public class FieldElement
 	{
 		this.isTaken = true;
 	}
+
+	public void setSunkenShip()
+	{
+		this.isSunkenShipOnIt = true;
+	}
+
 }

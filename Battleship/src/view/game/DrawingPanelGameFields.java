@@ -135,6 +135,7 @@ public class DrawingPanelGameFields extends JPanel
 								startY, NOT_VALID_COLOR);
 					}
 				}
+
 				// ******************************************
 
 				// **************It Game is in Attac mode**********
@@ -209,9 +210,15 @@ public class DrawingPanelGameFields extends JPanel
 		{
 			if (fieldElement.isTaken())
 			{
-				if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
+				if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP
+						&& !fieldElement.isSunkenShipOnIt())
 				{
 					path = "src\\img\\ship_dest.png";// strike ship
+				}
+				else if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP
+						&& fieldElement.isSunkenShipOnIt())
+				{
+					path = "src\\img\\ship_sunk.png";
 				}
 				else
 				{
@@ -238,9 +245,15 @@ public class DrawingPanelGameFields extends JPanel
 
 				path = "src\\img\\questm.png";
 			}
-			else if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP)
+			else if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP
+					&& !fieldElement.isSunkenShipOnIt())
 			{
 				path = "src\\img\\ship_dest.png";
+			}
+			else if (fieldElement.getFieldState() == FieldState.STRIKE_SHIP
+					&& fieldElement.isSunkenShipOnIt())
+			{
+				path = "src\\img\\ship_sunk.png";
 			}
 			else
 			{

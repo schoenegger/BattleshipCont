@@ -281,7 +281,6 @@ public class StartView extends JDialog
 	public void sendAttackCommandToEnemy(String attackCommand)
 	{
 		refGameLogic.sendAttackCommandToEnemy(attackCommand);
-
 	}
 
 	private void buildConnection(String mode)
@@ -303,5 +302,10 @@ public class StartView extends JDialog
 	public void setMyTurnInGameWindow(boolean isMyTurn)
 	{
 		this.gameWindow.setYourTurnLabel(isMyTurn);
+	}
+
+	public void displayGameOver()
+	{
+		this.gameWindow.displayGameOver();
 	}
 }

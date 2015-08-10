@@ -76,7 +76,7 @@ public class Field
 		}
 	}
 
-	public Vector<Ship> getListOfActiveShips()
+	public Vector<Ship> getListOfSetableShips()
 	{
 		Vector<Ship> activeShipsInField = new Vector<Ship>();
 
@@ -188,6 +188,8 @@ public class Field
 		if (fieldElemtens[posX][posY].isTaken())
 		{
 			fieldElemtens[posX][posY].setFieldState(FieldState.STRIKE_SHIP);
+			setAliveShipState();
+			setTaken();
 			return true;
 		}
 		else
@@ -196,6 +198,48 @@ public class Field
 		}
 
 		return false;
+	}
+
+	private void setAliveShipState()
+	{
+		for (Ship ship : shipsOnField)
+		{
+			String align = ship.getShipPosition().getAlignment();
+			int x = ship.getShipPosition().getXyPosition().x;
+			int y = ship.getShipPosition().getXyPosition().y;
+
+			boolean isAlive = false;
+
+			if (!align.equals("horizontal"))
+			{
+				for (int i = x; i < (x + ship.getCountSector()); i++)
+				{
+					if (fieldElemtens[i][y].getFieldState() == FieldState.STRIKE_SHIP)
+					{
+						isAlive &= true;
+					}
+					else
+					{
+						isAlive &= false;
+					}
+				}
+			}
+			else
+			{
+				for (int i = y; i < (y + ship.getCountSector()); i++)
+				{
+					if (fieldElemtens[i][y].getFieldState() == FieldState.STRIKE_SHIP)
+					{
+						isAlive &= true;
+					}
+					else
+					{
+						isAlive &= false;
+					}
+				}
+			}
+			ship.setAliveState(isAlive);
+		}
 	}
 
 	@Override
@@ -221,12 +265,19 @@ public class Field
 
 			if (checkIfShipIsInField(ship))
 			{
-				if (alignment.toLowerCase().equals("horizontal"))
+				if (alignment.toLowerCase().equals("horizontal")
+						&& ship.isAlive())
 				{
 					for (int i = 0; i < countSector; i++)
 					{
 						fieldElemtens[currShipPoint.x + i][currShipPoint.y]
 								.setTaken();
+
+						if (!ship.isAlive())
+						{
+							fieldElemtens[currShipPoint.x + i][currShipPoint.y]
+									.setSunkenShip();
+						}
 					}
 				}
 				else
@@ -236,6 +287,12 @@ public class Field
 					{
 						fieldElemtens[currShipPoint.x][currShipPoint.y + i]
 								.setTaken();
+
+						if (!ship.isAlive())
+						{
+							fieldElemtens[currShipPoint.x + i][currShipPoint.y]
+									.setSunkenShip();
+						}
 					}
 				}
 			}

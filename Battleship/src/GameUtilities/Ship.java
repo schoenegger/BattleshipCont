@@ -114,6 +114,11 @@ public class Ship
 		return isAlive;
 	}
 
+	public void setAliveState(boolean isAlive)
+	{
+		this.isAlive = isAlive;
+	}
+
 	public void setShipPosition(Point xy, String alignment)
 	{
 		this.shipPosition = new ShipPosition(xy, alignment);

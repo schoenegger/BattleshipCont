@@ -13,9 +13,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -28,6 +31,7 @@ public class LogView
 	private JTextArea textArea;
 	private JButton btnClearLog;
 	private JButton btnSaveLog;
+	private String filePath;
 
 	/**
 	 * Launch the application.
@@ -95,13 +99,22 @@ public class LogView
 		gbc_btnClearLog.gridy = 0;
 		frmLogFile.getContentPane().add(btnClearLog, gbc_btnClearLog);
 
-		JButton btnSaveLog_1 = new JButton("Save Log");
-		GridBagConstraints gbc_btnSaveLog_1 = new GridBagConstraints();
-		gbc_btnSaveLog_1.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnSaveLog_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnSaveLog_1.gridx = 1;
-		gbc_btnSaveLog_1.gridy = 0;
-		frmLogFile.getContentPane().add(btnSaveLog_1, gbc_btnSaveLog_1);
+		btnSaveLog = new JButton("Save Log");
+		btnSaveLog.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				saveTextFromLogfile();
+			}
+		});
+		GridBagConstraints gbc_btnSaveLog = new GridBagConstraints();
+		gbc_btnSaveLog.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnSaveLog.insets = new Insets(0, 0, 5, 0);
+		gbc_btnSaveLog.gridx = 1;
+		gbc_btnSaveLog.gridy = 0;
+		frmLogFile.getContentPane().add(btnSaveLog, gbc_btnSaveLog);
 
 		JScrollPane scrollPane = new JScrollPane();
 
@@ -151,5 +164,57 @@ public class LogView
 		{
 			Logging.writeErrorMessage("LogView -> cannot clear Logfile");
 		}
+	}
+
+	private void saveTextFromLogfile()
+	{
+		JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showDialog(null, "Attach");
+
+		if (createFile(filePath))
+		{
+			writeLogToFile();
+		}
+	}
+
+	public boolean createFile(String filePath)
+	{
+		File fullFilePath = new File(filePath);
+
+		if (fullFilePath.exists())
+		{
+			int result = JOptionPane.showConfirmDialog(null,
+					"File arready exists ... Overwrite?");
+			if (result == JOptionPane.YES_OPTION)
+			{
+				this.filePath = filePath;
+			}
+			return true;
+		}
+		else
+		{
+			this.filePath = filePath;
+			Logging.writeInfoMessage("Controller create CSV File because path does not exists");
+			return false;
+		}
+	}
+
+	private void writeLogToFile()
+	{
+		File file = new File(this.filePath);
+
+		FileWriter fw;
+		try
+		{
+			fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(textArea.getText());
+			bw.close();
+		}
+		catch (IOException e)
+		{
+			Logging.writeErrorMessage("LogView -> Not Possible to Write File");
+		}
+
 	}
 }

@@ -108,6 +108,7 @@ public class GameWindow extends JDialog
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 		frmSettings = new JFrame();
+		frmSettings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSettings.getContentPane().setBackground(new Color(135, 206, 235));
 		frmSettings.setBackground(SystemColor.inactiveCaption);
 		frmSettings.setMinimumSize(new Dimension(1500, 850));
@@ -273,7 +274,7 @@ public class GameWindow extends JDialog
 
 	private void updateComboBox()
 	{
-		Vector<Ship> activeShipsInField = refOwnField.getListOfActiveShips();
+		Vector<Ship> activeShipsInField = refOwnField.getListOfSetableShips();
 
 		int counterAirCarr = 0;
 		int counterDestr = 0;
@@ -606,6 +607,16 @@ public class GameWindow extends JDialog
 	{
 		textField.getText();
 		this.textField.setText(attacFieldText);
+	}
+
+	public void displayGameOver()
+	{
+		sendMessge("Game Over");
+
+		JOptionPane.showMessageDialog(null, "Game Over", "Game Over",
+				JOptionPane.OK_CANCEL_OPTION);
+
+		this.setVisible(false);
 	}
 
 }
