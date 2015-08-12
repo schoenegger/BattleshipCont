@@ -9,8 +9,6 @@ import logging.Logging;
 
 public class StartViewSettingData
 {
-	// private LanguageView languageView;
-	// private StartViewSettingData startSettData;
 	private String configFilePath = "cnf/configGame.txt";
 	private String ipAddress;
 	private String port;
@@ -83,15 +81,20 @@ public class StartViewSettingData
 		this.language = language;
 	}
 
-	public StartViewSettingData()// LanguageView languageView
+	/**
+	 * Start ViewSettingData from file
+	 */
+	public StartViewSettingData()
 	{
-
 		loadSettingsFromFile();
-		// languageView = new LanguageView(startSettData.getLanguage());
 	}
 
+	/**
+	 * load setting from txt file
+	 */
 	public void loadSettingsFromFile()
 	{
+
 		try
 		{
 			FileReader fr = new FileReader(configFilePath);
@@ -112,8 +115,8 @@ public class StartViewSettingData
 		}
 		catch (Exception e)
 		{
+			Logging.writeErrorMessage("StartViewSettings -> load from file is not possible");
 
-			e.printStackTrace();
 		}
 
 	}
@@ -144,11 +147,13 @@ public class StartViewSettingData
 		}
 	}
 
+	/**
+	 * Write setting to file
+	 */
 	public void writeSettingsToFile()
 	{
 		try
 		{
-
 			FileWriter fstream = new FileWriter(configFilePath, false);
 			BufferedWriter out = new BufferedWriter(fstream);
 
@@ -161,8 +166,8 @@ public class StartViewSettingData
 		}
 		catch (Exception e)
 		{
-			Logging.writeErrorMessage("Cannot write Start view Settings Data to File");
-			System.err.println("Error: " + e.getMessage());
+			Logging.writeErrorMessage("StartVieSettings -> Cannot write Start view Settings Data to File");
+
 		}
 	}
 }

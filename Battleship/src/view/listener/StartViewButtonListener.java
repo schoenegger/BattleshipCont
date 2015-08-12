@@ -8,9 +8,15 @@ import java.awt.event.KeyListener;
 import view.GlobalStrings.Definitions;
 import Game.Logic;
 
+/**
+ * StartViewButtonListener
+ * 
+ * @author Neubauer Dietmar
+ * @version 1.0
+ * 
+ */
 public class StartViewButtonListener implements ActionListener, KeyListener
 {
-
 	private Logic refGameLogic;
 
 	public StartViewButtonListener(Logic refGameLogic)
@@ -39,17 +45,13 @@ public class StartViewButtonListener implements ActionListener, KeyListener
 		}
 	}
 
-	// Add Didi Key Listener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		// int i = 0;
-		// i = 123;
-		// JFrame source = (JFrame) e.getSource();
+
 		switch (e.getKeyCode())
 		{
 		case KeyEvent.VK_ESCAPE :
-			// System.exit(0);
 			refGameLogic.quitGame();
 			break;
 		case KeyEvent.VK_P :

@@ -18,8 +18,6 @@ public class Field
 	private boolean isFieldInit = false;
 	private boolean isShipSettingPossible = false;
 
-	// Array of FieldElements 10x10--??
-
 	public Field()
 	{
 		fieldElemtens = new FieldElement[10][10];
@@ -40,10 +38,8 @@ public class Field
 
 	public boolean canSetShip(Ship ship)
 	{
-
 		return checkIfShipIsInField(ship) && !isFieldInit
 				&& checkAroundShipPosition(ship);
-
 	}
 
 	private boolean checkAroundField()
@@ -110,7 +106,6 @@ public class Field
 	 */
 	public boolean setShipsOnField(Vector<Ship> ships)
 	{
-
 		shipsOnField = new Vector<Ship>();
 
 		if (checkIfShipsListIsValid())
@@ -119,7 +114,6 @@ public class Field
 			this.isFieldInit = true;
 			return true;
 		}
-
 		return false;
 	}
 
@@ -182,7 +176,6 @@ public class Field
 		return false;
 	}
 
-	// TODO maybe second fireToPosition
 	public boolean fireToPosition(int posX, int posY)
 	{
 		if (fieldElemtens[posX][posY].isTaken())
@@ -213,7 +206,7 @@ public class Field
 			int ind = 0;
 			try
 			{
-				if (!align.equals("vertical"))
+				if (align.equals("horizontal"))
 				{
 					for (int i = x; i < (x + ship.getCountSector() - 1); i++)
 					{
@@ -229,7 +222,7 @@ public class Field
 				{
 					for (int i = y; i < (y + ship.getCountSector() - 1); i++)
 					{
-						if (!(fieldElemtens[i][y].getFieldState() == FieldState.STRIKE_SHIP))
+						if (!(fieldElemtens[y][i].getFieldState() == FieldState.STRIKE_SHIP))
 						{
 							isAlive = true;
 						}
@@ -241,7 +234,7 @@ public class Field
 			catch (Exception e)
 			{
 				System.out.println("wrong num=" + ind + "  vertical = " + vert);
-				e.printStackTrace();
+
 			}
 			ship.setAliveState(isAlive);
 		}

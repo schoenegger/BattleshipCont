@@ -31,6 +31,11 @@ import GameUtilities.GlobalValues;
 public class StartSettingsWindow extends JDialog
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private StartViewSettingData startViewSettingsData;
 	private LanguageView languageView;
 	private GameSoundPlayer gameSoundPlayer;
@@ -66,7 +71,7 @@ public class StartSettingsWindow extends JDialog
 		this.viewSettingsListener = new StartViewSettingsListener(refGameLogic,
 				this);
 		this.gameSoundPlayer = refLogic.getgameSoundPlayer();
-		// this.gameSoundPlayer = gameSoundPlayer;
+
 		initialize();
 	}
 
@@ -300,6 +305,6 @@ public class StartSettingsWindow extends JDialog
 	public void showLogView()
 	{
 		LogView logView = new LogView();
-
+		logView.init();
 	}
 }

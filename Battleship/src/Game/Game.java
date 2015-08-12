@@ -18,9 +18,6 @@ public class Game
 	 */
 	public static void main(String[] args) throws Exception
 	{
-		// Frontend frontend = new Frontend();
-
-		// frontend.callMenue();
 		Logic gameLogic = new Logic(true);
 		Logging.writeInfoMessage("Start Game");
 	}

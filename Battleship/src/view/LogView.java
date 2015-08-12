@@ -24,6 +24,13 @@ import javax.swing.JTextArea;
 
 import logging.Logging;
 
+/**
+ * LogView
+ * 
+ * @author Thomas Schönegger
+ * @version 1.0
+ * 
+ */
 public class LogView
 {
 
@@ -39,6 +46,11 @@ public class LogView
 	public LogView()
 	{
 		initialize();
+
+	}
+
+	public void init()
+	{
 		readTextFromLogfile();
 	}
 
@@ -147,11 +159,19 @@ public class LogView
 	private void saveTextFromLogfile()
 	{
 		JFileChooser fc = new JFileChooser();
-		int returnVal = fc.showDialog(null, "Attach");
+		fc.showDialog(null, "Attach");
 
-		if (checkCreateFile(fc.getSelectedFile().getPath()))
+		try
 		{
-			writeLogToFile();
+			if (checkCreateFile(fc.getSelectedFile().getPath()))
+			{
+				writeLogToFile();
+			}
+		}
+		catch (NullPointerException npe)
+		{
+			Logging.writeErrorMessage("LogView -> no File Selected");
+			JOptionPane.showConfirmDialog(null, "No File selected");
 		}
 	}
 

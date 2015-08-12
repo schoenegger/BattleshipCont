@@ -60,4 +60,5 @@ public class ConnectionLogic
 	{
 		return connection.isConnectionAvailable();
 	}
+
 }

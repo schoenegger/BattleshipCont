@@ -24,9 +24,10 @@ import Game.Logic;
 import GameUtilities.Field.Field;
 
 /**
+ * StartView
  * 
  * @author Thomas Schönegger
- *
+ * @version 1.0
  */
 public class StartView extends JDialog
 {

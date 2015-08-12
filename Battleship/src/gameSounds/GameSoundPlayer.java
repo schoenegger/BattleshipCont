@@ -16,16 +16,10 @@ public class GameSoundPlayer extends JButton
 	public final static String SOUND_GAME_WAV = "sound_game.wav";
 	public final static String SOUND_CANNON_HIT = "sound_cannon_hit";
 	public final static String SOUND_CANNON_MISS = "sound_cannon_miss";
-	// public final static String SOUND_GAME_WAV = "";
 
 	private Clip soundClip;
 	private boolean soundIsOn;
 	private String currentWavFileNameToPlay;
-
-	// private enum SoundTypes
-	// {
-	// BOMB, BACKGROUND, WATERSHOOT;
-	// }
 
 	public GameSoundPlayer()
 	{

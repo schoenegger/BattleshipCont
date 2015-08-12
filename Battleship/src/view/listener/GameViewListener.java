@@ -10,11 +10,17 @@ import logging.Logging;
 import view.GlobalStrings.Definitions;
 import Game.Logic;
 
+/**
+ * GameViewListener
+ * 
+ * @author Thomas Schönegger
+ * @version 1.0
+ * 
+ */
 public class GameViewListener implements ActionListener, MouseMotionListener,
 		MouseListener
 
 {
-
 	private Logic refLogic;
 
 	public GameViewListener(Logic refLogic)
@@ -69,32 +75,24 @@ public class GameViewListener implements ActionListener, MouseMotionListener,
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-
 	}
-
-	// must be called by valid Mouse Click Event
-	// refLogic.mouseClickToGameView();
 
 }

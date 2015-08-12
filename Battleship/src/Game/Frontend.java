@@ -43,7 +43,6 @@ public class Frontend
 		System.out.println("Please select: ");
 
 		player.sendFrontendReferenceToLogic(this);
-		// logic.setFrontendReference(this);
 
 		connectionType = readMenueInput();
 	}

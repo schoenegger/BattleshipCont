@@ -16,11 +16,6 @@ public class CpuPlayerLogic
 	private CpuGameHandler cpuGameHandler;
 	private int level;
 
-	public CpuPlayerLogic()
-	{
-
-	}
-
 	public Command getNextCommand()
 	{
 		try

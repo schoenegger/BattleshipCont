@@ -6,7 +6,7 @@ import java.util.Queue;
 import GameUtilities.Command;
 
 /**
- * Collect and handle the game data
+ * Collect and handle the game data ****Semaphor
  * 
  * @author Schoenegger / Purkart / Koch
  */
@@ -14,7 +14,7 @@ public class DataBox
 {
 	private static Queue<Command> receiveCommands = new LinkedList<Command>();
 	private static Queue<Command> sendCommands = new LinkedList<Command>();
-	// Semaphor
+
 	private static boolean accessForReceiveCommands = true;
 	private static boolean accessForSendCommands = true;
 
@@ -74,7 +74,7 @@ public class DataBox
 	}
 
 	/**
-	 * Checks if there are recieved Commands
+	 * Checks if there are received Commands
 	 * 
 	 * @return boolean
 	 */
@@ -156,7 +156,7 @@ public class DataBox
 	}
 
 	/**
-	 * Pushs a send Command into the queue
+	 * Push a send Command into the queue
 	 * 
 	 * @param command
 	 */
@@ -168,7 +168,7 @@ public class DataBox
 	}
 
 	/**
-	 * Pushs a send Receive into the queue
+	 * Push a Receive Command into the queue
 	 * 
 	 * @param command
 	 */
@@ -179,4 +179,5 @@ public class DataBox
 		receiveCommands.add(command);
 		freeAccessReceiveCommands();
 	}
+
 }

@@ -16,6 +16,7 @@ import GameConnections.CommandBuilder.CommandConverter;
 import GameUtilities.Command;
 
 /**
+ * TCP Connection Server
  * 
  * @author Schoenegger / Purkart / Koch
  *

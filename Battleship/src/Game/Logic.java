@@ -103,7 +103,7 @@ public class Logic
 	public void setIsMyTurn(boolean isMyTurn)
 	{
 		this.isMyTurn = isMyTurn;
-		// this.startView.setMyTurnInGameWindow(isMyTurn);
+
 	}
 
 	private boolean fireToFieldPosition(String fireMove)
@@ -212,7 +212,7 @@ public class Logic
 
 		if (ownField.checkIfAllShipsAreCountersunk())
 		{
-			// referenceFrontend.displayGameOver();
+
 			startView.displayGameOver();
 			wait(10000);
 			ConnectionCommandHandler.abortConnection();
@@ -272,37 +272,65 @@ public class Logic
 	}
 
 	// ************* Commands To Logic from startview*************
+
+	/**
+	 * inform view to sedn next move
+	 */
 	public void getNextMoveFromStartView()
 	{
 		this.startView.getNextCommandFromGameWindow();
 	}
 
+	/**
+	 * send read mouse position to view
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void sendMousePositionsToGameView(int x, int y)
 	{
 		startView.sendMouseMoveToGameView(x, y);
 	}
 
+	/**
+	 * inform View that set Ship button was pressed
+	 */
 	public void setShipButtonPressed()
 	{
 		startView.sendSetButtonPressed();
 	}
 
+	/**
+	 * inform view that attack ship button was pressed
+	 */
 	public void attacShipButtonPressed()
 	{
 		startView.attacShipButtonPressed();
 	}
 
+	/**
+	 * inform view that mouse were happened
+	 */
 	public void mouseClickToGameView()
 	{
 		startView.mouseClickToGameView();
 	}
 
 	// ************* Commands To Logic from startSettingsWindow*************
+
+	/**
+	 * stops the background sound
+	 */
 	public void stopBackGroundSounds()
 	{
 		gameSoundPlayer.stopBackGroundSounds();
 	}
 
+	/**
+	 * starts the background sound
+	 * 
+	 * @param wavFilename
+	 */
 	public void startBackgroundSound(String wavFilename)
 	{
 		gameSoundPlayer.startBackgroundSound(wavFilename);

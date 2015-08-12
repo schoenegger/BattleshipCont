@@ -1,17 +1,12 @@
 package GameConnections;
 
-import java.awt.Point;
-
 import Game.CpuPlayer;
 import GameUtilities.Command;
-import GameUtilities.Ship;
-import GameUtilities.ShipPosition;
-import GameUtilities.ShipType;
 
 /**
  * Local Connection - CPU Player
  * 
- * @author Schoenegger / Purkart / Koch
+ * @author Schoenegger
  *
  */
 public class LocalConnection extends Connection
@@ -45,7 +40,6 @@ public class LocalConnection extends Connection
 	@Override
 	public Command receiveCommand()
 	{
-
 		return cpuPlayer.receiveCommand();
 	}
 
@@ -62,13 +56,12 @@ public class LocalConnection extends Connection
 	}
 
 	/**
-	 * close
+	 * close the connection
 	 */
 	@Override
 	public void close()
 	{
-		// TODO Auto-generated method stub
-
+		this.close();
 	}
 
 }

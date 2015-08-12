@@ -93,7 +93,7 @@ public class TCPConnectionClient extends Connection
 		}
 		catch (Exception exception)
 		{
-			// Todo
+			Logging.writeErrorMessage("TCPConnectionClient -> receive Stream is not possible");
 		}
 
 		return inputString;
@@ -128,7 +128,7 @@ public class TCPConnectionClient extends Connection
 		}
 		catch (Exception exception)
 		{
-			// Todo
+			Logging.writeErrorMessage("TcpConnectionClient -> Send Stream not possible");
 		}
 	}
 
@@ -138,7 +138,7 @@ public class TCPConnectionClient extends Connection
 	@Override
 	public void close()
 	{
-		// TODO Auto-generated method stub
+
 		try
 		{
 			System.out.println("Close Connection!");
@@ -159,7 +159,6 @@ public class TCPConnectionClient extends Connection
 	@Override
 	public boolean isConnectionAvailable()
 	{
-
 		return false;
 	}
 }

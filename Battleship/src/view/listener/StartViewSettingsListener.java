@@ -13,6 +13,13 @@ import view.GlobalStrings.Definitions;
 import view.settings.StartSettingsWindow;
 import Game.Logic;
 
+/**
+ * StartViewSettingsListener
+ * 
+ * @author Thomas Schönegger
+ * @version 1.0
+ *
+ */
 public class StartViewSettingsListener implements ActionListener, KeyListener,
 		WindowListener
 {
@@ -38,6 +45,7 @@ public class StartViewSettingsListener implements ActionListener, KeyListener,
 			break;
 		case Definitions.SHOW_LOG_BUTTON_START_SETTINGS_VIEW :
 			refSettingsWindow.showLogView();
+			break;
 		case Definitions.TURN_MUSIC_ON_OFF :
 			refLogic.turnSoundOnOrOff();
 			break;
@@ -84,49 +92,42 @@ public class StartViewSettingsListener implements ActionListener, KeyListener,
 	@Override
 	public void windowActivated(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e)
-	{
-		// TODO Auto-generated method stub
+	{// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 }

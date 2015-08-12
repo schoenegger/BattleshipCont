@@ -45,6 +45,11 @@ public class LanguageView
 		setLanguage(language);
 	}
 
+	/**
+	 * Sets the current language
+	 * 
+	 * @param languageDictionary
+	 */
 	public void setLanguage(String languageDictionary)
 	{
 		try
@@ -58,6 +63,12 @@ public class LanguageView
 		}
 	}
 
+	/**
+	 * returns the language string by choosen Language
+	 * 
+	 * @param languageDictionary
+	 * @return
+	 */
 	public String getResourceString(String languageDictionary)
 	{
 		String resourceString;

@@ -16,7 +16,6 @@ public class ConnectionCommandHandler implements Runnable
 	private Command commandSend;
 	private Command commandReceive;
 	private Connection connection = null;
-	// private List<String> stringList =
 
 	private static boolean abortConnection = false; // static.. you can call it
 
@@ -146,7 +145,8 @@ public class ConnectionCommandHandler implements Runnable
 		}
 		catch (Exception e)
 		{
-			System.out.println(e);
+			Logging.writeErrorMessage("ConnectionCommandHandler -> "
+					+ e.toString());
 		}
 	}
 

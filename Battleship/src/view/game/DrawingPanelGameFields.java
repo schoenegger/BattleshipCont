@@ -17,6 +17,12 @@ import GameUtilities.Field.Field;
 import GameUtilities.Field.FieldElement;
 import GameUtilities.Field.FieldState;
 
+/**
+ * DrawingPanelGameFields
+ * 
+ * @author Thomas Schönegger
+ * @version 1.0
+ */
 public class DrawingPanelGameFields extends JPanel
 {
 

@@ -40,6 +40,7 @@ import GameUtilities.Field.FieldState;
  * 
  * @author Thomas Schönegger
  * @version 1.0
+ * 
  */
 public class GameWindow extends JDialog
 {
@@ -52,15 +53,15 @@ public class GameWindow extends JDialog
 	private DrawingPanelGameFields drawPanel;
 	private JTextField textField;
 	private JLabel lblMessages;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JLabel lblXY;
 	private JButton btnAttack;
 	// private JButton btnExit;
 
 	private Field refOwnField;
 	private Field refEnemyField;
-	private volatile String nextMove = null;
-	private String currFieldText = "";
+	// private volatile String nextMove = null;
+	// private String currFieldText = "";
 	private JRadioButton rdbtnVertical;
 	private JRadioButton rdbtnHorizontal;
 	private JButton btnSetShip;
@@ -93,12 +94,6 @@ public class GameWindow extends JDialog
 		this.refStartView = refStartView;
 		this.gameViewListener = new GameViewListener(refLogic);
 		initializeComponents();
-		initGameField();
-		// setYourTurnLabel(true);
-	}
-
-	private void initGameField()
-	{
 
 	}
 
@@ -165,7 +160,7 @@ public class GameWindow extends JDialog
 		gbc_rdbtnVertical.gridy = 0;
 		panel_1.add(rdbtnVertical, gbc_rdbtnVertical);
 
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		comboBox.setModel(new DefaultComboBoxModel(new String[]
 		{ "Destroyer", "AirCarrier", "YellowSubmarine" }));
 		comboBox.setToolTipText("ShipType");
@@ -254,13 +249,9 @@ public class GameWindow extends JDialog
 		frmSettings.setVisible(true);
 	}
 
-	// public void setYourTurnLabel(boolean on)
-	// {
-	// lblYourTurn.setVisible(on);
-	// refresh();
-	//
-	// }
-
+	/**
+	 * Creates a game3 view by game Fields
+	 */
 	public void createGameViewByGameFields()
 	{
 		drawPanel.revalidate();
