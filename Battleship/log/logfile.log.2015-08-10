@@ -1,0 +1,23 @@
+2015-08-10 20:33:40,352  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 21:09:47,473  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 21:14:16,620  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 21:20:26,392  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 21:23:08,016  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 21:52:49,582  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 21:52:57,656  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 21:53:16,844  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 21:53:20,284 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Can not create connection. Please restart the Game !!!
+ Exception:java.net.ConnectException: Connection refused: connect
+2015-08-10 23:08:23,428  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:09:56,407  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:13:26,661  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:13:50,298  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:17:32,493  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:19:00,644  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:22:18,284  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:34:02,832  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:35:41,193  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:49:40,563  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:52:25,933  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:53:06,229  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-10 23:53:37,590  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game

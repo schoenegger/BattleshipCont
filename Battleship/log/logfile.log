@@ -1,4 +1,50 @@
-2015-08-06 22:37:43,697  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
-2015-08-06 22:42:26,546  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
-2015-08-06 22:42:30,303 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Can not create connection. Please restart the Game !!!
+2015-08-11 21:01:11,553  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 21:04:31,854  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 21:04:39,274  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - Controller create CSV File because path does not exists
+2015-08-11 21:04:44,696  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - Controller create CSV File because path does not exists
+2015-08-11 22:52:11,728  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 22:52:18,679 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Can not create connection. Please restart the Game !!!
  Exception:java.net.ConnectException: Connection refused: connect
+2015-08-11 22:52:27,770  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 22:54:58,720  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:01:22,517  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:13:12,620  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:17:26,862  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:19:03,882  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:50:04,121  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:50:21,966  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:52:33,160  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:56:14,015  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-11 23:59:24,754  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:15:30,883  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:24:58,538  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:30:38,271  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:31:49,675  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:35:05,469  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:42:25,968  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:42:29,012 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Can not create connection. Please restart the Game !!!
+ Exception:java.net.ConnectException: Connection refused: connect
+2015-08-12 00:44:14,175  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:44:17,605 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Can not create connection. Please restart the Game !!!
+ Exception:java.net.ConnectException: Connection refused: connect
+2015-08-12 00:44:29,016  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:44:36,634  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-12 00:47:19,188  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:47:27,504  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 00:47:31,624  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-12 00:47:36,705 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - TCPConnectionServer -> No Connectiont available
+2015-08-12 20:14:56,484  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 20:33:37,985  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 20:50:07,804  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 20:50:11,668 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - TCPConnectionServer -> No Connectiont available
+2015-08-12 20:50:20,077  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 20:50:25,209  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-12 20:50:43,991  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-12 20:50:47,494  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-12 20:51:16,070 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command -> 
+2015-08-12 20:51:16,671 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command -> 
+2015-08-12 20:51:17,271 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command -> 
+2015-08-12 20:51:17,872 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command -> 
+2015-08-12 20:51:18,472 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command -> 
+2015-08-12 20:51:19,073 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command -> 
+2015-08-12 20:51:19,673 ERROR [Thread-8] - logging.Logging.writeErrorMessage 33 - Command Converter -> Cannot Convert to Game Command -> 
