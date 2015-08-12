@@ -299,10 +299,10 @@ public class StartView extends JDialog
 		gameWindow.MouseClickToGameView();
 	}
 
-	public void setMyTurnInGameWindow(boolean isMyTurn)
-	{
-		this.gameWindow.setYourTurnLabel(isMyTurn);
-	}
+	// public void setMyTurnInGameWindow(boolean isMyTurn)
+	// {
+	// this.gameWindow.setYourTurnLabel(isMyTurn);
+	// }
 
 	public void displayGameOver()
 	{

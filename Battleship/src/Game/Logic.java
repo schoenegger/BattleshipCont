@@ -103,7 +103,7 @@ public class Logic
 	public void setIsMyTurn(boolean isMyTurn)
 	{
 		this.isMyTurn = isMyTurn;
-		this.startView.setMyTurnInGameWindow(isMyTurn);
+		// this.startView.setMyTurnInGameWindow(isMyTurn);
 	}
 
 	private boolean fireToFieldPosition(String fireMove)

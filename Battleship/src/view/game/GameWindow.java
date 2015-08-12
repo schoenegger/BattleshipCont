@@ -55,7 +55,7 @@ public class GameWindow extends JDialog
 	private JComboBox comboBox;
 	private JLabel lblXY;
 	private JButton btnAttack;
-	private JButton btnExit;
+	// private JButton btnExit;
 
 	private Field refOwnField;
 	private Field refEnemyField;
@@ -94,7 +94,7 @@ public class GameWindow extends JDialog
 		this.gameViewListener = new GameViewListener(refLogic);
 		initializeComponents();
 		initGameField();
-		setYourTurnLabel(true);
+		// setYourTurnLabel(true);
 	}
 
 	private void initGameField()
@@ -145,14 +145,14 @@ public class GameWindow extends JDialog
 		{ 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
-		btnExit = new JButton("EXIT");
-		btnExit.setEnabled(false);
-		GridBagConstraints gbc_btnExit = new GridBagConstraints();
-		gbc_btnExit.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnExit.insets = new Insets(0, 0, 5, 5);
-		gbc_btnExit.gridx = 1;
-		gbc_btnExit.gridy = 0;
-		panel_1.add(btnExit, gbc_btnExit);
+		// btnExit = new JButton("EXIT");
+		// btnExit.setEnabled(false);
+		// GridBagConstraints gbc_btnExit = new GridBagConstraints();
+		// gbc_btnExit.anchor = GridBagConstraints.NORTHWEST;
+		// gbc_btnExit.insets = new Insets(0, 0, 5, 5);
+		// gbc_btnExit.gridx = 1;
+		// gbc_btnExit.gridy = 0;
+		// panel_1.add(btnExit, gbc_btnExit);
 
 		rdbtnVertical = new JRadioButton("vertical");
 		rdbtnVertical.setBackground(new Color(0, 100, 0));
@@ -254,12 +254,12 @@ public class GameWindow extends JDialog
 		frmSettings.setVisible(true);
 	}
 
-	public void setYourTurnLabel(boolean on)
-	{
-		lblYourTurn.setVisible(on);
-		refresh();
-
-	}
+	// public void setYourTurnLabel(boolean on)
+	// {
+	// lblYourTurn.setVisible(on);
+	// refresh();
+	//
+	// }
 
 	public void createGameViewByGameFields()
 	{
@@ -334,7 +334,7 @@ public class GameWindow extends JDialog
 		btnSetShip.setVisible(false);
 		btnAttack.setEnabled(true);
 		btnAttack.setVisible(true);
-		btnExit.setEnabled(true);
+		// btnExit.setEnabled(true);
 	}
 
 	private void setShipToField()
@@ -483,7 +483,7 @@ public class GameWindow extends JDialog
 
 				if (refEnemyField.IsValidAttacPosition(x, y))
 				{
-					setYourTurnLabel(false);
+					// setYourTurnLabel(false);
 					refStartView.sendAttackCommandToEnemy(attackCommand);
 				}
 				else
@@ -611,8 +611,10 @@ public class GameWindow extends JDialog
 
 	public void displayGameOver()
 	{
-		sendMessge("Game Over");
+		this.btnAttack.setEnabled(false);
+		this.btnAttack.setVisible(false);
 
+		sendMessge("Game Over");
 		JOptionPane.showMessageDialog(null, "Game Over", "Game Over",
 				JOptionPane.OK_CANCEL_OPTION);
 

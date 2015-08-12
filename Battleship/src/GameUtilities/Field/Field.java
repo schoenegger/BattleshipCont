@@ -268,43 +268,51 @@ public class Field
 			String alignment = ship.getShipPosition().getAlignment();
 			int countSector = ship.getCountSector();
 
-			if (checkIfShipIsInField(ship))
+			try
 			{
-				if (alignment.toLowerCase().equals("horizontal")
-						&& ship.isAlive())
+				if (checkIfShipIsInField(ship))
 				{
-					for (int i = 0; i < countSector; i++)
+					if (alignment.toLowerCase().equals("horizontal")
+							&& ship.isAlive())
 					{
-						fieldElemtens[currShipPoint.x + i][currShipPoint.y]
-								.setTaken();
-
-						if (!ship.isAlive())
+						for (int i = 0; i < countSector; i++)
 						{
 							fieldElemtens[currShipPoint.x + i][currShipPoint.y]
-									.setSunkenShip();
+									.setTaken();
+
+							if (!ship.isAlive())
+							{
+								fieldElemtens[currShipPoint.x + i][currShipPoint.y]
+										.setSunkenShip();
+							}
+						}
+					}
+					else
+					// Horizontal
+					{
+						for (int i = 0; i < countSector; i++)
+						{
+							fieldElemtens[currShipPoint.x][currShipPoint.y + i]
+									.setTaken();
+
+							if (!ship.isAlive())
+							{
+								fieldElemtens[currShipPoint.x + i][currShipPoint.y]
+										.setSunkenShip();
+							}
 						}
 					}
 				}
 				else
-				// Horizontal
 				{
-					for (int i = 0; i < countSector; i++)
-					{
-						fieldElemtens[currShipPoint.x][currShipPoint.y + i]
-								.setTaken();
-
-						if (!ship.isAlive())
-						{
-							fieldElemtens[currShipPoint.x + i][currShipPoint.y]
-									.setSunkenShip();
-						}
-					}
+					System.out
+							.println("Field.setTaken -> Ship is not in field");
+					Logging.writeInfoMessage("Field.setTaken -> Ship is not in field");
 				}
 			}
-			else
+			catch (Exception e)
 			{
-				System.out.println("Field.setTaken -> Ship is not in field");
-				Logging.writeInfoMessage("Field.setTaken -> Ship is not in field");
+				Logging.writeErrorMessage("Field -> No valid Field");
 			}
 		}
 
