@@ -64,6 +64,7 @@ public class TCPConnectionClient extends Connection
 					"No Client Available", JOptionPane.OK_CANCEL_OPTION);
 
 			Logging.writeErrorMessage("TCPConnectionServer -> No Connectiont available");
+			System.exit(1);
 		}
 	}
 

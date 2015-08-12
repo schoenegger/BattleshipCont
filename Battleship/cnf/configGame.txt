@@ -2,4 +2,4 @@ ipAddress;localhost
 port;8009
 mode;client
 level;1
-language;DEUTSCH
+language;ENGLISH

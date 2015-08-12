@@ -45,6 +45,9 @@ public class TCPConnectionServer extends Connection
 
 		try
 		{
+			JOptionPane.showMessageDialog(null, "No Client Available",
+					"No Client Available", JOptionPane.PLAIN_MESSAGE);
+
 			connectionSocket = serverSocket.accept();
 			System.out.println("Just connected to "
 					+ connectionSocket.getRemoteSocketAddress());
