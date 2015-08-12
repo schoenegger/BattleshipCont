@@ -13,7 +13,6 @@ import org.mockito.stubbing.Answer;
 
 import Game.CommandHandler;
 import GameUtilities.Field.Field;
-import GameUtilities.Field.FieldElement;
 
 public class ConnectionTests
 {
@@ -42,15 +41,32 @@ public class ConnectionTests
 		// }})
 		// .when(mockedList).mockedList.size();
 		//
+		// doAnswer(new Answer()
+		// {
+		// public Object answer(InvocationOnMock invocation)
+		// {
+		//
+		// return null;
+		// }
+		// }).when(field).getFieldElement(10, 10);
+		//
+		// doAnswer(new Answer()
+		// {
+		// public Object answer(InvocationOnMock invocation)
+		// {
+		// FieldElement fieldElement = new FieldElement(true);
+		//
+		// return fieldElement;
+		// }
+		// }).when(field).getFieldElement(9, 9);
+
 		doAnswer(new Answer()
 		{
 			public Object answer(InvocationOnMock invocation)
 			{
-				FieldElement fieldElement = new FieldElement(true);
-
-				return fieldElement;
+				return "test";
 			}
-		}).when(field).getFieldElement(10, 10);
+		}).when(mockCommHandler).toString();
 
 		// when(mock.someMethod(anyString())).thenAnswer(new Answer() {
 		// Object answer(InvocationOnMock invocation) {
@@ -63,7 +79,9 @@ public class ConnectionTests
 		// when(mockedList.size()).thenCallRealMethod(field.fireToPosition(10,
 		// 10));
 		// when(mockedList.addAll(new ArrayList<String>()).
-		Assert.assertNotNull(field.getFieldElement(10, 10));
+		Assert.assertEquals("test", mockCommHandler.toString());
+		// Assert.assertNotNull(field.getFieldElement(9, 9));
+		// Assert.assertNull(field.getFieldElement(10, 10));
 		Assert.assertEquals(10, mockedList.size());
 		Assert.assertTrue(mockedList.isEmpty());
 

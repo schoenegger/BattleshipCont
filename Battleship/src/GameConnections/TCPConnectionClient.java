@@ -8,6 +8,9 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import javax.swing.JOptionPane;
+
+import logging.Logging;
 import GameConnections.CommandBuilder.CommandConverter;
 import GameUtilities.Command;
 
@@ -37,16 +40,31 @@ public class TCPConnectionClient extends Connection
 	 * @throws UnknownHostException
 	 * @throws IOException
 	 */
-	public TCPConnectionClient(int port, String ipAdress) throws UnknownHostException, IOException
+	public TCPConnectionClient(int port, String ipAdress)
+			throws UnknownHostException, IOException
 	{
-		this.clientSocket = new Socket(ipAdress, port);
-		System.out.println("Just connected to " + clientSocket.getRemoteSocketAddress());
+		try
+		{
+			this.clientSocket = new Socket(ipAdress, port);
+			System.out.println("Just connected to "
+					+ clientSocket.getRemoteSocketAddress());
 
-		this.outputStream = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+			this.outputStream = new BufferedWriter(new OutputStreamWriter(
+					clientSocket.getOutputStream()));
 
-		this.inputReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			this.inputReader = new BufferedReader(new InputStreamReader(
+					clientSocket.getInputStream()));
 
-		convert = new CommandConverter();
+			convert = new CommandConverter();
+		}
+		catch (Exception e)
+		{
+
+			JOptionPane.showMessageDialog(null, "No Client Available",
+					"No Client Available", JOptionPane.OK_CANCEL_OPTION);
+
+			Logging.writeErrorMessage("TCPConnectionServer -> No Connectiont available");
+		}
 	}
 
 	/**

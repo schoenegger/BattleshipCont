@@ -34,28 +34,6 @@ public class LogView
 	private String filePath;
 
 	/**
-	 * Launch the application.
-	 */
-	// public static void main(String[] args)
-	// {
-	// EventQueue.invokeLater(new Runnable()
-	// {
-	// public void run()
-	// {
-	// try
-	// {
-	// LogView window = new LogView();
-	// window.frame.setVisible(true);
-	// }
-	// catch (Exception e)
-	// {
-	// e.printStackTrace();
-	// }
-	// }
-	// });
-	// }
-
-	/**
 	 * Create the application.
 	 */
 	public LogView()
@@ -171,13 +149,19 @@ public class LogView
 		JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showDialog(null, "Attach");
 
-		if (createFile(filePath))
+		if (checkCreateFile(fc.getSelectedFile().getPath()))
 		{
 			writeLogToFile();
 		}
 	}
 
-	public boolean createFile(String filePath)
+	/**
+	 * Check if Create Textfile is possible
+	 * 
+	 * @param filePath
+	 * @return
+	 */
+	private boolean checkCreateFile(String filePath)
 	{
 		File fullFilePath = new File(filePath);
 
@@ -188,20 +172,21 @@ public class LogView
 			if (result == JOptionPane.YES_OPTION)
 			{
 				this.filePath = filePath;
+				return true;
 			}
-			return true;
+			return false;
 		}
 		else
 		{
 			this.filePath = filePath;
 			Logging.writeInfoMessage("Controller create CSV File because path does not exists");
-			return false;
+			return true;
 		}
 	}
 
 	private void writeLogToFile()
 	{
-		File file = new File(this.filePath);
+		File file = new File(this.filePath + ".log");
 
 		FileWriter fw;
 		try

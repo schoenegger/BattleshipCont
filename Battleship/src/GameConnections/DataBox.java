@@ -29,7 +29,7 @@ public class DataBox
 		{
 			try
 			{
-				Thread.sleep((int) (Math.random() * 1000));
+				Thread.sleep((int) (Math.random() * 500));
 			}
 			catch (Exception e)
 			{
@@ -54,7 +54,7 @@ public class DataBox
 		{
 			try
 			{
-				Thread.sleep((int) (Math.random() * 1000));
+				Thread.sleep((int) (Math.random() * 500));
 			}
 			catch (Exception e)
 			{

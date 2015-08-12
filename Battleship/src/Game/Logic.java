@@ -37,7 +37,6 @@ public class Logic
 	 */
 	public Logic(boolean isFirstPlayer)
 	{
-
 		startView = new StartView(this); // , startSettData
 		gameSoundPlayer = new GameSoundPlayer();
 
@@ -59,7 +58,6 @@ public class Logic
 	public void openViewGameFieldCPU()
 	{
 		startView.openViewGameFieldsCPU();
-
 	}
 
 	/**

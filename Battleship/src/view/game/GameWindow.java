@@ -381,7 +381,7 @@ public class GameWindow extends JDialog
 		}
 
 		isValid &= (posx < 10) && (posx >= 0) && (posy < 10) && (posy >= 0);
-		if (posx > 0 && posy > 0) // no negative Index allowed
+		if (posx >= 0 && posy >= 0) // no negative Index allowed
 		{
 			isValid &= (refEnemyField.getFieldElement(posx, posy)
 					.getFieldState() == FieldState.UNKNOWN);
@@ -481,7 +481,7 @@ public class GameWindow extends JDialog
 				x = Integer.parseInt(points[0]);
 				y = Integer.parseInt(points[1]);
 
-				if (refOwnField.IsValidAttacPosition(x, y))
+				if (refEnemyField.IsValidAttacPosition(x, y))
 				{
 					setYourTurnLabel(false);
 					refStartView.sendAttackCommandToEnemy(attackCommand);

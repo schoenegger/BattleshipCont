@@ -209,34 +209,39 @@ public class Field
 			int y = ship.getShipPosition().getXyPosition().y;
 
 			boolean isAlive = false;
-
-			if (!align.equals("horizontal"))
+			boolean vert = false;
+			int ind = 0;
+			try
 			{
-				for (int i = x; i < (x + ship.getCountSector()); i++)
+				if (!align.equals("vertical"))
 				{
-					if (fieldElemtens[i][y].getFieldState() == FieldState.STRIKE_SHIP)
+					for (int i = x; i < (x + ship.getCountSector() - 1); i++)
 					{
-						isAlive &= true;
+						if (!(fieldElemtens[i][y].getFieldState() == FieldState.STRIKE_SHIP))
+						{
+							isAlive = true;
+						}
+						vert = false;
+						ind = i;
 					}
-					else
+				}
+				else
+				{
+					for (int i = y; i < (y + ship.getCountSector() - 1); i++)
 					{
-						isAlive &= false;
+						if (!(fieldElemtens[i][y].getFieldState() == FieldState.STRIKE_SHIP))
+						{
+							isAlive = true;
+						}
+						vert = true;
+						ind = i;
 					}
 				}
 			}
-			else
+			catch (Exception e)
 			{
-				for (int i = y; i < (y + ship.getCountSector()); i++)
-				{
-					if (fieldElemtens[i][y].getFieldState() == FieldState.STRIKE_SHIP)
-					{
-						isAlive &= true;
-					}
-					else
-					{
-						isAlive &= false;
-					}
-				}
+				System.out.println("wrong num=" + ind + "  vertical = " + vert);
+				e.printStackTrace();
 			}
 			ship.setAliveState(isAlive);
 		}
