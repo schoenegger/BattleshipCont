@@ -9,6 +9,8 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +27,7 @@ import javax.swing.JTextArea;
 
 import logging.Logging;
 import view.GlobalStrings.LanguageView;
+import view.settings.StartSettingsWindow;
 import view.settings.StartViewSettingData;
 
 /**
@@ -36,6 +39,7 @@ import view.settings.StartViewSettingData;
  */
 public class LogView
 {
+	private StartSettingsWindow refstartSettingsWindow;
 	private StartViewSettingData startSettData;
 	private LanguageView languageView;
 	private JFrame frmLogFile;
@@ -47,8 +51,9 @@ public class LogView
 	/**
 	 * Create the application.
 	 */
-	public LogView()
+	public LogView(StartSettingsWindow refstartSettingsWindow)
 	{
+		this.refstartSettingsWindow = refstartSettingsWindow;
 		this.startSettData = new StartViewSettingData();
 		this.languageView = new LanguageView(startSettData.getLanguage());
 		initialize();
@@ -78,6 +83,54 @@ public class LogView
 		{ 0.0, 1.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[]
 		{ 0.0, 1.0, Double.MIN_VALUE };
+		frmLogFile.addWindowListener(new WindowListener()
+		{
+
+			@Override
+			public void windowOpened(WindowEvent e)
+			{
+				refstartSettingsWindow.enableLogButton(false);
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e)
+			{
+
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e)
+			{
+
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e)
+			{
+
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				refstartSettingsWindow.enableLogButton(true);
+
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e)
+			{
+				// TODO Auto-generated method stub
+
+			}
+		});
 		frmLogFile.getContentPane().setLayout(gridBagLayout);
 
 		btnClearLog = new JButton(

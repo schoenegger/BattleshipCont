@@ -188,17 +188,8 @@ public class StartView extends JDialog
 
 	public void openStartViewSettings()
 	{
-		// Singelton StartView Setting
-		if (startSettWindow == null)
-		{
-			this.startSettWindow = new StartSettingsWindow(startSettData,
-					this.languageView, refGameLogic);
-		}
-		// if (!startSettWindow.isShowing())
-		// {
-		// this.startSettWindow = new StartSettingsWindow(startSettData,
-		// this.languageView, refGameLogic);
-		// }
+		this.startSettWindow = new StartSettingsWindow(this, startSettData,
+				this.languageView, refGameLogic);
 	}
 
 	public void openViewGameFields()
@@ -308,5 +299,27 @@ public class StartView extends JDialog
 	public void displayGameOver()
 	{
 		this.gameWindow.displayGameOver();
+	}
+
+	public void setButtonSettingsVisible(boolean enable)
+	{
+		int width = btnSettings.getWidth();
+		int height = btnSettings.getHeight();
+
+		if (enable)
+		{
+			width *= 1.1;
+			height *= 1.1;
+			btnSettings.setSize(width, height);
+			btnSettings.setEnabled(enable);
+		}
+		else
+		{
+			width /= 1.1;
+			height /= 1.1;
+			btnSettings.setSize(width, height);
+			btnSettings.setEnabled(enable);
+		}
+
 	}
 }

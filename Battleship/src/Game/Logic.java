@@ -5,6 +5,8 @@ import gameSounds.GameSoundPlayer;
 import java.awt.Point;
 
 import view.StartView;
+import view.GlobalStrings.LanguageView;
+import view.settings.StartViewSettingData;
 import GameConnections.ConnectionCommandHandler;
 import GameUtilities.Command;
 import GameUtilities.AttackPosition.AttackPosition;
@@ -23,6 +25,9 @@ public class Logic
 	private StartView startView;
 	private CommandHandler commandHandler;
 
+	private StartViewSettingData startSettData;
+	private LanguageView languageView;
+
 	private GameSoundPlayer gameSoundPlayer;
 	private Command currAttacCommand = null;
 	private Field ownField = new Field(true);
@@ -37,8 +42,11 @@ public class Logic
 	 */
 	public Logic(boolean isFirstPlayer)
 	{
-		startView = new StartView(this); // , startSettData
-		gameSoundPlayer = new GameSoundPlayer();
+		this.startView = new StartView(this); // , startSettData
+		this.gameSoundPlayer = new GameSoundPlayer();
+
+		this.startSettData = new StartViewSettingData();
+		this.languageView = new LanguageView(startSettData.getLanguage());
 
 		this.isMyTurn = isFirstPlayer;
 	}
@@ -85,7 +93,8 @@ public class Logic
 	private void startNextMove()
 	{
 		startView.getNextCommandFromGameWindow();
-		startView.sendGameWindowMessage("Attac The Enemy");
+		startView.sendGameWindowMessage(languageView
+				.getResourceString(LanguageView.ATTACK_THE_ENEMY));
 	}
 
 	/**
@@ -95,7 +104,8 @@ public class Logic
 	 */
 	public void sendAttackCommandToEnemy(String fireCommand)
 	{
-		startView.sendGameWindowMessage("Enemy Turn");
+		startView.sendGameWindowMessage(languageView
+				.getResourceString(LanguageView.ENEMY_TURN));
 		fireToFieldPosition(fireCommand);
 		// commandHandler.receiveCommandFromDataBox();
 	}
@@ -204,8 +214,9 @@ public class Logic
 																	// Command
 																	// Handler
 	{
-		startView.sendGameWindowMessage("Attac from Enemy : "
-				+ attacPosition.toString());
+		startView.sendGameWindowMessage(languageView
+				.getResourceString(LanguageView.ATTACK_FROM_ENEMY)// ("Attac from Enemy : "
+				+ " " + attacPosition.toString());
 		currAttacCommand = new Command(1, attacPosition, "ATTAC_COMMAND");
 		ownField.fireToPosition(attacPosition.getXyPosition().x,
 				attacPosition.getXyPosition().y);

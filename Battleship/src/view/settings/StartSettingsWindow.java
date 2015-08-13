@@ -22,6 +22,7 @@ import javax.swing.SpinnerNumberModel;
 
 import logging.Logging;
 import view.LogView;
+import view.StartView;
 import view.GlobalStrings.Definitions;
 import view.GlobalStrings.LanguageView;
 import view.listener.StartViewSettingsListener;
@@ -41,6 +42,7 @@ public class StartSettingsWindow extends JDialog
 	private GameSoundPlayer gameSoundPlayer;
 	private Logic refGameLogic;
 	private StartViewSettingsListener viewSettingsListener;
+	private StartView refStartView;
 
 	private JFrame frmSettings;
 	private JTextField txtIPAddress;
@@ -62,9 +64,11 @@ public class StartSettingsWindow extends JDialog
 	 * 
 	 * @wbp.parser.constructor
 	 */
-	public StartSettingsWindow(StartViewSettingData startSettData,
-			LanguageView languageView, Logic refLogic)
+	public StartSettingsWindow(StartView refStartView,
+			StartViewSettingData startSettData, LanguageView languageView,
+			Logic refLogic)
 	{
+		this.refStartView = refStartView;
 		this.languageView = languageView;
 		startViewSettingsData = startSettData;
 		this.refGameLogic = refLogic;
@@ -301,7 +305,19 @@ public class StartSettingsWindow extends JDialog
 
 	public void showLogView()
 	{
-		LogView logView = new LogView();
+		LogView logView = new LogView(this);
 		logView.init();
+	}
+
+	public void enableLogButton(boolean enable)
+	{
+		btnShowLog.setEnabled(enable);
+
+	}
+
+	public void enableSettingsButtonInStartFrame(boolean enable)
+	{
+		refStartView.setButtonSettingsVisible(enable);
+
 	}
 }

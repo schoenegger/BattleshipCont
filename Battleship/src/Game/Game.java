@@ -18,8 +18,17 @@ public class Game
 	 */
 	public static void main(String[] args) throws Exception
 	{
-		Logic gameLogic = new Logic(true);
-		Logging.writeInfoMessage("Start Game");
+
+		try
+		{
+			Logic gameLogic = new Logic(true);
+			Logging.writeInfoMessage("Start Game");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			Logging.writeInfoMessage("Game Exception" + e.getMessage());
+		}
 	}
 
 }

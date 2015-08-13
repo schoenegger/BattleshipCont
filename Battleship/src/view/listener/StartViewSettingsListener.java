@@ -78,6 +78,7 @@ public class StartViewSettingsListener implements ActionListener, KeyListener,
 	@Override
 	public void windowOpened(WindowEvent e)
 	{
+		refSettingsWindow.enableSettingsButtonInStartFrame(false);
 		refLogic.stopBackGroundSounds();
 		refLogic.startBackgroundSound(GameSoundPlayer.SOUND_SETTING_WAV);
 	}
@@ -85,6 +86,7 @@ public class StartViewSettingsListener implements ActionListener, KeyListener,
 	@Override
 	public void windowClosing(WindowEvent e)
 	{
+		refSettingsWindow.enableSettingsButtonInStartFrame(true);
 		refLogic.stopBackGroundSounds();
 		refLogic.startBackgroundSound(GameSoundPlayer.SOUND_MENUE_WAV);
 	}
