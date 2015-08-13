@@ -25,37 +25,40 @@ public class CpuGameHandler
 
 	public Field getInitField()
 	{
-		for (ShipType st : ShipType.values())
-		{
-			setShipOnField(st);
-		}
+		// for (ShipType st : ShipType.values())
+		// {
+		setShipOnField();
+		// }
 
 		return this.ownField;
 
 	}
 
-	private void setShipOnField(ShipType st)
+	private void setShipOnField()
 	{
 		ShipCreator shipCreator = new ShipCreator();
 
 		Ship ship;
 
-		do
+		for (ShipType st : ShipType.values())
 		{
-			setRandShipPosition();
-			ShipPosition sp = new ShipPosition(this.randXY, this.randAlignment);
-			ship = shipCreator.getShip(sp, st);
-			if (ship != null)
+			do
 			{
-				while (!ownField.canSetShip(ship))
+				setRandShipPosition();
+				ShipPosition sp = new ShipPosition(this.randXY,
+						this.randAlignment);
+				ship = shipCreator.getShip(sp, st);
+				if (ship != null)
 				{
-					setRandShipPosition();
-					ship.setShipPosition(randXY, randAlignment);
+					while (!ownField.canSetShip(ship))
+					{
+						setRandShipPosition();
+						ship.setShipPosition(randXY, randAlignment);
+					}
+					ownField.setShipOnField(ship);
 				}
-				ownField.setShipOnField(ship);
-			}
-
-		} while (ship != null);
+			} while (ship != null);
+		}
 
 	}
 

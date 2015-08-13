@@ -12,13 +12,20 @@ import GameUtilities.Command;
 public class LocalConnection extends Connection
 {
 	private CpuPlayer cpuPlayer;
+	private int level = 1;
 
 	/**
 	 * Local Connection - CPU Player
 	 */
-	public LocalConnection()
+	public LocalConnection(int level)
 	{
-		this.cpuPlayer = new CpuPlayer();
+		this.level = level;
+		this.cpuPlayer = new CpuPlayer(level);
+	}
+
+	public int getLevel()
+	{
+		return this.level;
 	}
 
 	/**

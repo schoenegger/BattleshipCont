@@ -1,0 +1,64 @@
+2015-08-13 00:11:28,490  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 00:24:56,602  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 00:25:58,841  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 00:27:52,999  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 00:31:42,003  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 00:31:46,763 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - LogView -> no File Selected
+2015-08-13 00:47:07,396  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 00:48:15,053  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 01:28:46,502  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 01:33:49,123  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 01:34:50,193 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 01:34:59,064 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 01:35:06,865 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 01:35:06,865 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 01:36:47,046  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 01:38:09,121  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 19:17:18,714  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 19:20:06,630  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 19:29:37,877  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 19:29:54,429  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-13 19:30:20,759 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - LogView -> no File Selected
+2015-08-13 19:30:33,640  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-13 19:41:10,072  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 19:53:46,683  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 19:56:03,338  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 19:59:38,401  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 20:09:52,935  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 20:21:57,390  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 21:29:47,917  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 21:55:33,096  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 22:11:36,281  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 22:15:50,586 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,586 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,586 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,586 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,586 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,586 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,847 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,847 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,847 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,847 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,847 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,847 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:15:50,847 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:17:25,295  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 22:17:34,585  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 22:20:40,807 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:20:40,807 ERROR [AWT-EventQueue-0] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:20:41,138 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:20:41,138 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:20:41,138 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:20:41,138 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:20:41,138 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:20:41,138 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:20:41,138 ERROR [Thread-5] - logging.Logging.writeErrorMessage 33 - Field -> No valid Field
+2015-08-13 22:33:39,349  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 22:54:32,512  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 23:12:00,139  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 23:16:39,235  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 23:25:34,437  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 23:55:46,937  INFO [main] - logging.Logging.writeInfoMessage 43 - Start Game
+2015-08-13 23:56:01,616  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-13 23:56:11,140  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings
+2015-08-13 23:56:11,351  INFO [AWT-EventQueue-0] - logging.Logging.writeInfoMessage 43 - changed Start View Settings

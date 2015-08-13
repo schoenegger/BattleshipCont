@@ -31,11 +31,22 @@ public class Field
 		initNewField();
 	}
 
+	/**
+	 * isFieldInit
+	 * 
+	 * @return
+	 */
 	public boolean isFieldInit()
 	{
 		return isFieldInit;
 	}
 
+	/**
+	 * canSetShip
+	 * 
+	 * @param ship
+	 * @return
+	 */
 	public boolean canSetShip(Ship ship)
 	{
 		return checkIfShipIsInField(ship) && !isFieldInit
@@ -48,6 +59,13 @@ public class Field
 		return true;
 	}
 
+	/**
+	 * checkIfPositionIsInField
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean checkIfPositionIsInField(int x, int y)
 	{
 		boolean inField = true;
@@ -72,6 +90,11 @@ public class Field
 		}
 	}
 
+	/**
+	 * getListOfSetableShips
+	 * 
+	 * @return
+	 */
 	public Vector<Ship> getListOfSetableShips()
 	{
 		Vector<Ship> activeShipsInField = new Vector<Ship>();
@@ -86,12 +109,26 @@ public class Field
 		return activeShipsInField;
 	}
 
+	/**
+	 * getStateOfFieldElement
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public FieldState getStateOfFieldElement(int x, int y)
 	{
 		FieldState fieldState = fieldElemtens[x][y].getFieldState();
 		return fieldState;
 	}
 
+	/**
+	 * getFieldElement
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public FieldElement getFieldElement(int x, int y)
 	{
 		return fieldElemtens[x][y];
@@ -123,6 +160,11 @@ public class Field
 		return true;
 	}
 
+	/**
+	 * checkIfAllShipsAreCountersunk
+	 * 
+	 * @return
+	 */
 	public boolean checkIfAllShipsAreCountersunk()
 	{
 		for (int i = 0; i <= 9; i++)
@@ -140,30 +182,13 @@ public class Field
 		return true;
 	}
 
-	public Point getRandomfreeFieldCoordinate()
-	{
-		Point freePosition;
-
-		for (int i = 0; i <= 9; i++)
-		{
-			for (int j = 0; j <= 9; j++)
-			{
-				if (fieldElemtens[i][j].getFieldState().equals(
-						FieldState.STRIKE_SHIP))
-				{
-
-				}
-				if (fieldElemtens[i][j].getFieldState().equals(
-						FieldState.UNKNOWN))
-				{
-					freePosition = new Point(i, j);
-					return freePosition;
-				}
-			}
-		}
-		return new Point(0, 0);
-	}
-
+	/**
+	 * IsValidAttacPosition
+	 * 
+	 * @param posX
+	 * @param posY
+	 * @return
+	 */
 	public boolean IsValidAttacPosition(int posX, int posY)
 	{
 		if (posX >= 0 && posX <= 9 && posY >= 0 && posY <= 9)
@@ -176,6 +201,13 @@ public class Field
 		return false;
 	}
 
+	/**
+	 * fireToPosition
+	 * 
+	 * @param posX
+	 * @param posY
+	 * @return
+	 */
 	public boolean fireToPosition(int posX, int posY)
 	{
 		if (fieldElemtens[posX][posY].isTaken())
@@ -254,6 +286,9 @@ public class Field
 		return transferDataString;
 	}
 
+	/**
+	 * set the fields with ships to state Taken
+	 */
 	public void setTaken()
 	{
 		for (Ship ship : shipsOnField)
@@ -329,6 +364,11 @@ public class Field
 		return (pointX < 10) && (pointX >= 0) && (pointY < 10) && (pointY >= 0);
 	}
 
+	/**
+	 * setShipOnField
+	 * 
+	 * @param ship
+	 */
 	public void setShipOnField(Ship ship)
 	{
 		this.shipsOnField.addElement(ship);
@@ -340,6 +380,14 @@ public class Field
 		setTaken();
 	}
 
+	/**
+	 * setPossibleFields
+	 * 
+	 * @param x
+	 * @param y
+	 * @param type
+	 * @param align
+	 */
 	public void setPossibleFields(int x, int y, ShipType type, String align)
 	{
 		ShipPosition shipPos = new ShipPosition(new Point(x, y), align);
@@ -410,6 +458,9 @@ public class Field
 		return true;
 	}
 
+	/**
+	 * unmarkFields
+	 */
 	public void unmarkFields()
 	{
 		for (FieldElement[] feRow : fieldElemtens)
@@ -421,6 +472,11 @@ public class Field
 		}
 	}
 
+	/**
+	 * isShipSettingPossiple
+	 * 
+	 * @return
+	 */
 	public boolean isShipSettingPossiple()
 	{
 		return isShipSettingPossible & !isFieldInit;
@@ -503,6 +559,67 @@ public class Field
 
 		System.out.println(printField);
 		System.out.println(" 0 1 2 3 4 5 6 7 8 9");
+	}
+
+	// ***********************Logic by Level*************
+
+	/**
+	 * isShipSettingPossiple
+	 * 
+	 * @param level
+	 * @return
+	 */
+	public Point getRandomfreeFieldCoordinate(int level)
+	{
+		Point freePosition;
+		if (level == 1)
+		{
+			for (int i = 0; i <= 9; i++)
+			{
+				for (int j = 0; j <= 9; j++)
+				{
+					if (fieldElemtens[i][j].getFieldState().equals(
+							FieldState.STRIKE_SHIP))
+					{
+
+					}
+					if (fieldElemtens[i][j].getFieldState().equals(
+							FieldState.UNKNOWN))
+					{
+						freePosition = new Point(i, j);
+						return freePosition;
+					}
+				}
+			}
+		}
+		else if (level == 2)
+		{
+			do
+			{
+				freePosition = getRandomFreePosition();
+
+			} while (!fieldElemtens[freePosition.x][freePosition.y]
+					.getFieldState().equals(FieldState.UNKNOWN));
+			return freePosition;
+		}
+		else
+		{
+			do
+			{
+				freePosition = getRandomFreePosition();
+
+			} while (!fieldElemtens[freePosition.x][freePosition.y]
+					.getFieldState().equals(FieldState.UNKNOWN));
+			return freePosition;
+
+		}
+		return new Point(0, 0);
+	}
+
+	private Point getRandomFreePosition()
+	{
+		return new Point((int) (Math.random() * 1000) % 10,
+				(int) (Math.random() * 1000) % 10);
 	}
 
 }

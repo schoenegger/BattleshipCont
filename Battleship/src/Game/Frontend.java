@@ -233,13 +233,12 @@ public class Frontend
 	{
 		System.out.println("Cpu player created");
 
-		connectionCommandHandler = new Thread(new ConnectionCommandHandler());
+		connectionCommandHandler = new Thread(new ConnectionCommandHandler(1));
 		connectionCommandHandler.start();
 		executeGameSetupMenue();
 
 		System.out.println("cpu player game executed");
 
-		// TODO exceptionhandling for false
 		return true;
 	}
 

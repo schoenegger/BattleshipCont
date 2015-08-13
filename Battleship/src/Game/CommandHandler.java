@@ -127,12 +127,6 @@ public class CommandHandler
 		}
 	}
 
-	// helpers
-	private int getNewCommandNumber()
-	{
-		return ++this.commandNo;
-	}
-
 	private void wait(int ms)
 	{
 		try

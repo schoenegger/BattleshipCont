@@ -18,8 +18,8 @@ public class Definitions
 	public final static String TURN_MUSIC_ON_OFF = "TurnMusicOnOff";
 
 	// Count of ships in Game
-	public final static int MAX_AIRCARRIER = 1;
+	public final static int MAX_AIRCARRIER = 2;
 	public final static int MAX_DESTROYER = 2;
-	public final static int MAX_YELLOW_SUBMARINE = 3;
+	public final static int MAX_YELLOW_SUBMARINE = 2;
 	public final static int MAX_COUNT_SHIPS_ON_FIELD = 6;
 }

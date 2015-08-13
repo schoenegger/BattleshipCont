@@ -182,6 +182,8 @@ public class StartSettingsWindow extends JDialog
 		spinnerLevel = new JSpinner();
 		spinnerLevel.setModel(new SpinnerNumberModel(1, 1, 3, 1));
 		spinnerLevel.setBounds(182, 211, 63, 28);
+		spinnerLevel
+				.setValue(Integer.parseInt(startViewSettingsData.getLevel()));
 		frmSettings.getContentPane().add(spinnerLevel);
 
 		lblLanguage = new JLabel(
@@ -253,6 +255,7 @@ public class StartSettingsWindow extends JDialog
 			startViewSettingsData.setIpAddress(txtIPAddress.getText());
 			startViewSettingsData.setPort(spinnerPort.getValue().toString());
 			startViewSettingsData.setMode(getHostState());
+			startViewSettingsData.setLevel(spinnerLevel.getValue().toString());
 			startViewSettingsData.setLanguage(comboBox.getSelectedItem()
 					.toString());
 			startViewSettingsData.writeSettingsToFile();

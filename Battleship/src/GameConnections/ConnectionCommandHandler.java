@@ -22,11 +22,11 @@ public class ConnectionCommandHandler implements Runnable
 	/**
 	 * Constructor
 	 */
-	public ConnectionCommandHandler()
+	public ConnectionCommandHandler(String level)
 	{
 		try
 		{
-			this.connection = new LocalConnection();
+			this.connection = new LocalConnection(Integer.parseInt(level));
 			this.connectionLogic = new ConnectionLogic(connection);
 		}
 		catch (Exception exception)

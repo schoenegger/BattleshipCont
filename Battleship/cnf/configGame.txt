@@ -1,5 +1,5 @@
 ipAddress;localhost
 port;8009
-mode;client
-level;1
+mode;host
+level;3
 language;DEUTSCH

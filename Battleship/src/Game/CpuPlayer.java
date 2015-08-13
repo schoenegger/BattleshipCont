@@ -10,11 +10,11 @@ import GameUtilities.Command;
  */
 public class CpuPlayer
 {
-	CpuPlayerLogic cpuPlayerLogic = new CpuPlayerLogic();
+	CpuPlayerLogic cpuPlayerLogic;
 
-	public CpuPlayer()
+	public CpuPlayer(int level)
 	{
-
+		cpuPlayerLogic = new CpuPlayerLogic(level);
 	}
 
 	/**

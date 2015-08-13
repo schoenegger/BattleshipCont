@@ -206,14 +206,14 @@ public class Logic
 			return true;
 
 		case "cpu" :
-			connectionCommandHandler = new Thread(
-					new ConnectionCommandHandler());
+			connectionCommandHandler = new Thread(new ConnectionCommandHandler(
+					startSettData.getLevel()));
 			connectionCommandHandler.start();
 			return true;
 
 		default :
-			connectionCommandHandler = new Thread(
-					new ConnectionCommandHandler());
+			connectionCommandHandler = new Thread(new ConnectionCommandHandler(
+					"1"));
 			return false;
 		}
 
