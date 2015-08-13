@@ -40,7 +40,7 @@ public class LanguageView
 	public static final String OWN_FIELD = "Own_Field";
 	public static final String ENEMY_FIELD = "Enemy_Field";
 	public static final String ATTACK = "Attack";
-	public static final String SET_SCHIP = "Set_Ship";
+	public static final String SET_SHIP = "Set_Ship";
 	// Shiptypes
 	public static final String DESTROYER = "Destroyer";
 	public static final String AIR_CARRIER = "Air_Carrier";
@@ -52,7 +52,7 @@ public class LanguageView
 	public static final String ATTACK_THE_ENEMY = "Attack_The_Enemy";
 	public static final String ENEMY_TURN = "Enemy_Turn";
 	public static final String YOUR_TURN = "Your_Turn";
-	public static final String ATTACK_FROM_ENEMY = "Attack_From_Enemy:";
+	public static final String ATTACK_FROM_ENEMY = "Attack_From_Enemy";
 
 	public LanguageView(String language)
 	{

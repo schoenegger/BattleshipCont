@@ -55,7 +55,7 @@ public class StartSettingsWindow extends JDialog
 	private JLabel lblLanguage;
 	private JButton btnSave;
 	private JLabel lblHeadSettings;
-	private JButton buttonShowLog;
+	private JButton btnShowLog;
 
 	/**
 	 * Create the application.
@@ -200,10 +200,6 @@ public class StartSettingsWindow extends JDialog
 		btnSave = new JButton(languageView.getResourceString(LanguageView.SAVE));
 		btnSave.setBounds(38, 313, 100, 28);
 
-		// gameSoundPlayer.setMnemonic(KeyEvent.VK_M);
-		// gameSoundPlayer.setActionCommand(Definitions.TURN_MUSIC_ON_OFF);
-		// Listener adds
-		// gameSoundPlayer.addActionListener(this.viewSettingsListener);
 		refGameLogic.getgameSoundPlayer().setMnemonic(KeyEvent.VK_M);
 		refGameLogic.getgameSoundPlayer().setActionCommand(
 				Definitions.TURN_MUSIC_ON_OFF);
@@ -231,13 +227,14 @@ public class StartSettingsWindow extends JDialog
 		lblHeadSettings.setBounds(93, 16, 200, 50);
 		frmSettings.getContentPane().add(lblHeadSettings);
 
-		buttonShowLog = new JButton("Show Log");
-		buttonShowLog.setMnemonic(KeyEvent.VK_L);
-		buttonShowLog.addActionListener(this.viewSettingsListener);
-		buttonShowLog
+		btnShowLog = new JButton(
+				languageView.getResourceString(LanguageView.SHOW_LOG));
+		btnShowLog.setMnemonic(KeyEvent.VK_L);
+		btnShowLog.addActionListener(this.viewSettingsListener);
+		btnShowLog
 				.setActionCommand(Definitions.SHOW_LOG_BUTTON_START_SETTINGS_VIEW);
-		buttonShowLog.setBounds(182, 313, 100, 28);
-		frmSettings.getContentPane().add(buttonShowLog);
+		btnShowLog.setBounds(182, 313, 110, 28);
+		frmSettings.getContentPane().add(btnShowLog);
 		frmSettings.setBounds(100, 100, 387, 424);
 
 		frmSettings.setVisible(true);

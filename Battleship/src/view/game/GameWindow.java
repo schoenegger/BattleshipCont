@@ -27,7 +27,9 @@ import logging.Logging;
 import net.miginfocom.swing.MigLayout;
 import view.StartView;
 import view.GlobalStrings.Definitions;
+import view.GlobalStrings.LanguageView;
 import view.listener.GameViewListener;
+import view.settings.StartViewSettingData;
 import Game.Logic;
 import GameUtilities.Ship;
 import GameUtilities.ShipPosition;
@@ -47,6 +49,8 @@ public class GameWindow extends JDialog
 	private static final long serialVersionUID = 1L;
 
 	private StartView refStartView;
+	private StartViewSettingData startSettData;
+	private LanguageView languageView;
 
 	private JPanel panel_1;
 	private JFrame frmSettings;
@@ -92,6 +96,10 @@ public class GameWindow extends JDialog
 		this.refOwnField = new Field(true);
 		this.refStartView = refStartView;
 		this.gameViewListener = new GameViewListener(refLogic);
+
+		this.startSettData = new StartViewSettingData();
+		this.languageView = new LanguageView(startSettData.getLanguage());
+
 		initializeComponents();
 
 	}
@@ -107,7 +115,8 @@ public class GameWindow extends JDialog
 		frmSettings.setBackground(SystemColor.inactiveCaption);
 		frmSettings.setMinimumSize(new Dimension(1500, 850));
 		frmSettings.setResizable(true);
-		frmSettings.setTitle("Game Field");
+		frmSettings.setTitle(languageView
+				.getResourceString(LanguageView.GAME_FIELD));
 
 		frmSettings.getContentPane().setLayout(null);
 
@@ -160,8 +169,13 @@ public class GameWindow extends JDialog
 		panel_1.add(rdbtnVertical, gbc_rdbtnVertical);
 
 		comboBox = new JComboBox<String>();
+		// comboBox.setModel(new DefaultComboBoxModel(new String[]
+		// { "Destroyer", "AirCarrier", "YellowSubmarine" }));
 		comboBox.setModel(new DefaultComboBoxModel(new String[]
-		{ "Destroyer", "AirCarrier", "YellowSubmarine" }));
+		{ languageView.getResourceString(LanguageView.DESTROYER),
+				languageView.getResourceString(LanguageView.AIR_CARRIER),
+				languageView.getResourceString(LanguageView.YELLOW_SUBMARINE) }));
+
 		comboBox.setToolTipText("ShipType");
 		comboBox.setEditable(true);
 		comboBox.setMinimumSize(new Dimension(20, 20));
@@ -173,7 +187,8 @@ public class GameWindow extends JDialog
 		gbc_comboBox.gridy = 0;
 		panel_1.add(comboBox, gbc_comboBox);
 
-		btnAttack = new JButton("Attack");
+		btnAttack = new JButton(
+				languageView.getResourceString(LanguageView.ATTACK));
 		btnAttack.setActionCommand(Definitions.BUTTON_ATTAC);
 		btnAttack.addActionListener(this.gameViewListener);
 		btnAttack.setEnabled(false);
@@ -196,7 +211,8 @@ public class GameWindow extends JDialog
 		gbc_rdbtnHorizontal.gridy = 1;
 		panel_1.add(rdbtnHorizontal, gbc_rdbtnHorizontal);
 
-		lblMessages = new JLabel("INIT FIELD..........");
+		lblMessages = new JLabel(
+				languageView.getResourceString(LanguageView.INIT_FIELD));
 		lblMessages.setFont(new Font("Segoe Script", Font.BOLD, 16));
 		GridBagConstraints gbc_lblMessages = new GridBagConstraints();
 		gbc_lblMessages.insets = new Insets(0, 0, 5, 5);
@@ -204,7 +220,8 @@ public class GameWindow extends JDialog
 		gbc_lblMessages.gridy = 1;
 		panel_1.add(lblMessages, gbc_lblMessages);
 
-		lblYourTurn = new JLabel("YOUR TURN");
+		lblYourTurn = new JLabel(
+				languageView.getResourceString(LanguageView.YOUR_TURN));
 		lblYourTurn.setVisible(false);
 		lblYourTurn.setForeground(Color.RED);
 		lblYourTurn.setFont(new Font("SansSerif", Font.BOLD, 13));
@@ -224,7 +241,8 @@ public class GameWindow extends JDialog
 		panel_1.add(textField, gbc_textField);
 		textField.setColumns(10);
 
-		btnSetShip = new JButton("Set Ship");
+		btnSetShip = new JButton(
+				languageView.getResourceString(LanguageView.SET_SHIP));
 		btnSetShip.setActionCommand(Definitions.BUTTON_SET_SHIP);
 		btnSetShip.addActionListener(this.gameViewListener);
 
@@ -259,7 +277,8 @@ public class GameWindow extends JDialog
 
 	public void getNextMove()
 	{
-		sendMessge("Please Attac your Enemy");
+		sendMessge(languageView
+				.getResourceString(LanguageView.PLEASE_ATTACK_YOUR_ENEMY));
 	}
 
 	private void updateComboBox()
@@ -291,15 +310,20 @@ public class GameWindow extends JDialog
 			String currItemString = comboBox.getItemAt(i).toString()
 					.toLowerCase();
 
-			if (currItemString.equals("destroyer") && counterDestr >= 2)
+			if (currItemString.equals(languageView.getResourceString(
+					LanguageView.DESTROYER).toLowerCase())
+					&& counterDestr >= 2)
 			{
 				comboBox.removeItemAt(i);
 			}
-			else if (currItemString.equals("aircarrier") && counterAirCarr >= 2)
+			else if (currItemString.equals(languageView.getResourceString(
+					LanguageView.AIR_CARRIER).toLowerCase())
+					&& counterAirCarr >= 2)
 			{
 				comboBox.removeItemAt(i);
 			}
-			else if (currItemString.equals("yellowsubmarine")
+			else if (currItemString.equals(languageView.getResourceString(
+					LanguageView.YELLOW_SUBMARINE).toLowerCase())
 					&& counterYellSubmar >= 2)
 			{
 				comboBox.removeItemAt(i);
@@ -400,23 +424,43 @@ public class GameWindow extends JDialog
 	{
 		if (comboBox.getItemCount() > 0)
 		{
+
 			String itemCombBox = this.comboBox.getSelectedItem().toString();
 
-			switch (itemCombBox.toLowerCase())
+			if (itemCombBox.equals(languageView
+					.getResourceString(LanguageView.DESTROYER)))
 			{
-			case "destroyer" :
 				return ShipType.DESTROYER;
-
-			case "aircarrier" :
-				return ShipType.AIRCARRIER;
-
-			case "yellowsubmarine" :
-				return ShipType.YELLOW_SUBMARINE;
-
-			default :
-				return ShipType.AIRCARRIER;
-
 			}
+			else if (itemCombBox.equals(languageView
+					.getResourceString(LanguageView.AIR_CARRIER)))
+			{
+				return ShipType.AIRCARRIER;
+			}
+			else if (itemCombBox.equals(languageView
+					.getResourceString(LanguageView.YELLOW_SUBMARINE)))
+			{
+				return ShipType.YELLOW_SUBMARINE;
+			}
+			else
+			{
+				return ShipType.AIRCARRIER;
+			}
+
+			// switch (itemCombBox.toLowerCase())
+			// {
+			// case "destroyer" :
+			// return ShipType.DESTROYER;
+			//
+			// case "aircarrier" :
+			// return ShipType.AIRCARRIER;
+			//
+			// case "yellowsubmarine" :
+			// return ShipType.YELLOW_SUBMARINE;
+			//
+			// default :
+			// return ShipType.AIRCARRIER;
+			// }
 		}
 		return ShipType.AIRCARRIER;
 	}
@@ -431,11 +475,13 @@ public class GameWindow extends JDialog
 		ShipPosition shipPos = new ShipPosition(new Point(x, y), shipAlignment);
 
 		ShipType shipType;
-		if (shipFromCombobox.equals("Destroyer"))
+		if (shipFromCombobox.equals(languageView
+				.getResourceString(LanguageView.DESTROYER)))
 		{
 			shipType = ShipType.DESTROYER;
 		}
-		else if (shipFromCombobox.equals("AirCarrier"))
+		else if (shipFromCombobox.equals(languageView
+				.getResourceString(LanguageView.AIR_CARRIER)))
 		{
 			shipType = ShipType.AIRCARRIER;
 		}
@@ -443,6 +489,18 @@ public class GameWindow extends JDialog
 		{
 			shipType = ShipType.YELLOW_SUBMARINE;
 		}
+		// if (shipFromCombobox.equals("Destroyer"))
+		// {
+		// shipType = ShipType.DESTROYER;
+		// }
+		// else if (shipFromCombobox.equals("AirCarrier"))
+		// {
+		// shipType = ShipType.AIRCARRIER;
+		// }
+		// else
+		// {
+		// shipType = ShipType.YELLOW_SUBMARINE;
+		// }
 
 		Ship ship = new Ship(shipPos, shipType, ++shipCounter);
 

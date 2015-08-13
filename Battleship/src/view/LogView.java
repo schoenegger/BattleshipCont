@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,6 +24,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import logging.Logging;
+import view.GlobalStrings.LanguageView;
+import view.settings.StartViewSettingData;
 
 /**
  * LogView
@@ -33,7 +36,8 @@ import logging.Logging;
  */
 public class LogView
 {
-
+	private StartViewSettingData startSettData;
+	private LanguageView languageView;
 	private JFrame frmLogFile;
 	private JTextArea textArea;
 	private JButton btnClearLog;
@@ -45,6 +49,8 @@ public class LogView
 	 */
 	public LogView()
 	{
+		this.startSettData = new StartViewSettingData();
+		this.languageView = new LanguageView(startSettData.getLanguage());
 		initialize();
 
 	}
@@ -74,7 +80,11 @@ public class LogView
 		{ 0.0, 1.0, Double.MIN_VALUE };
 		frmLogFile.getContentPane().setLayout(gridBagLayout);
 
-		btnClearLog = new JButton("Clear Log");
+		btnClearLog = new JButton(
+				languageView.getResourceString(LanguageView.CLEAR_LOG));
+		btnClearLog.setToolTipText("Alt+C");
+		btnClearLog.setMnemonic(KeyEvent.VK_C);
+
 		btnClearLog.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -89,7 +99,10 @@ public class LogView
 		gbc_btnClearLog.gridy = 0;
 		frmLogFile.getContentPane().add(btnClearLog, gbc_btnClearLog);
 
-		btnSaveLog = new JButton("Save Log");
+		btnSaveLog = new JButton(
+				languageView.getResourceString(LanguageView.SAVE_LOG));
+		btnSaveLog.setToolTipText("Alt+S");
+		btnSaveLog.setMnemonic(KeyEvent.VK_S);
 		btnSaveLog.addActionListener(new ActionListener()
 		{
 

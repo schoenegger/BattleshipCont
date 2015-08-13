@@ -12,6 +12,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import view.GlobalStrings.LanguageView;
+import view.settings.StartViewSettingData;
 import GameUtilities.ShipType;
 import GameUtilities.Field.Field;
 import GameUtilities.Field.FieldElement;
@@ -35,6 +37,10 @@ public class DrawingPanelGameFields extends JPanel
 	private BufferedImage image;
 	private Field ownField;
 	private Field enemyField;
+
+	private StartViewSettingData startSettData;
+	private LanguageView languageView;
+
 	private int mouseCourserX = 0;
 	private int mouseCourserY = 0;
 	private ShipType currShipType = ShipType.AIRCARRIER;
@@ -55,6 +61,9 @@ public class DrawingPanelGameFields extends JPanel
 		this.enemyField = enemyField;
 		startRunningText(10);
 		// this.setBackground(new Color(255, 255, 255));
+
+		this.startSettData = new StartViewSettingData();
+		this.languageView = new LanguageView(startSettData.getLanguage());
 
 		this.setForeground(DEFAULT_FOREGROUND);
 		this.setFont(new Font("Arial", Font.BOLD, 20));
@@ -88,9 +97,9 @@ public class DrawingPanelGameFields extends JPanel
 		graphic = (Graphics2D) graph.create();
 
 		createFieldView(ownField, (1.0 / 12.0), (1.0 / 6.0), (1.0 / 30.0),
-				"OWN FIELD", true);
+				languageView.getResourceString(LanguageView.OWN_FIELD), true);
 		createFieldView(enemyField, (7.0 / 12.0), (1.0 / 6.0), (1.0 / 30.0),
-				"ENEMY FIELD", false);
+				languageView.getResourceString(LanguageView.ENEMY_FIELD), false);
 
 	}
 
