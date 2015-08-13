@@ -60,7 +60,6 @@ public class StartViewSettingsListener implements ActionListener, KeyListener,
 		switch (e.getKeyCode())
 		{
 		case KeyEvent.VK_ESCAPE :
-			refLogic.stopBackGroundSounds();
 			refLogic.startBackgroundSound(GameSoundPlayer.SOUND_MENUE_WAV);
 			refSettingsWindow.closeWindow();
 			break;
@@ -94,42 +93,35 @@ public class StartViewSettingsListener implements ActionListener, KeyListener,
 	@Override
 	public void windowActivated(WindowEvent e)
 	{
-
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e)
 	{
-
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e)
 	{
-
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e)
 	{
-
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e)
 	{
-
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e)
-	{// TODO Auto-generated method stub
-
+	{
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e)
 	{
-
 	}
 }

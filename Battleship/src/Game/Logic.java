@@ -122,7 +122,17 @@ public class Logic
 		boolean returnValue = false;
 		Command attacCommand = buildAttacCommand(fireMove);
 
-		enemyField.fireToPosition(attacCoordinates[0], attacCoordinates[1]);
+		if (enemyField.fireToPosition(attacCoordinates[0], attacCoordinates[1]))
+		{
+			startBombSound(GameSoundPlayer.SOUND_CANNON_HIT,
+					GameSoundPlayer.VOLUME_OWN_CANNON_SOUND);
+		}
+		else
+		{
+			startBombSound(GameSoundPlayer.SOUND_CANNON_MISS,
+					GameSoundPlayer.VOLUME_OWN_CANNON_SOUND);
+		}
+
 		commandHandler.sendAttacCommand(attacCommand);
 		if (enemyField.checkIfAllShipsAreCountersunk())
 		{
@@ -218,8 +228,17 @@ public class Logic
 				.getResourceString(LanguageView.ATTACK_FROM_ENEMY)// ("Attac from Enemy : "
 				+ " " + attacPosition.toString());
 		currAttacCommand = new Command(1, attacPosition, "ATTAC_COMMAND");
-		ownField.fireToPosition(attacPosition.getXyPosition().x,
-				attacPosition.getXyPosition().y);
+		if (ownField.fireToPosition(attacPosition.getXyPosition().x,
+				attacPosition.getXyPosition().y))
+		{
+			startBombSound(GameSoundPlayer.SOUND_CANNON_HIT,
+					GameSoundPlayer.VOLUME_ENEMY_CANNON_SOUND);
+		}
+		else
+		{
+			startBombSound(GameSoundPlayer.SOUND_CANNON_MISS,
+					GameSoundPlayer.VOLUME_ENEMY_CANNON_SOUND);
+		}
 
 		if (ownField.checkIfAllShipsAreCountersunk())
 		{
@@ -352,8 +371,8 @@ public class Logic
 		gameSoundPlayer.turnSoundOnOrOFF();
 	}
 
-	public void startBombSound(String wavFilename)
+	public void startBombSound(String wavFilename, Float soundVolume)
 	{
-		gameSoundPlayer.startBombSound(wavFilename);
+		gameSoundPlayer.startBombSound(wavFilename, soundVolume);
 	}
 }

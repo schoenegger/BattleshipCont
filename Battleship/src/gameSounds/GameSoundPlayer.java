@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.JButton;
 
 import logging.Logging;
@@ -14,12 +15,16 @@ public class GameSoundPlayer extends JButton
 	public final static String SOUND_MENUE_WAV = "sound_menue.wav";
 	public final static String SOUND_SETTING_WAV = "sound_settings.wav";
 	public final static String SOUND_GAME_WAV = "sound_game.wav";
-	public final static String SOUND_CANNON_HIT = "sound_cannon_hit";
-	public final static String SOUND_CANNON_MISS = "sound_cannon_miss";
+	public final static String SOUND_CANNON_HIT = "sound_hit.wav";
+	public final static String SOUND_CANNON_MISS = "sound_miss.wav";
+
+	public final static Float VOLUME_ENEMY_CANNON_SOUND = (float) -10.0;
+	public final static Float VOLUME_OWN_CANNON_SOUND = (float) 0.0;
 
 	private Clip soundClip;
 	private boolean soundIsOn;
 	private String currentWavFileNameToPlay;
+	private FloatControl gainControl;
 
 	public GameSoundPlayer()
 	{
@@ -80,24 +85,31 @@ public class GameSoundPlayer extends JButton
 
 	}
 
-	public void startBombSound(String wavFilename)
+	public void startBombSound(String wavFilename, float soundVolume)
 	{
-		synchronized (wavFilename)
+		if (soundIsOn)
 		{
-			try
+			synchronized (wavFilename)
 			{
-				this.soundClip = AudioSystem.getClip();
-				this.soundClip.open(AudioSystem.getAudioInputStream(new File(
-						"sound\\" + wavFilename)));
-			}
-			catch (Exception e)
-			{
-				Logging.writeErrorMessage("Methode startBombSound Cannot play sound "
-						+ wavFilename + " !");
-				System.err.println("Error: " + e.getMessage());
-				e.printStackTrace();
+				try
+				{
+					this.soundClip = AudioSystem.getClip();
+					this.soundClip.open(AudioSystem
+							.getAudioInputStream(new File("sound\\"
+									+ wavFilename)));
+				}
+				catch (Exception e)
+				{
+					Logging.writeErrorMessage("Methode startBombSound Cannot play sound "
+							+ wavFilename + " !");
+					System.err.println("Error: " + e.getMessage());
+					e.printStackTrace();
+				}
+				soundClip.start();
+				gainControl = (FloatControl) soundClip
+						.getControl(FloatControl.Type.MASTER_GAIN);
+				gainControl.setValue(soundVolume);
 			}
 		}
-
 	}
 }
