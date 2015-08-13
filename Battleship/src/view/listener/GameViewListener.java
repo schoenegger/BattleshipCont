@@ -1,10 +1,14 @@
 package view.listener;
 
+import gameSounds.GameSoundPlayer;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import logging.Logging;
 import view.GlobalStrings.Definitions;
@@ -18,7 +22,7 @@ import Game.Logic;
  * 
  */
 public class GameViewListener implements ActionListener, MouseMotionListener,
-		MouseListener
+		MouseListener, WindowListener
 
 {
 	private Logic refLogic;
@@ -93,6 +97,51 @@ public class GameViewListener implements ActionListener, MouseMotionListener,
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e)
+	{
+
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e)
+	{
+
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e)
+	{
+		refLogic.stopBackGroundSounds();
+		refLogic.startBackgroundSound(GameSoundPlayer.SOUND_MENUE_WAV);
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e)
+	{
+
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e)
+	{
+
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e)
+	{
+
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e)
+	{
+		refLogic.stopBackGroundSounds();
+		refLogic.startBackgroundSound(GameSoundPlayer.SOUND_GAME_WAV);
+
 	}
 
 }

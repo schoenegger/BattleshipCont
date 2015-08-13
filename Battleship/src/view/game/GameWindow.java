@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.SystemColor;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
@@ -124,6 +125,7 @@ public class GameWindow extends JDialog
 		frmSettings.getContentPane().setLayout(
 				new MigLayout("", "[grow]",
 						"[600.00:600.00,grow][21.00,baseline]"));
+		frmSettings.addWindowListener(gameViewListener);
 
 		drawPanel = new DrawingPanelGameFields(refOwnField, refEnemyField);
 		drawPanel.setBackground(SystemColor.info);
@@ -190,6 +192,7 @@ public class GameWindow extends JDialog
 		btnAttack = new JButton(
 				languageView.getResourceString(LanguageView.ATTACK));
 		btnAttack.setActionCommand(Definitions.BUTTON_ATTAC);
+		btnAttack.setMnemonic(KeyEvent.VK_A);
 		btnAttack.addActionListener(this.gameViewListener);
 		btnAttack.setEnabled(false);
 		btnAttack.setVisible(false);
@@ -245,7 +248,7 @@ public class GameWindow extends JDialog
 				languageView.getResourceString(LanguageView.SET_SHIP));
 		btnSetShip.setActionCommand(Definitions.BUTTON_SET_SHIP);
 		btnSetShip.addActionListener(this.gameViewListener);
-
+		btnSetShip.setMnemonic(KeyEvent.VK_S);
 		GridBagConstraints gbc_btnSetShip = new GridBagConstraints();
 		gbc_btnSetShip.anchor = GridBagConstraints.WEST;
 		gbc_btnSetShip.insets = new Insets(0, 0, 0, 5);
