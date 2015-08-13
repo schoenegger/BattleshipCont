@@ -60,8 +60,7 @@ public class GameWindow extends JDialog
 
 	private Field refOwnField;
 	private Field refEnemyField;
-	// private volatile String nextMove = null;
-	// private String currFieldText = "";
+
 	private JRadioButton rdbtnVertical;
 	private JRadioButton rdbtnHorizontal;
 	private JButton btnSetShip;
@@ -474,7 +473,7 @@ public class GameWindow extends JDialog
 
 				if (refEnemyField.IsValidAttacPosition(x, y))
 				{
-					// setYourTurnLabel(false);
+
 					refStartView.sendAttackCommandToEnemy(attackCommand);
 				}
 				else

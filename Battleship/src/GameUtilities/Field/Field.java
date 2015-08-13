@@ -208,7 +208,7 @@ public class Field
 			{
 				if (align.equals("horizontal"))
 				{
-					for (int i = x; i < (x + ship.getCountSector() - 1); i++)
+					for (int i = x; i < (x + ship.getCountSector()); i++)
 					{
 						if (!(fieldElemtens[i][y].getFieldState() == FieldState.STRIKE_SHIP))
 						{
@@ -220,7 +220,7 @@ public class Field
 				}
 				else
 				{
-					for (int i = y; i < (y + ship.getCountSector() - 1); i++)
+					for (int i = y; i < (y + ship.getCountSector()); i++)
 					{
 						if (!(fieldElemtens[y][i].getFieldState() == FieldState.STRIKE_SHIP))
 						{
@@ -237,6 +237,7 @@ public class Field
 
 			}
 			ship.setAliveState(isAlive);
+			setTaken();
 		}
 	}
 
@@ -337,7 +338,6 @@ public class Field
 		{
 			isFieldInit = true;
 		}
-
 		setTaken();
 	}
 
