@@ -23,6 +23,11 @@ public class CpuGameHandler
 		this.ownField = new Field();
 	}
 
+	/**
+	 * returns the init field
+	 * 
+	 * @return
+	 */
 	public Field getInitField()
 	{
 		// for (ShipType st : ShipType.values())

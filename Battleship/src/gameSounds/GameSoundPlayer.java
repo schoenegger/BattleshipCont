@@ -58,6 +58,11 @@ public class GameSoundPlayer extends JButton
 		soundClip.stop();
 	}
 
+	/**
+	 * start the background Sound
+	 * 
+	 * @param wavFilename
+	 */
 	public void startBackgroundSound(String wavFilename)
 	{
 		currentWavFileNameToPlay = wavFilename;
@@ -85,6 +90,12 @@ public class GameSoundPlayer extends JButton
 
 	}
 
+	/**
+	 * start the bomb sound
+	 * 
+	 * @param wavFilename
+	 * @param soundVolume
+	 */
 	public void startBombSound(String wavFilename, float soundVolume)
 	{
 		if (soundIsOn)

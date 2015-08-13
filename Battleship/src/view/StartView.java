@@ -192,6 +192,9 @@ public class StartView extends JDialog
 				this.languageView, refGameLogic);
 	}
 
+	/**
+	 * openViewGameFields
+	 */
 	public void openViewGameFields()
 	{
 		// Singelton Game
@@ -202,6 +205,9 @@ public class StartView extends JDialog
 		}
 	}
 
+	/**
+	 * openViewGameFieldsCPU
+	 */
 	public void openViewGameFieldsCPU()
 	{
 		// Singeton Game
@@ -212,6 +218,9 @@ public class StartView extends JDialog
 		}
 	}
 
+	/**
+	 * getNextCommandFromGameWindow
+	 */
 	public void getNextCommandFromGameWindow()
 	{
 		this.gameWindow.getNextMove();
@@ -239,29 +248,51 @@ public class StartView extends JDialog
 		return "";
 	}
 
+	/**
+	 * sendGameWindowMessage
+	 * 
+	 * @param message
+	 */
 	public void sendGameWindowMessage(String message)
 	{
 		this.gameWindow.sendMessge(message);
 
 	}
 
+	/**
+	 * sendMouseMoveToGameView
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void sendMouseMoveToGameView(int x, int y)
 	{
 		gameWindow.refreshByMouseMove(x, y);
 
 	}
 
+	/**
+	 * sendSetButtonPressed
+	 */
 	public void sendSetButtonPressed()
 	{
 		gameWindow.setShipButtonPressed();
 	}
 
+	/**
+	 * attacShipButtonPressed
+	 */
 	public void attacShipButtonPressed()
 	{
 		gameWindow.attacShipButtonPressed();
 
 	}
 
+	/**
+	 * setEnemyFieldInGameWindow
+	 * 
+	 * @param enemyField
+	 */
 	public void setEnemyFieldInGameWindow(Field enemyField)
 	{
 		gameWindow.setEnemyField(enemyField);
@@ -270,6 +301,11 @@ public class StartView extends JDialog
 
 	// *********************Functions for Logic****************
 
+	/**
+	 * setEnemyFieldInGameWindow
+	 * 
+	 * @param attackCommand
+	 */
 	public void sendAttackCommandToEnemy(String attackCommand)
 	{
 		refGameLogic.sendAttackCommandToEnemy(attackCommand);
@@ -281,21 +317,37 @@ public class StartView extends JDialog
 				startSettData.getPort());
 	}
 
+	/**
+	 * setInitFieldInLogic
+	 * 
+	 * @param ownInitField
+	 */
 	public void setInitFieldInLogic(Field ownInitField)
 	{
 		this.refGameLogic.setInitField(ownInitField);
 	}
 
+	/**
+	 * mouseClickToGameView
+	 */
 	public void mouseClickToGameView()
 	{
 		gameWindow.MouseClickToGameView();
 	}
 
+	/**
+	 * displayGameOver
+	 */
 	public void displayGameOver()
 	{
 		this.gameWindow.displayGameOver();
 	}
 
+	/**
+	 * setButtonSettingsVisible
+	 * 
+	 * @param enable
+	 */
 	public void setButtonSettingsVisible(boolean enable)
 	{
 		int width = btnSettings.getWidth();
@@ -318,6 +370,9 @@ public class StartView extends JDialog
 
 	}
 
+	/**
+	 * displayWin
+	 */
 	public void displayWin()
 	{
 		this.gameWindow.displayWin();

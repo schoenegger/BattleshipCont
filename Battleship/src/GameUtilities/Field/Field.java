@@ -53,12 +53,6 @@ public class Field
 				&& checkAroundShipPosition(ship);
 	}
 
-	private boolean checkAroundField()
-	{
-
-		return true;
-	}
-
 	/**
 	 * checkIfPositionIsInField
 	 * 

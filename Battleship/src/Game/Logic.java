@@ -21,7 +21,7 @@ public class Logic
 {
 	private Thread connectionCommandHandler;
 
-	private Frontend referenceFrontend;
+	// private Frontend referenceFrontend;
 	private StartView startView;
 	private CommandHandler commandHandler;
 
@@ -53,16 +53,25 @@ public class Logic
 
 	/********************** FUNCTION FOR FRONTEND ********************************/
 
+	/**
+	 * first release
+	 */
 	public void openStartViewSettings()
 	{
 		startView.openStartViewSettings();
 	}
 
+	/**
+	 * openViewGameField
+	 */
 	public void openViewGameField()
 	{
 		startView.openViewGameFields();
 	}
 
+	/**
+	 * openViewGameFieldCPU
+	 */
 	public void openViewGameFieldCPU()
 	{
 		startView.openViewGameFieldsCPU();
@@ -79,6 +88,12 @@ public class Logic
 		sendFieldToOtherPlayer();
 	}
 
+	/**
+	 * isAttacMoveValid
+	 * 
+	 * @param nextMove
+	 * @return
+	 */
 	public boolean isAttacMoveValid(String nextMove)
 	{
 		System.out.println(nextMove);
@@ -110,6 +125,11 @@ public class Logic
 		// commandHandler.receiveCommandFromDataBox();
 	}
 
+	/**
+	 * setIsMyTurn
+	 * 
+	 * @param isMyTurn
+	 */
 	public void setIsMyTurn(boolean isMyTurn)
 	{
 		this.isMyTurn = isMyTurn;
@@ -188,6 +208,14 @@ public class Logic
 		}
 	}
 
+	/**
+	 * start Connection
+	 * 
+	 * @param defConnType
+	 * @param ipAdd
+	 * @param port
+	 * @return
+	 */
 	public boolean startConnection(String defConnType, String ipAdd, String port)
 	{
 		switch (defConnType.toLowerCase())
@@ -221,6 +249,11 @@ public class Logic
 
 	/********************** FUNCTION FOR COMMAND HANDLER *************************/
 
+	/**
+	 * set to Enemy AttacCommand
+	 * 
+	 * @param attacPosition
+	 */
 	public void setEnemyAttacCommand(AttackPosition attacPosition)// called from
 																	// Command
 																	// Handler
@@ -289,6 +322,9 @@ public class Logic
 		return startView.checkFocusButton();
 	}
 
+	/**
+	 * Quit the gamne
+	 */
 	public void quitGame()
 	{
 		startView.setVisible(false);
@@ -297,6 +333,11 @@ public class Logic
 		// startView.closeWindow();
 	}
 
+	/**
+	 * getgameSoundPlayer
+	 * 
+	 * @return
+	 */
 	public GameSoundPlayer getgameSoundPlayer()
 	{
 		return gameSoundPlayer;
@@ -367,11 +408,20 @@ public class Logic
 		gameSoundPlayer.startBackgroundSound(wavFilename);
 	}
 
+	/**
+	 * turnSoundOnOrOff
+	 */
 	public void turnSoundOnOrOff()
 	{
 		gameSoundPlayer.turnSoundOnOrOFF();
 	}
 
+	/**
+	 * startBombSound
+	 * 
+	 * @param wavFilename
+	 * @param soundVolume
+	 */
 	public void startBombSound(String wavFilename, Float soundVolume)
 	{
 		gameSoundPlayer.startBombSound(wavFilename, soundVolume);

@@ -21,6 +21,11 @@ public class CpuPlayerLogic
 		this.level = level;
 	}
 
+	/**
+	 * returns the next command
+	 * 
+	 * @return
+	 */
 	public Command getNextCommand()
 	{
 		try
@@ -38,6 +43,11 @@ public class CpuPlayerLogic
 		return actualCommand;
 	}
 
+	/**
+	 * send command to cpu logic
+	 * 
+	 * @param command
+	 */
 	public void sendCommandToCpuLogic(Command command)
 	{
 		if (command == null)
