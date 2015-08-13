@@ -136,7 +136,8 @@ public class Logic
 		commandHandler.sendAttacCommand(attacCommand);
 		if (enemyField.checkIfAllShipsAreCountersunk())
 		{
-			referenceFrontend.displayWin();
+			// referenceFrontend.displayWin();
+			startView.displayWin();
 			wait(10000);
 			ConnectionCommandHandler.abortConnection();
 		}

@@ -322,4 +322,9 @@ public class StartView extends JDialog
 		}
 
 	}
+
+	public void displayWin()
+	{
+		this.gameWindow.displayWin();
+	}
 }

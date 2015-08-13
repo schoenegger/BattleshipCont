@@ -222,7 +222,7 @@ public class Field
 				{
 					for (int i = y; i < (y + ship.getCountSector()); i++)
 					{
-						if (!(fieldElemtens[y][i].getFieldState() == FieldState.STRIKE_SHIP))
+						if (!(fieldElemtens[x][i].getFieldState() == FieldState.STRIKE_SHIP))
 						{
 							isAlive = true;
 						}
@@ -266,8 +266,7 @@ public class Field
 			{
 				if (checkIfShipIsInField(ship))
 				{
-					if (alignment.toLowerCase().equals("horizontal")
-							&& ship.isAlive())
+					if (alignment.toLowerCase().equals("horizontal"))
 					{
 						for (int i = 0; i < countSector; i++)
 						{
@@ -291,8 +290,8 @@ public class Field
 
 							if (!ship.isAlive())
 							{
-								fieldElemtens[currShipPoint.x + i][currShipPoint.y]
-										.setSunkenShip();
+								fieldElemtens[currShipPoint.x][currShipPoint.y
+										+ i].setSunkenShip();
 							}
 						}
 					}

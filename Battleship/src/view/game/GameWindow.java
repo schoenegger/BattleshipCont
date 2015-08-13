@@ -632,7 +632,7 @@ public class GameWindow extends JDialog
 		lblMessages.setText(message);
 		try
 		{
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		}
 		catch (InterruptedException e)
 		{
@@ -654,12 +654,20 @@ public class GameWindow extends JDialog
 		frmSettings.revalidate();
 	}
 
+	/**
+	 * Reffreshes the attack Text field
+	 * 
+	 * @param attacFieldText
+	 */
 	public void refreshAttacTextField(String attacFieldText)
 	{
 		textField.getText();
 		this.textField.setText(attacFieldText);
 	}
 
+	/**
+	 * Display the State Game Over
+	 */
 	public void displayGameOver()
 	{
 		this.btnAttack.setEnabled(false);
@@ -668,6 +676,23 @@ public class GameWindow extends JDialog
 		sendMessge("Game Over");
 		JOptionPane.showMessageDialog(null, "Game Over", "Game Over",
 				JOptionPane.OK_CANCEL_OPTION);
+
+		this.setVisible(false);
+	}
+
+	/**
+	 * Displays the State win Game
+	 */
+	public void displayWin()
+	{
+		this.btnAttack.setEnabled(false);
+		this.btnAttack.setVisible(false);
+
+		sendMessge("Game Over");
+		JOptionPane
+				.showMessageDialog(null, "WIN",
+						"Congratulation You win the GAME",
+						JOptionPane.OK_CANCEL_OPTION);
 
 		this.setVisible(false);
 	}

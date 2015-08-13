@@ -74,6 +74,12 @@ public class GameViewListener implements ActionListener, MouseMotionListener,
 	public void mouseClicked(MouseEvent e)
 	{
 		refLogic.mouseClickToGameView();
+
+		if (e.getButton() == MouseEvent.BUTTON3)
+		{
+			refLogic.attacShipButtonPressed();
+		}
+
 	}
 
 	@Override
